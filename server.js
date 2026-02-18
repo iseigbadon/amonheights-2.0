@@ -1,18 +1,30 @@
 /* ============================================
    AMON HEIGHTS REAL ESTATE - EXPRESS SERVER
-   Admin Dashboard Backend
+   Admin Dashboard Backend (Cloudinary Integration)
    ============================================ */
 
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// ============================================
+// CLOUDINARY CONFIGURATION
+// ============================================
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 // ============================================
 // CONFIGURATION
@@ -23,21 +35,14 @@ const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH ||
     bcrypt.hashSync(process.env.ADMIN_PASSWORD || 'amonheights2024', 10);
 
 const PROPERTIES_FILE = path.join(__dirname, 'data', 'properties.json');
-const UPLOADS_DIR = path.join(__dirname, 'public', 'uploads');
 
-// Ensure uploads directory exists
-if (!fs.existsSync(UPLOADS_DIR)) {
-    fs.mkdirSync(UPLOADS_DIR, { recursive: true });
-}
-
-// Configure multer for file uploads
-const storage = multer.diskStorage({
-    destination: UPLOADS_DIR,
-    filename: (req, file, cb) => {
-        const timestamp = Date.now();
-        const ext = path.extname(file.originalname);
-        const name = file.fieldname + '_' + timestamp + ext;
-        cb(null, name);
+// Configure multer with Cloudinary storage
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: 'amon-heights/properties',
+        allowed_formats: ['jpg', 'jpeg', 'png', 'webp', 'gif'],
+        resource_type: 'image'
     }
 });
 
@@ -58,8 +63,8 @@ const upload = multer({
 // MIDDLEWARE
 // ============================================
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
@@ -166,13 +171,14 @@ app.get('/api/admin/properties', requireAuth, (req, res) => {
     res.json(properties);
 });
 
-// Admin: Upload property image
+// Admin: Upload property image to Cloudinary
 app.post('/api/admin/upload', requireAuth, upload.single('image'), (req, res) => {
     if (!req.file) {
         return res.status(400).json({ error: 'No file uploaded' });
     }
     
-    const imageUrl = `/uploads/${req.file.filename}`;
+    // Cloudinary provides secure_url
+    const imageUrl = req.file.secure_url;
     res.json({ success: true, url: imageUrl });
 });
 
@@ -206,7 +212,7 @@ app.post('/api/admin/properties', requireAuth, (req, res) => {
         fullDescription: fullDescription || description,
         image,
         video: video || '',
-        amenities: amenities || [],
+        amenities: Array.isArray(amenities) ? amenities : [],
         visible: visible !== false,
         createdAt: new Date().toISOString()
     };
