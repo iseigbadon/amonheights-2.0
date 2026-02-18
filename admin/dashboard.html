@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amon Heights - Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Amon Heights</h2>
+                <p>Admin</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-tab="properties">
+                    <span>📋</span> Properties
+                </button>
+                <button class="nav-item" data-tab="add-property">
+                    <span>➕</span> Add Property
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="logout-btn">
+                    <span>🚪</span> Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- HEADER -->
+            <header class="dashboard-header">
+                <h1>Dashboard</h1>
+                <div class="header-actions">
+                    <span class="welcome-text" id="welcomeText">Welcome, Admin</span>
+                </div>
+            </header>
+
+            <!-- TAB: PROPERTIES LIST -->
+            <section id="properties-tab" class="tab-content active">
+                <div class="tab-header">
+                    <h2>Properties</h2>
+                    <p class="tab-subtitle">Manage your property listings</p>
+                </div>
+
+                <div class="properties-controls">
+                    <input type="text" id="propertyFilter" placeholder="Search properties..." class="search-input">
+                </div>
+
+                <div class="properties-table-wrapper">
+                    <table class="properties-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Location</th>
+                                <th>Type</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="propertiesTableBody">
+                            <!-- Loaded via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="emptyState" class="empty-state" style="display: none;">
+                    <p>No properties yet. <a href="#" onclick="switchTab('add-property'); return false;">Add your first property</a></p>
+                </div>
+            </section>
+
+            <!-- TAB: ADD/EDIT PROPERTY -->
+            <section id="add-property-tab" class="tab-content">
+                <div class="tab-header">
+                    <h2 id="formTitle">Add New Property</h2>
+                    <p class="tab-subtitle">Create a new property listing</p>
+                </div>
+
+                <div class="form-container">
+                    <form id="propertyForm" class="property-form">
+                        <input type="hidden" id="propertyId">
+
+                        <!-- Basic Info -->
+                        <fieldset>
+                            <legend>Basic Information</legend>
+
+                            <div class="form-group">
+                                <label for="propertyName">Property Name *</label>
+                                <input type="text" id="propertyName" name="propertyName" required placeholder="e.g., Luxury Penthouse - Maitama">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="propertyLocation">Location *</label>
+                                    <input type="text" id="propertyLocation" name="propertyLocation" required placeholder="e.g., Maitama, Abuja">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="propertyCategory">Type *</label>
+                                    <select id="propertyCategory" name="propertyCategory" required>
+                                        <option value="">Select Type</option>
+                                        <option value="sale">For Sale</option>
+                                        <option value="rent">For Rent</option>
+                                        <option value="shortlet">Short-Let</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="propertyPrice">Price *</label>
+                                <input type="text" id="propertyPrice" name="propertyPrice" required placeholder="e.g., ₦250,000,000">
+                            </div>
+                        </fieldset>
+
+                        <!-- Descriptions -->
+                        <fieldset>
+                            <legend>Descriptions</legend>
+
+                            <div class="form-group">
+                                <label for="propertyDescription">Short Description *</label>
+                                <textarea id="propertyDescription" name="propertyDescription" required placeholder="Brief description for property cards" rows="3"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="propertyFullDescription">Full Description</label>
+                                <textarea id="propertyFullDescription" name="propertyFullDescription" placeholder="Detailed description for property detail page" rows="4"></textarea>
+                            </div>
+                        </fieldset>
+
+                        <!-- Media -->
+                        <fieldset>
+                            <legend>Media</legend>
+
+                            <div class="form-group">
+                                <label for="propertyImage">Property Image *</label>
+                                <div class="image-upload">
+                                    <input type="file" id="propertyImage" name="propertyImage" accept="image/*" required>
+                                    <p class="upload-hint">PNG, JPEG, WebP (Max 10MB)</p>
+                                </div>
+                                <div id="imagePreview" class="image-preview" style="display: none;">
+                                    <img id="previewImg" src="" alt="Preview">
+                                    <button type="button" class="remove-image-btn">Remove</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="propertyVideo">YouTube Video Link</label>
+                                <input type="url" id="propertyVideo" name="propertyVideo" placeholder="https://www.youtube.com/embed/...">
+                                <p class="form-hint">Paste the embed URL from YouTube</p>
+                            </div>
+                        </fieldset>
+
+                        <!-- Amenities -->
+                        <fieldset>
+                            <legend>Amenities</legend>
+                            <div class="form-group">
+                                <label>Amenities (comma-separated)</label>
+                                <textarea id="propertyAmenities" name="propertyAmenities" placeholder="Swimming Pool, Gym, Smart Home, etc." rows="3"></textarea>
+                            </div>
+                        </fieldset>
+
+                        <!-- Visibility -->
+                        <fieldset>
+                            <legend>Settings</legend>
+
+                            <div class="form-group checkbox">
+                                <input type="checkbox" id="propertyVisible" name="propertyVisible" checked>
+                                <label for="propertyVisible">Visible on Public Website</label>
+                            </div>
+                        </fieldset>
+
+                        <!-- Actions -->
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Save Property</button>
+                            <button type="button" class="btn btn-secondary" onclick="resetForm()">Reset</button>
+                            <button type="button" class="btn btn-danger" id="deleteBtn" style="display: none;">Delete Property</button>
+                        </div>
+                    </form>
+
+                    <div id="formMessage" class="form-message"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODALS -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <h2>Delete Property?</h2>
+            <p>This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button class="btn btn-danger" id="confirmDelete">Delete</button>
+                <button class="btn btn-secondary" id="cancelDelete">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
