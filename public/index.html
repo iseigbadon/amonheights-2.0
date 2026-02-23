@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amon Heights – Luxury Real Estate & Premium Living in Abuja</title>
+    <meta name="description" content="Discover premium luxury properties, high-return investments, and exclusive short-let experiences in Abuja's most prestigious locations.">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional image gallery styling */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            box-shadow: var(--shadow-md);
+            transition: transform var(--transition-base), box-shadow var(--transition-base);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(34, 34, 34, 0.3) 0%, rgba(34, 34, 34, 0) 100%);
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .lifestyle-section {
+            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+            padding: 5rem 0;
+        }
+
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .story-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .story-text p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #717171;
+        }
+
+        .story-image {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .interior-showcase {
+            background: #ffffff;
+            padding: 5rem 0;
+        }
+
+        .showcase-title {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .showcase-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .showcase-title p {
+            font-size: 1.1rem;
+            color: #717171;
+        }
+
+        .interior-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .interior-card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            background: white;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-base);
+        }
+
+        .interior-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-8px);
+        }
+
+        .interior-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .interior-content {
+            padding: 1.8rem;
+        }
+
+        .interior-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: #222222;
+        }
+
+        .interior-content p {
+            font-size: 0.95rem;
+            color: #717171;
+            line-height: 1.6;
+        }
+
+        .image-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .full-width-image {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            margin: 3rem 0;
+        }
+
+        .full-width-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .story-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .story-text h2 {
+                font-size: 1.8rem;
+            }
+
+            .image-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+
+            .interior-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width-image img {
+                height: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <a href="#" class="logo">Amon Heights</a>
+            <nav class="nav-desktop">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#story" class="nav-link">About Abuja</a>
+                <a href="#properties" class="nav-link">Properties</a>
+                <a href="#interior" class="nav-link">Interiors</a>
+                <a href="#shortlets" class="nav-link">Short-Lets</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+            </button>
+        </div>
+        <nav class="nav-mobile" id="mobileNav">
+            <a href="#home" class="nav-link-mobile">Home</a>
+            <a href="#story" class="nav-link-mobile">About Abuja</a>
+            <a href="#properties" class="nav-link-mobile">Properties</a>
+            <a href="#interior" class="nav-link-mobile">Interiors</a>
+            <a href="#shortlets" class="nav-link-mobile">Short-Lets</a>
+            <a href="#contact" class="nav-link-mobile">Contact</a>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero">
+        <div class="hero-background" style="background-image: url('../Images/living room 1.jpg');"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Premium Real Estate &<br>Luxury Living in Abuja</h1>
+            <p class="hero-subtitle">Discover exceptional properties in Nigeria's most prestigious capital city. From luxury penthouses to strategic investments, experience Abuja's finest real estate.</p>
+            <div class="hero-actions">
+                <button class="btn btn-primary" onclick="openWhatsApp('Hello, I\'d like to book a viewing with Amon Heights Real Estate Ltd.')">Book a Viewing</button>
+                <a href="#properties" class="btn btn-outline">Explore Properties</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABUJA STORY SECTION -->
+    <section id="story" class="lifestyle-section">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-text">
+                    <h2>The Abuja Story</h2>
+                    <p>Abuja, Nigeria's modern capital, represents the epitome of urban planning and sophisticated living. Nestled at the heart of a bustling nation, Abuja's tree-lined avenues, diplomatic precincts, and vibrant communities attract high-net-worth individuals and international investors seeking security, stability, and unparalleled luxury.</p>
+                    <p>From the exclusive neighborhoods of Maitama and Asokoro to the emerging investment hubs, Abuja offers more than just real estate—it's a lifestyle choice for those who demand the finest. Every property tells a story of prestige, every location offers opportunity, and every investment promises growth.</p>
+                    <p>At Amon Heights, we understand Abuja's unique appeal and help our clients find their perfect sanctuary in this dynamic city.</p>
+                </div>
+                <div class="story-image">
+                    <img src="../Images/abuja.jpg" alt="Abuja Skyline" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+
+            <!-- Abuja Neighborhoods Gallery -->
+            <div>
+                <h3 style="text-align: center; font-size: 1.8rem; margin-bottom: 2.5rem; color: #222222;">Explore Abuja's Prestigious Neighborhoods</h3>
+                <div class="image-grid">
+                    <div class="gallery-item">
+                        <img src="../Images/abuja 3.jpg" alt="Maitama District">
+                        <div class="gallery-overlay"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../Images/cbn abuja.jpg" alt="Asokoro Enclave">
+                        <div class="gallery-overlay"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../Images/sadiq-ali-UwoCLYgejB0-unsplash.jpg" alt="Wuse II District">
+                        <div class="gallery-overlay"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../Images/abuja scene.jpg" alt="Garki Area">
+                        <div class="gallery-overlay"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../Images/abuja.jpg" alt="Luxury Living">
+                        <div class="gallery-overlay"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../Images/abuja 3.jpg" alt="Urban Development">
+                        <div class="gallery-overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERIOR SHOWCASE SECTION -->
+    <section id="interior" class="interior-showcase">
+        <div class="container">
+            <div class="showcase-title">
+                <h2>Experience Luxury Interiors</h2>
+                <p>Step into sophistication. Our curated properties feature world-class design and premium finishes.</p>
+            </div>
+
+            <!-- Featured Interior Gallery -->
+            <div class="full-width-image">
+                <img src="../Images/living room 2.jpg" alt="Luxury Living Room">
+            </div>
+
+            <div class="interior-grid">
+                <div class="interior-card">
+                    <img src="../Images/indoor.jpg" alt="Modern Kitchen" class="interior-image">
+                    <div class="interior-content">
+                        <h3>State-of-the-Art Kitchens</h3>
+                        <p>Bulthaup and Siematic kitchens with premium appliances and smart home integration.</p>
+                    </div>
+                </div>
+                <div class="interior-card">
+                    <img src="../Images/bedroom 1.jpg" alt="Master Bedroom" class="interior-image">
+                    <div class="interior-content">
+                        <h3>Luxurious Master Suites</h3>
+                        <p>Spacious bedrooms with walk-in closets, premium bedding, and spa-like bathrooms.</p>
+                    </div>
+                </div>
+                <div class="interior-card">
+                    <img src="../Images/indoor 5.jpg" alt="Living Space" class="interior-image">
+                    <div class="interior-content">
+                        <h3>Open-Plan Living Areas</h3>
+                        <p>Sophisticated living spaces designed for entertaining with panoramic views.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second Row of Interiors -->
+            <div class="full-width-image">
+                <img src="../Images/living room 1.jpg" alt="Elegant Living Room">
+            </div>
+
+            <div class="interior-grid">
+                <div class="interior-card">
+                    <img src="../Images/indoor 6.jpg" alt="Bathroom Design" class="interior-image">
+                    <div class="interior-content">
+                        <h3>Spa-Like Bathrooms</h3>
+                        <p>Italian marble, heated floors, and rainfall showers in every luxury residence.</p>
+                    </div>
+                </div>
+                <div class="interior-card">
+                    <img src="../Images/indoor 7.jpg" alt="Bedroom Design" class="interior-image">
+                    <div class="interior-content">
+                        <h3>Bespoke Interior Design</h3>
+                        <p>World-class designers curate every detail for maximum elegance and comfort.</p>
+                    </div>
+                </div>
+                <div class="interior-card">
+                    <img src="../Images/interior design with chair.jpg" alt="Home Decor" class="interior-image">
+                    <div class="interior-content">
+                        <h3>Premium Finishes</h3>
+                        <p>Handpicked materials and artisanal craftsmanship throughout every room.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY AMON HEIGHTS -->
+    <section class="why-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Amon Heights</h2>
+                <p>We partner with discerning clients seeking premium real estate experiences</p>
+            </div>
+            <div class="why-grid">
+                <div class="why-item">
+                    <div class="why-icon">🏆</div>
+                    <h3>Luxury-Focused</h3>
+                    <p>We specialize exclusively in premium properties across Abuja's most prestigious locations.</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-icon">📈</div>
+                    <h3>High ROI Investments</h3>
+                    <p>Strategic properties with proven appreciation and exceptional rental yields.</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-icon">👥</div>
+                    <h3>Bespoke Advisory</h3>
+                    <p>Personalized guidance from experienced professionals who understand Abuja's luxury market.</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-icon">⭐</div>
+                    <h3>Established Brand</h3>
+                    <p>Founded 2020 | RC 1434164 | Trusted by discerning clients across Nigeria.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROPERTIES SECTION -->
+    <section id="properties" class="properties-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Listings</h2>
+                <p>Curated luxury properties across Abuja's most exclusive neighborhoods</p>
+            </div>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All Properties</button>
+                <button class="filter-btn" data-filter="sale">For Sale</button>
+                <button class="filter-btn" data-filter="rent">For Rent</button>
+                <button class="filter-btn" data-filter="shortlet">Short-Let</button>
+            </div>
+            <div class="properties-grid" id="propertiesGrid">
+                <!-- Loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SHORT-LETS SECTION -->
+    <section id="shortlets" class="shortlets-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Premium Short-Let Experiences</h2>
+                <p>Luxury hospitality for the discerning traveler</p>
+            </div>
+            <div class="image-grid">
+                <div class="gallery-item">
+                    <img src="../Images/shortlet.jpg" alt="Luxury Short-Let">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../Images/shortlet1.jpg" alt="Premium Suite">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../Images/shortlet2.jpg" alt="Hospitality">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../Images/shortlet5.jpg" alt="Luxury Bedroom">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../Images/shortlet6.jpg" alt="Premium Amenities">
+                    <div class="gallery-overlay"></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../Images/living room 1.jpg" alt="Luxury Interior">
+                    <div class="gallery-overlay"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div>
+                    <h2 style="margin-bottom: 1.5rem;">About Amon Heights</h2>
+                    <p>Amon Heights Real Estate Ltd is a premier luxury real estate firm specializing in high-end properties across Abuja, Nigeria. Since our establishment in 2020, we've become the trusted partner for discerning clients, investors, and international clients seeking strategic real estate opportunities in Nigeria's capital.</p>
+                    <p style="margin-top: 1.5rem;">Our team combines market expertise, cultural understanding, and a commitment to excellence, ensuring every client receives personalized service and access to the finest properties Abuja has to offer.</p>
+                    <div class="about-details">
+                        <div>
+                            <strong>Founded</strong>
+                            <p>2020</p>
+                        </div>
+                        <div>
+                            <strong>RC Number</strong>
+                            <p>1434164</p>
+                        </div>
+                        <div>
+                            <strong>Location</strong>
+                            <p>Abuja, Nigeria</p>
+                        </div>
+                        <div>
+                            <strong>Specialization</strong>
+                            <p>Luxury Real Estate</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-contact">
+                    <h3>Get in Touch</h3>
+                    <p>Ready to find your luxury home or investment property in Abuja? Our team is here to help you discover exceptional real estate opportunities.</p>
+                    <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem;">
+                        <button class="btn btn-primary" onclick="openWhatsApp('Hello! I\'d like to discuss luxury properties and investment opportunities with Amon Heights.')">WhatsApp: +234 813 786 8434</button>
+                        <button class="btn btn-primary" onclick="openWhatsApp('Hello! I\'d like to connect with Amon Heights Real Estate.')">WhatsApp: +234 904 083 7557</button>
+                        <p style="text-align: center; margin-top: 1rem;">
+                            <strong>Email:</strong> amonheightslimited@gmail.com<br>
+                            <strong>Address:</strong> Suite 106, Holborn House, Apo, Abuja<br>
+                            <strong>Instagram:</strong> @amonheightslimited
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Start Your Journey</h2>
+                <p>Connect with our team today and discover your next luxury property in Abuja</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h4>WhatsApp</h4>
+                    <p>Instant communication for viewings and inquiries</p>
+                    <a href="https://wa.me/2348137868434" target="_blank">+234 813 786 8434</a>
+                    <a href="https://wa.me/2349040837557" target="_blank" style="display: block; margin-top: 0.5rem;">+234 904 083 7557</a>
+                </div>
+                <div class="contact-item">
+                    <h4>Email</h4>
+                    <p>For detailed inquiries and proposals</p>
+                    <a href="mailto:amonheightslimited@gmail.com">amonheightslimited@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <h4>Follow Us</h4>
+                    <p>Stay updated with our latest listings and market insights</p>
+                    <a href="https://instagram.com/amonheightslimited" target="_blank">@amonheightslimited</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>Amon Heights</h4>
+                    <p>Premium luxury real estate in Abuja, Nigeria. Specializing in exclusive properties and strategic investments for discerning clients worldwide.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#properties">Properties</a></li>
+                        <li><a href="#shortlets">Short-Lets</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="https://wa.me/2348137868434">WhatsApp</a></li>
+                        <li><a href="mailto:amonheightslimited@gmail.com">Email</a></li>
+                        <li><a href="https://instagram.com/amonheightslimited">Instagram</a></li>
+                        <li>Suite 106, Holborn House, Apo, Abuja</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Amon Heights Real Estate Ltd. RC: 1434164. All rights reserved. | Luxury Real Estate in Abuja</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- PROPERTY MODAL -->
+    <div id="propertyModal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-wrapper">
+            <div class="modal-content">
+                <button class="modal-close" title="Close">✕</button>
+                <div id="modalBody">
+                    <!-- Modal content loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
