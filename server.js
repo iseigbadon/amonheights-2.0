@@ -1,293 +1,251 @@
 /* ============================================
    AMON HEIGHTS REAL ESTATE - EXPRESS SERVER
-   Admin Dashboard Backend (Cloudinary Integration)
+   Admin Dashboard Backend
    ============================================ */
 
 const express = require('express');
-const path = require('path');
-const fs = require('fs');
-const multer = require('multer');
-const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-// ============================================
-// CLOUDINARY CONFIGURATION
-// ============================================
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
-});
+// Create uploads directory if it doesn't exist
+if (!fs.existsSync('public/uploads')) {
+    fs.mkdirSync('public/uploads', { recursive: true });
+}
 
-// ============================================
-// CONFIGURATION
-// ============================================
-
-const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
-const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH || 
-    bcrypt.hashSync(process.env.ADMIN_PASSWORD || 'amonheights2024', 10);
-
-const PROPERTIES_FILE = path.join(__dirname, 'data', 'properties.json');
-
-// Configure multer with Cloudinary storage
-const storage = new CloudinaryStorage({
-    cloudinary: cloudinary,
-    params: {
-        folder: 'amon-heights/properties',
-        allowed_formats: ['jpg', 'jpeg', 'png', 'webp', 'gif'],
-        resource_type: 'image'
-    }
-});
-
-const upload = multer({
-    storage,
-    limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
-    fileFilter: (req, file, cb) => {
-        const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
-        if (allowedTypes.includes(file.mimetype)) {
-            cb(null, true);
-        } else {
-            cb(new Error('Invalid file type. Only JPEG, PNG, WebP and GIF allowed.'));
-        }
-    }
-});
-
-// ============================================
-// MIDDLEWARE
-// ============================================
-
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ extended: true, limit: '50mb' }));
-app.use(express.static(path.join(__dirname, 'public')));
-
+// Session configuration
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'amon-heights-secret-key-2024',
+    secret: process.env.SESSION_SECRET || 'amonheights-luxury-secret-2024',
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: process.env.NODE_ENV === 'production',
+        secure: false,
         httpOnly: true,
-        sameSite: 'strict'
+        maxAge: 1000 * 60 * 60 * 24
     }
 }));
 
-// Admin authentication middleware
-function requireAuth(req, res, next) {
-    if (!req.session.adminId) {
-        return res.status(401).json({ error: 'Unauthorized' });
+// File upload configuration
+const upload = multer({
+    dest: 'public/uploads/',
+    limits: { fileSize: 10 * 1024 * 1024 },
+    fileFilter: (req, file, cb) => {
+        const allowedMimes = ['image/jpeg', 'image/png', 'image/webp'];
+        if (allowedMimes.includes(file.mimetype)) {
+            cb(null, true);
+        } else {
+            cb(new Error('Invalid file type'));
+        }
     }
-    next();
-}
+});
 
-// ============================================
-// UTILITY FUNCTIONS
-// ============================================
+// Admin credentials
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'amonheights2024';
 
+// Properties data file
+const PROPERTIES_FILE = 'data/properties.json';
+
+// Helper: Load properties from JSON
 function loadProperties() {
     try {
         if (fs.existsSync(PROPERTIES_FILE)) {
-            const data = fs.readFileSync(PROPERTIES_FILE, 'utf-8');
-            return JSON.parse(data);
+            return JSON.parse(fs.readFileSync(PROPERTIES_FILE, 'utf8'));
         }
+        return [];
     } catch (error) {
         console.error('Error loading properties:', error);
+        return [];
     }
-    return [];
 }
 
+// Helper: Save properties to JSON
 function saveProperties(properties) {
-    fs.writeFileSync(PROPERTIES_FILE, JSON.stringify(properties, null, 2));
+    try {
+        if (!fs.existsSync('data')) {
+            fs.mkdirSync('data', { recursive: true });
+        }
+        fs.writeFileSync(PROPERTIES_FILE, JSON.stringify(properties, null, 2));
+    } catch (error) {
+        console.error('Error saving properties:', error);
+    }
 }
 
-// ============================================
-// PUBLIC ROUTES
-// ============================================
+// ==================== ADMIN ROUTES ====================
 
-// Serve main page
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-// API: Get all properties
-app.get('/api/properties', (req, res) => {
-    const properties = loadProperties();
-    // Only return visible properties for public view
-    const visibleProperties = properties.filter(p => p.visible !== false);
-    res.json(visibleProperties);
-});
-
-// ============================================
-// ADMIN ROUTES
-// ============================================
-
-// Admin login page
-app.get('/admin', (req, res) => {
-    if (req.session.adminId) {
-        return res.redirect('/admin/dashboard');
-    }
-    res.sendFile(path.join(__dirname, 'admin', 'login.html'));
-});
-
-// Admin dashboard page
-app.get('/admin/dashboard', (req, res) => {
-    if (!req.session.adminId) {
-        return res.redirect('/admin');
-    }
-    res.sendFile(path.join(__dirname, 'admin', 'dashboard.html'));
-});
-
-// Admin login API
+// Admin Login
 app.post('/api/admin/login', (req, res) => {
     const { username, password } = req.body;
 
-    if (!username || !password) {
-        return res.status(400).json({ error: 'Username and password required' });
+    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+        req.session.admin = true;
+        res.json({ success: true, message: 'Login successful' });
+    } else {
+        res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
-
-    if (username === ADMIN_USERNAME && bcrypt.compareSync(password, ADMIN_PASSWORD_HASH)) {
-        req.session.adminId = 'admin';
-        return res.json({ success: true, message: 'Login successful' });
-    }
-
-    res.status(401).json({ error: 'Invalid credentials' });
 });
 
-// Admin logout API
-app.post('/api/admin/logout', requireAuth, (req, res) => {
-    req.session.destroy();
+// Admin Logout
+app.post('/api/admin/logout', (req, res) => {
+    req.session.admin = false;
     res.json({ success: true });
 });
 
-// Admin: Get all properties (including hidden)
-app.get('/api/admin/properties', requireAuth, (req, res) => {
+// Check admin session
+app.get('/api/admin/check', (req, res) => {
+    if (req.session.admin) {
+        res.json({ authenticated: true });
+    } else {
+        res.status(401).json({ authenticated: false });
+    }
+});
+
+// Get all properties (admin)
+app.get('/api/admin/properties', (req, res) => {
+    if (!req.session.admin) {
+        return res.status(401).json({ error: 'Unauthorized' });
+    }
     const properties = loadProperties();
     res.json(properties);
 });
 
-// Admin: Upload property image to Cloudinary
-app.post('/api/admin/upload', requireAuth, upload.single('image'), (req, res) => {
-    if (!req.file) {
-        return res.status(400).json({ error: 'No file uploaded' });
-    }
-    
-    // Cloudinary provides secure_url
-    const imageUrl = req.file.secure_url;
-    res.json({ success: true, url: imageUrl });
-});
-
-// Admin: Add new property
-app.post('/api/admin/properties', requireAuth, (req, res) => {
-    const {
-        name,
-        location,
-        category,
-        price,
-        description,
-        fullDescription,
-        image,
-        video,
-        amenities,
-        visible
-    } = req.body;
-
-    if (!name || !location || !category || !price || !image) {
-        return res.status(400).json({ error: 'Missing required fields' });
+// Add property (admin)
+app.post('/api/admin/properties', (req, res) => {
+    if (!req.session.admin) {
+        return res.status(401).json({ error: 'Unauthorized' });
     }
 
     const properties = loadProperties();
     const newProperty = {
-        id: properties.length > 0 ? Math.max(...properties.map(p => p.id)) + 1 : 1,
-        name,
-        location,
-        category,
-        price,
-        description,
-        fullDescription: fullDescription || description,
-        image,
-        video: video || '',
-        amenities: Array.isArray(amenities) ? amenities : [],
-        visible: visible !== false,
+        id: Date.now().toString(),
+        name: req.body.name,
+        location: req.body.location,
+        category: req.body.category,
+        price: req.body.price,
+        description: req.body.description,
+        amenities: req.body.amenities || [],
+        youtubeUrl: req.body.youtubeUrl,
+        images: req.body.images || [],
+        visible: true,
         createdAt: new Date().toISOString()
     };
 
     properties.push(newProperty);
     saveProperties(properties);
-
-    res.status(201).json({ success: true, property: newProperty });
+    res.json({ success: true, property: newProperty });
 });
 
-// Admin: Update property
-app.put('/api/admin/properties/:id', requireAuth, (req, res) => {
-    const { id } = req.params;
-    const updates = req.body;
+// Update property (admin)
+app.put('/api/admin/properties/:id', (req, res) => {
+    if (!req.session.admin) {
+        return res.status(401).json({ error: 'Unauthorized' });
+    }
 
     const properties = loadProperties();
-    const propertyIndex = properties.findIndex(p => p.id == id);
+    const index = properties.findIndex(p => p.id === req.params.id);
 
-    if (propertyIndex === -1) {
+    if (index === -1) {
         return res.status(404).json({ error: 'Property not found' });
     }
 
-    properties[propertyIndex] = {
-        ...properties[propertyIndex],
-        ...updates,
-        id: parseInt(id) // Ensure ID doesn't change
+    properties[index] = {
+        ...properties[index],
+        ...req.body,
+        id: properties[index].id,
+        createdAt: properties[index].createdAt
     };
 
     saveProperties(properties);
-
-    res.json({ success: true, property: properties[propertyIndex] });
+    res.json({ success: true, property: properties[index] });
 });
 
-// Admin: Delete property
-app.delete('/api/admin/properties/:id', requireAuth, (req, res) => {
-    const { id } = req.params;
-
-    let properties = loadProperties();
-    const initialLength = properties.length;
-
-    properties = properties.filter(p => p.id != id);
-
-    if (properties.length === initialLength) {
-        return res.status(404).json({ error: 'Property not found' });
+// Delete property (admin)
+app.delete('/api/admin/properties/:id', (req, res) => {
+    if (!req.session.admin) {
+        return res.status(401).json({ error: 'Unauthorized' });
     }
 
+    let properties = loadProperties();
+    properties = properties.filter(p => p.id !== req.params.id);
     saveProperties(properties);
-
     res.json({ success: true, message: 'Property deleted' });
 });
 
-// ============================================
-// ERROR HANDLING
-// ============================================
-
-app.use((err, req, res, next) => {
-    console.error('Error:', err);
-    
-    if (err instanceof multer.MulterError) {
-        if (err.code === 'LIMIT_FILE_SIZE') {
-            return res.status(400).json({ error: 'File too large. Maximum 10MB.' });
-        }
+// Upload image (admin)
+app.post('/api/admin/upload', upload.single('image'), (req, res) => {
+    if (!req.session.admin) {
+        return res.status(401).json({ error: 'Unauthorized' });
     }
-    
-    res.status(500).json({ error: err.message || 'Server error' });
+
+    if (!req.file) {
+        return res.status(400).json({ error: 'No file uploaded' });
+    }
+
+    const filename = `uploads/${req.file.filename}`;
+    res.json({ success: true, filename });
 });
 
-// ============================================
-// START SERVER
-// ============================================
+// ==================== PUBLIC ROUTES ====================
 
+// Get visible properties (public)
+app.get('/api/properties', (req, res) => {
+    const properties = loadProperties();
+    const visibleProperties = properties.filter(p => p.visible !== false);
+    res.json(visibleProperties);
+});
+
+// Get single property (public)
+app.get('/api/properties/:id', (req, res) => {
+    const properties = loadProperties();
+    const property = properties.find(p => p.id === req.params.id && p.visible !== false);
+
+    if (!property) {
+        return res.status(404).json({ error: 'Property not found' });
+    }
+
+    res.json(property);
+});
+
+// ==================== PAGE ROUTES ====================
+
+// Serve admin login
+app.get('/admin', (req, res) => {
+    if (req.session.admin) {
+        return res.sendFile(path.join(__dirname, 'admin/dashboard.html'));
+    }
+    res.sendFile(path.join(__dirname, 'admin/login.html'));
+});
+
+// Serve homepage
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/index.html'));
+});
+
+// ==================== ERROR HANDLING ====================
+
+app.use((err, req, res, next) => {
+    console.error(err);
+    res.status(500).json({ error: err.message || 'Internal server error' });
+});
+
+// ==================== START SERVER ====================
+
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`
-    ╔════════════════════════════════════════╗
-    │  AMON HEIGHTS REAL ESTATE              │
+    console.log(`✅ Server running on port ${PORT}`);
+    console.log(`🌐 Visit http://localhost:${PORT}`);
+    console.log(`🔐 Admin: http://localhost:${PORT}/admin`);
+});
     │  Server running on http://localhost:${PORT}│
     │  Admin dashboard: http://localhost:${PORT}/admin│
     ╚════════════════════════════════════════╝
