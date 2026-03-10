@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About Amon Heights - Nigeria's premier luxury real estate platform. Discover our story, expertise, and exclusive properties in Abuja.">
+    <meta name="keywords" content="Amon Heights, luxury real estate Abuja, premium properties, real estate investment Nigeria">
+    <meta name="author" content="Amon Heights Real Estate Ltd">
+    <meta property="og:title" content="About Amon Heights - Luxury Real Estate Nigeria">
+    <meta property="og:description" content="Premium properties and investment opportunities in Abuja. RC: 1434164">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="Images/logo.png">
+    <title>About Amon Heights - Luxury Real Estate Platform | Abuja, Nigeria</title>
+    <link rel="icon" type="image/png" href="Images/logo.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-black: #1a1a1a;
+            --color-white: #ffffff;
+            --color-grey-soft: #fafafa;
+            --color-grey-text: #666666;
+            --color-grey-light: #ebebeb;
+            --color-grey-border: #d8d8d8;
+            --color-primary: #FF5A5F;
+            --color-primary-light: #FF8B91;
+            --color-primary-dark: #E63946;
+            
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            --transition-fast: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 280ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 380ms cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.15);
+            --shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.2);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--color-white);
+            color: var(--color-black);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(180deg, var(--color-white) 0%, rgba(255, 255, 255, 0.98) 100%);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            padding: 1rem 0;
+            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(8px);
+        }
+
+        .header-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: var(--transition-base);
+        }
+
+        .logo-section:hover {
+            opacity: 0.8;
+        }
+
+        .logo-img {
+            height: 32px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--color-black);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--color-black);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition-base);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+            transition: width var(--transition-fast);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition-base);
+            font-family: var(--font-family);
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            color: var(--color-white);
+            box-shadow: 0 4px 16px rgba(255, 90, 95, 0.25);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 24px rgba(255, 90, 95, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--color-white);
+            color: var(--color-black);
+            border: 1.5px solid var(--color-grey-light);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: rgba(255, 90, 95, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .header-wrapper {
+                padding: 0 20px;
+                gap: 16px;
+            }
+            .nav-links {
+                gap: 1.5rem;
+            }
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 40px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255, 90, 95, 0.04) 0%, rgba(255, 90, 95, 0.02) 100%);
+            border-radius: 20px;
+            margin-top: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--color-grey-text);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 3rem 20px;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+
+        /* ===== CONTENT SECTION ===== */
+        .section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 40px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .section h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            letter-spacing: -0.3px;
+        }
+
+        .section p {
+            font-size: 0.95rem;
+            color: var(--color-grey-text);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ===== STORY SECTION ===== */
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: flex-start;
+            margin-top: 2rem;
+        }
+
+        .story-text h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--color-black);
+        }
+
+        .story-text p {
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .story-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 2.5rem 1.8rem;
+            background: linear-gradient(135deg, var(--color-white) 0%, #f9f9f9 100%);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-base);
+        }
+
+        .stat:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+            border-color: var(--color-primary);
+        }
+
+        .stat-number {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.3px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--color-grey-text);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 1024px) {
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        /* ===== FEATURES GRID ===== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            padding: 2.8rem;
+            background: var(--color-white);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-8px);
+        }
+
+        .feature-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            transition: var(--transition-base);
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.15) rotate(8deg);
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--color-black);
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: var(--color-grey-text);
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        /* ===== PORTFOLIO SECTION ===== */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .portfolio-item {
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--color-white);
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: var(--transition-base);
+            cursor: pointer;
+        }
+
+        .portfolio-item:hover {
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-8px);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            display: block;
+            transition: transform var(--transition-base);
+        }
+
+        .portfolio-item:hover .portfolio-image {
+            transform: scale(1.08);
+        }
+
+        .portfolio-info {
+            padding: 2rem 1.8rem;
+        }
+
+        .portfolio-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            color: var(--color-black);
+        }
+
+        .portfolio-location {
+            font-size: 0.85rem;
+            color: var(--color-grey-text);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* ===== CONTACT SECTION ===== */
+        .contact-section {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            border-radius: 20px;
+            padding: 4.5rem 3.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            box-shadow: 0 20px 60px rgba(255, 90, 95, 0.2);
+            color: var(--color-white);
+        }
+
+        .contact-section h3 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            color: var(--color-white);
+        }
+
+        .contact-section p {
+            font-size: 1rem;
+            margin-bottom: 2.5rem;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-section .btn-primary {
+            background: var(--color-white);
+            color: var(--color-primary);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .contact-section .btn-primary:hover {
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.4);
+        }
+
+        .contact-section .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--color-white);
+            border: 2px solid var(--color-white);
+        }
+
+        .contact-section .btn-secondary:hover {
+            background: var(--color-white);
+            color: var(--color-primary);
+            border-color: var(--color-white);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: var(--color-white);
+            padding: 4rem 40px 2rem;
+            margin-top: 6rem;
+            border-top: 1px solid rgba(255, 90, 95, 0.1);
+        }
+
+        .footer-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h4 {
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.8px;
+            color: var(--color-primary);
+        }
+
+        .footer-column a {
+            display: block;
+            font-size: 0.9rem;
+            color: #aaa;
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            transition: var(--transition-base);
+        }
+
+        .footer-column a:hover {
+            color: var(--color-primary);
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        /* ===== UTILITIES ===== */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255, 90, 95, 0.2) 0%, transparent 100%);
+            margin: 5rem 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-32 {
+            margin-top: 2rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .section {
+                padding: 4rem 30px;
+            }
+
+            .section h2 {
+                font-size: 2.2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-wrapper {
+                padding: 0 20px;
+            }
+
+            .section {
+                padding: 3.5rem 20px;
+            }
+
+            .section h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero {
+                padding: 3rem 20px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .story-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .contact-section {
+                padding: 3rem 2rem;
+            }
+
+            .contact-section h3 {
+                font-size: 1.6rem;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+            }
+
+            .contact-buttons .btn {
+                width: 100%;
+            }
+
+            .footer {
+                padding: 3rem 20px 1.5rem;
+            }
+
+            .footer-grid {
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-wrapper {
+                padding: 0 20px;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .section {
+                padding: 2.5rem 20px;
+            }
+
+            .section h2 {
+                font-size: 1.4rem;
+            }
+
+            .hero {
+                padding: 2rem 20px;
+            }
+
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .feature-card {
+                padding: 1.8rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-image {
+                height: 200px;
+            }
+
+            .stat {
+                padding: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 1.8rem;
+            }
+
+            .contact-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .contact-section h3 {
+                font-size: 1.3rem;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.2rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="header-wrapper">
+        <a href="./" class="logo-section">
+            <img src="Images/logo.png" alt="Amon Heights" class="logo-img">
+            <span class="logo-text">Amon Heights</span>
+        </a>
+        <div class="nav-links">
+            <a href="./">Properties</a>
+            <a href="./about.html">About</a>
+            <a href="https://www.instagram.com/amonheights_limited/">Instagram</a>
+            <a href="https://wa.me/2349040837557" class="btn btn-primary">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <h1>About Amon Heights</h1>
+    <p>Nigeria's premier luxury real estate platform, connecting discerning clients with exclusive properties and investment opportunities across Abuja's most prestigious locations.</p>
+</section>
+
+<!-- STORY SECTION -->
+<section class="section">
+    <h2>Our Story</h2>
+    <div class="story-grid">
+        <div class="story-text">
+            <h3>Redefining Luxury Real Estate in Nigeria</h3>
+            <p>Founded in 2020, Amon Heights emerged with a clear mission: to bring world-class luxury real estate standards to Nigeria. We recognized a gap in the market for a platform that combined premium aesthetics, transparent processes, and uncompromising quality.</p>
+            <p>Today, we are proud to be the go-to destination for luxury property seekers, investors, and developers across Abuja and beyond.</p>
+            <p>Our RC number <strong>1434164</strong> represents our legitimacy and commitment to regulatory excellence.</p>
+        </div>
+        <div class="story-stats">
+            <div class="stat">
+                <div class="stat-number">2020</div>
+                <div class="stat-label">Founded</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Properties Listed</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Verified</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="section" style="background-color: var(--color-grey-lighter);">
+    <h2 class="text-center">Why Choose Amon Heights?</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🏆</div>
+            <h3>Premium Selection</h3>
+            <p>Only the finest properties in Abuja's most exclusive neighborhoods. Every listing meets our rigorous quality standards.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📈</div>
+            <h3>High Returns</h3>
+            <p>Strategic investments with proven appreciation and exceptional rental yields. Your investment is backed by market expertise.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">⭐</div>
+            <h3>Expert Team</h3>
+            <p>Experienced advisors providing personalized service. We understand the local market and global standards.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3>Fully Verified</h3>
+            <p>All properties are legally verified with transparent documentation. Your security and peace of mind are our priority.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🌍</div>
+            <h3>Global Standards</h3>
+            <p>Airbnb-level quality in design and service. Premium experience backed by international best practices.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Fast Service</h3>
+            <p>Quick response times and efficient processes. From inquiry to completion, we move at your pace.</p>
+        </div>
+    </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="section">
+    <h2 class="text-center">Featured Developments</h2>
+    <p class="text-center" style="margin-top: 0;">A showcase of our most prestigious properties across Abuja's finest neighborhoods</p>
+    <div class="portfolio-grid">
+        <div class="portfolio-item">
+            <img src="Images/living%20room%201.jpg" alt="Luxury Apartment Maitama" loading="lazy" class="portfolio-image">
+            <div class="portfolio-info">
+                <div class="portfolio-title">Maitama Luxury Estate</div>
+                <div class="portfolio-location">Maitama, Abuja</div>
+            </div>
+        </div>
+        <div class="portfolio-item">
+            <img src="Images/abuja%203.jpg" alt="Modern Villa Asokoro" loading="lazy" class="portfolio-image">
+            <div class="portfolio-info">
+                <div class="portfolio-title">Asokoro Modern Villa</div>
+                <div class="portfolio-location">Asokoro, Abuja</div>
+            </div>
+        </div>
+        <div class="portfolio-item">
+            <img src="Images/duplex%20outdoor.jpg" alt="Garki Executive Duplex" loading="lazy" class="portfolio-image">
+            <div class="portfolio-info">
+                <div class="portfolio-title">Garki Executive Duplex</div>
+                <div class="portfolio-location">Garki, Abuja</div>
+            </div>
+        </div>
+        <div class="portfolio-item">
+            <img src="Images/living%20room%202.jpg" alt="Beachfront Property" loading="lazy" class="portfolio-image">
+            <div class="portfolio-info">
+                <div class="portfolio-title">Premium Waterfront Villa</div>
+                <div class="portfolio-location">Prime Location, Abuja</div>
+            </div>
+        </div>
+        <div class="portfolio-item">
+            <img src="Images/duplex%20and%20pool%20outdoor%201.jpg" alt="Estate Development" loading="lazy" class="portfolio-image">
+            <div class="portfolio-info">
+                <div class="portfolio-title">Exclusive Estate Development</div>
+                <div class="portfolio-location">Maitama, Abuja</div>
+            </div>
+        </div>
+        <div class="portfolio-item">
+            <img src="Images/shortlet.jpg" alt="Short-Let Property" loading="lazy" class="portfolio-image">
+            <div class="portfolio-info">
+                <div class="portfolio-title">Premium Short-Let Home</div>
+                <div class="portfolio-location">Central Abuja</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- KEY CONTACT SECTION -->
+<section class="section">
+    <div class="contact-section">
+        <h3>Ready to Start Your Journey?</h3>
+        <p>Whether you're buying, selling, or investing, our expert team is here to guide you through every step.</p>
+        <div class="contact-buttons">
+            <a href="https://wa.me/2349040837557" class="btn btn-primary">Sales: +234 904 083 7557</a>
+            <a href="https://wa.me/2347072901406" class="btn btn-secondary">Rentals: +234 707 290 1406</a>
+            <a href="https://www.instagram.com/amonheights_limited/" class="btn btn-secondary">Follow on Instagram</a>
+        </div>
+    </div>
+</section>
+
+<!-- COMPANY INFO -->
+<section class="section">
+    <h2>Company Information</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 32px;">
+        <div>
+            <h3>Contact Details</h3>
+            <p><strong>Suite 106, Holborn House</strong></p>
+            <p>Plot 649 Franca Afegbua Crescent</p>
+            <p>Apo Legislative Quarters Extension, Abuja</p>
+            <p style="margin-top: 16px;"><strong>RC Number:</strong> 1434164</p>
+            <p><strong>Email:</strong> <a href="mailto:amonheightslimited@gmail.com" style="color: var(--color-red);">amonheightslimited@gmail.com</a></p>
+        </div>
+        <div>
+            <h3>Operating Divisions</h3>
+            <ul style="list-style: none;">
+                <li style="margin-bottom: 12px;">✓ Luxury Properties for Sale</li>
+                <li style="margin-bottom: 12px;">✓ Premium Rental Properties</li>
+                <li style="margin-bottom: 12px;">✓ Short-Let Hospitality</li>
+                <li style="margin-bottom: 12px;">✓ Investment Advisory</li>
+                <li style="margin-bottom: 12px;">✓ Property Management</li>
+                <li style="margin-bottom: 12px;">✓ Real Estate Consultation</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOLLOW & SOCIAL -->
+<section class="section text-center">
+    <h2>Follow Our Latest Listings</h2>
+    <p style="margin-top: 12px; margin-bottom: 32px;">Stay updated with exclusive properties and investment opportunities</p>
+    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="https://www.instagram.com/amonheights_limited/" class="btn btn-primary">📸 Instagram @amonheights</a>
+        <a href="https://www.youtube.com/@amonheights" class="btn btn-secondary">🎬 YouTube Channel</a>
+        <a href="https://x.com/AmonHeights" class="btn btn-secondary">𝕏 @AmonHeights</a>
+        <a href="https://www.linkedin.com/company/amon-heights-limited/" class="btn btn-secondary">💼 LinkedIn</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-wrapper">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <h4>Company</h4>
+                <a href="./about.html">About Us</a>
+                <a href="./">Properties</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-column">
+                <h4>Solutions</h4>
+                <a href="https://wa.me/2349040837557">Buy Property</a>
+                <a href="https://wa.me/2347072901406">Rent Property</a>
+                <a href="./">Browse Listings</a>
+            </div>
+            <div class="footer-column">
+                <h4>Social</h4>
+                <a href="https://www.instagram.com/amonheights_limited/">Instagram</a>
+                <a href="https://www.youtube.com/@amonheights">YouTube</a>
+                <a href="https://x.com/AmonHeights">X / Twitter</a>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <a href="https://wa.me/2349040837557">Sales</a>
+                <a href="https://wa.me/2347072901406">Rentals</a>
+                <a href="mailto:amonheightslimited@gmail.com">Email</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Amon Heights Real Estate Ltd. RC: 1434164. All rights reserved. | Powered by Strigwall</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
