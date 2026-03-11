@@ -168,29 +168,29 @@ function getBlogPost(id) {
 // ========== CONTACT FUNCTIONS ==========
 function contactWhatsApp(propertyName = 'property') {
     const message = `Hello Amon Heights, I'm interested in the ${propertyName}. Can you provide more details?`;
-    const whatsappUrl = `https://wa.me/2349000000000?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/2349040837557?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
 }
 
 function contactEmail() {
-    window.location.href = 'mailto:info@amonheights.com?subject=Property Inquiry&body=Hello Amon Heights Team, I am interested in learning more about your properties.';
+    window.location.href = 'mailto:amonheightslimited@gmail.com?subject=Property Inquiry&body=Hello Amon Heights Team, I am interested in learning more about your properties.';
 }
 
 function contactPhone() {
-    window.location.href = 'tel:+234-800-000-0000';
+    window.location.href = 'tel:+2349040837557';
 }
 
 // ========== SOCIAL MEDIA FUNCTIONS ==========
 function openInstagram() {
-    window.open('https://instagram.com/amonheights', '_blank');
+    window.open('https://www.instagram.com/amonheights_limited/', '_blank');
 }
 
 function openYouTube() {
-    window.open('https://youtube.com/@amonheights', '_blank');
+    window.open('https://www.youtube.com/@amonheights', '_blank');
 }
 
 function openTwitter() {
-    window.open('https://twitter.com/amonheights', '_blank');
+    window.open('https://x.com/AmonHeights', '_blank');
 }
 
 function openLinkedIn() {
