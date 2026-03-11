@@ -9,14 +9,19 @@
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
-        <div class="logo">Amon Heights</div>
-        <nav class="nav">
-            <a href="index.html">Properties</a>
-            <a href="about.html">About</a>
-            <a href="blog.html">Blog</a>
-            <a href="#contact">Contact</a>
-        </nav>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="Images/logo.png" alt="Amon Heights">
+                <span>Amon Heights</span>
+            </div>
+            <nav>
+                <a href="index.html">Properties</a>
+                <a href="about.html">About</a>
+                <a href="blog.html">Blog</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
     </header>
 
     <!-- Hero -->
@@ -42,7 +47,7 @@
                 <button class="filter-btn" onclick="filter('shortlet')">Shortlets</button>
             </div>
         </div>
-        <div id="propertyGrid"></div>
+        <div class="grid" id="propertyGrid"></div>
     </section>
 
     <!-- Modal -->
