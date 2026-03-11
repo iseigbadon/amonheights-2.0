@@ -3,457 +3,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Amon Heights Admin Dashboard - Manage blog posts and content">
-    <title>Admin Dashboard - Blog Management | Amon Heights</title>
+    <title>Admin Dashboard | Amon Heights</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --color-primary: #c41e3a;
-            --color-primary-hover: #a01729;
-            --color-black: #0a0a0a;
-            --color-white: #ffffff;
-            --color-grey-soft: #fafafa;
-            --color-grey-text: #666666;
-            --color-grey-light: #ebebeb;
-            --color-grey-border: #d8d8d8;
-            --color-primary: #FF5A5F;
-            --color-primary-light: #FF8B91;
-            --color-primary-dark: #E63946;
-            
-            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-            --transition-fast: 180ms cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-base: 280ms cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-slow: 380ms cubic-bezier(0.4, 0, 0.2, 1);
-            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
-            --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.15);
-            --shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.2);
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #c41e3a;
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --grey: #666666;
+            --light-grey: #f5f5f5;
+            --border: #e0e0e0;
+        }
+
         html {
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
-            font-family: var(--font-family);
-            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
-            color: var(--color-black);
-            font-weight: 400;
-            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            background: var(--light-grey);
+            color: var(--black);
+            line-height: 1.6;
         }
 
-        /* ============================================
-           HEADER & NAVIGATION
-           ============================================ */
-
+        /* HEADER */
         header {
             position: sticky;
             top: 0;
-            background: linear-gradient(180deg, var(--color-white) 0%, rgba(255, 255, 255, 0.98) 100%);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-            padding: 1rem 2rem;
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 1.2rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            z-index: 100;
+        }
+
+        .header-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 100;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-            backdrop-filter: blur(8px);
-            flex-wrap: wrap;
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            flex-shrink: 0;
-        }
-
-        .logo a {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            transition: var(--transition-base);
-        }
-
-        .logo a:hover {
-            transform: scale(1.05);
-        }
-
-        .logo img {
-            height: 40px;
-            width: auto;
-            display: block;
-            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.12));
-            transition: filter var(--transition-base);
-        }
-
-        .logo a:hover img {
-            filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.18));
-        }
-
-        .header-brand {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--color-black);
-            white-space: nowrap;
-            letter-spacing: -0.5px;
-        }
-
-        .tab-nav {
-            display: flex;
-            gap: 0;
-            border-bottom: 1px solid var(--color-grey-light);
-            margin: 0;
-            padding: 0;
-            flex: 1;
-            min-width: 200px;
-            order: 3;
-            width: 100%;
-        }
-
-        .tab-nav button {
-            background: none;
-            border: none;
-            padding: 1rem 1.5rem;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--color-grey-text);
-            cursor: pointer;
-            transition: all var(--transition-base);
-            border-bottom: 3px solid transparent;
-            position: relative;
-            bottom: -1px;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-        }
-
-        .tab-nav button:hover {
-            color: var(--color-black);
-            background: rgba(255, 90, 95, 0.05);
-        }
-
-        .tab-nav button.active {
-            color: var(--color-primary);
-            border-bottom-color: var(--color-primary);
-            box-shadow: 0 1px 0 var(--color-primary);
-        }
-
-        .header-right {
+        .logo-section {
             display: flex;
             align-items: center;
             gap: 1rem;
-            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--black);
+            font-size: 1.3rem;
+            font-weight: 800;
         }
 
-        #logoutBtn {
-            background: linear-gradient(135deg, var(--color-grey-soft) 0%, var(--color-grey-light) 100%);
-            color: var(--color-black);
-            border: 1.5px solid var(--color-grey-light);
-            padding: 0.7rem 1.3rem;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all var(--transition-base);
+        .logo-section img {
+            height: 36px;
+            width: auto;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 0;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .nav-tab {
+            background: none;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.4px;
-            min-height: 44px;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            color: var(--grey);
+            border-bottom: 3px solid transparent;
+            transition: all 200ms ease;
         }
 
-        #logoutBtn:hover {
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-            color: var(--color-white);
-            border-color: var(--color-primary);
-            box-shadow: 0 8px 20px rgba(255, 90, 95, 0.3);
-            transform: translateY(-2px);
+        .nav-tab:hover {
+            color: var(--black);
         }
 
-        #logoutBtn:active {
-            transform: translateY(0);
-            box-shadow: 0 4px 12px rgba(255, 90, 95, 0.2);
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
         }
 
-        /* ============================================
-           LAYOUT & CONTAINER
-           ============================================ */
+        .logout-btn {
+            padding: 0.7rem 1.5rem;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 200ms ease;
+        }
 
+        .logout-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* CONTAINER */
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 3rem 2rem;
         }
 
-        .tab-content {
+        /* SECTIONS */
+        .section {
             display: none;
-            animation: fadeInUp 0.6s ease-out;
         }
 
-        .tab-content.active {
+        .section.active {
             display: block;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ============================================
-           SECTION HEADERS
-           ============================================ */
-
         .section-header {
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
         }
 
         .section-header h2 {
-            font-size: 2.2rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
             font-weight: 800;
-            margin-bottom: 0.6rem;
-            color: var(--color-black);
-            letter-spacing: -0.3px;
+            margin-bottom: 0.5rem;
         }
 
-        .section-subtitle {
+        .section-header p {
+            color: var(--grey);
             font-size: 0.95rem;
-            color: var(--color-grey-text);
         }
 
-        /* ============================================
-           SEARCH & PROPERTIES CONTROLS
-           ============================================ */
-
-        .properties-controls {
-            margin-bottom: 1.5rem;
+        /* CONTROLS */
+        .controls {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
         }
 
         .search-input {
-            max-width: 400px;
-            padding: 0.85rem 1.2rem;
-            border: 1.5px solid var(--color-grey-light);
-            border-radius: 8px;
-            font-size: 0.95rem;
+            flex: 1;
+            min-width: 250px;
+            padding: 0.8rem 1rem;
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
             font-family: inherit;
-            transition: all var(--transition-base);
-            min-height: 44px;
-            background: var(--color-white);
-            color: var(--color-black);
+            font-size: 0.95rem;
+            transition: all 200ms ease;
         }
 
         .search-input:focus {
             outline: none;
-            border-color: var(--color-primary);
-            box-shadow: 0 0 0 4px rgba(255, 90, 95, 0.15);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(196,30,58,0.1);
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 200ms ease;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--black);
+            border: 1.5px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-danger {
+            background: #ffebee;
+            color: #c62828;
+            border: 1.5px solid #ffcdd2;
+        }
+
+        .btn-danger:hover {
+            background: #f5b3ba;
+        }
+
+        /* GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 200ms ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
             transform: translateY(-2px);
         }
 
-        /* ============================================
-           PROPERTIES TABLE
-           ============================================ */
-
-        .table-wrapper {
-            background: var(--color-white);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            overflow-x: auto;
-            border: 1px solid rgba(0, 0, 0, 0.04);
-        }
-
-        table {
+        .card-image {
             width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
+            height: 200px;
+            object-fit: cover;
+            background: var(--light-grey);
         }
 
-        thead {
-            background: linear-gradient(90deg, #f9f9f9 0%, #ffffff 100%);
-            border-bottom: 2px solid var(--color-primary);
+        .card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
-        th {
-            padding: 1.2rem;
-            text-align: left;
-            font-weight: 800;
-            font-size: 0.75rem;
-            color: var(--color-primary);
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-        }
-
-        td {
-            padding: 1rem 1.2rem;
-            border-bottom: 1px solid var(--color-grey-light);
-            color: var(--color-black);
-        }
-
-        tbody tr {
-            transition: all var(--transition-base);
-        }
-
-        tbody tr:hover {
-            background: rgba(255, 90, 95, 0.05);
-            box-shadow: inset 0 0 0 1px rgba(255, 90, 95, 0.1);
-        }
-
-        tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        .status-badge {
+        .card-badge {
             display: inline-block;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
+            padding: 0.3rem 0.8rem;
+            background: rgba(196,30,58,0.1);
+            color: var(--primary);
+            border-radius: 4px;
             font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.4px;
+            margin-bottom: 0.8rem;
+            width: fit-content;
         }
 
-        .status-available {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            color: #1b5e20;
-            box-shadow: 0 2px 8px rgba(56, 142, 60, 0.15);
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
         }
 
-        .status-sold {
-            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
-            color: #b71c1c;
-            box-shadow: 0 2px 8px rgba(198, 40, 40, 0.15);
+        .card-meta {
+            font-size: 0.85rem;
+            color: var(--grey);
+            margin-bottom: 1rem;
         }
 
-        .action-buttons {
+        .card-excerpt {
+            font-size: 0.95rem;
+            color: var(--grey);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .card-actions {
             display: flex;
             gap: 0.6rem;
         }
 
-        .action-btn {
-            padding: 0.6rem 1rem;
-            border: none;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            min-height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .card-actions .btn {
+            flex: 1;
+            padding: 0.6rem;
+            font-size: 0.85rem;
         }
 
-        .action-btn-edit {
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-            color: var(--color-white);
-            box-shadow: 0 4px 12px rgba(255, 90, 95, 0.2);
-        }
-
-        .action-btn-edit:hover {
-            box-shadow: 0 8px 20px rgba(255, 90, 95, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .action-btn-delete {
-            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
-            color: #c62828;
-            border: 1px solid #ffcdd2;
-        }
-
-        .action-btn-delete:hover {
-            box-shadow: 0 4px 12px rgba(198, 40, 40, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 4rem 2rem;
-            color: var(--color-grey-text);
-            background: linear-gradient(135deg, #f9f9f9 0%, var(--color-grey-soft) 100%);
-            border-radius: 12px;
-            border: 2px dashed var(--color-grey-light);
-        }
-
-        .empty-state a {
-            color: var(--color-primary);
-            text-decoration: none;
-            font-weight: 700;
-            transition: all var(--transition-fast);
-        }
-
-        .empty-state a:hover {
-            color: var(--color-primary-dark);
-            text-decoration: underline;
-        }
-
-        /* ============================================
-           FORM STYLING
-           ============================================ */
-
+        /* FORM */
         .form-card {
-            background: linear-gradient(135deg, var(--color-white) 0%, #f9f9f9 100%);
-            border-radius: 16px;
-            padding: 2.5rem;
-            box-shadow: var(--shadow-md);
-            border: 1px solid rgba(0, 0, 0, 0.04);
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
-        .form-section {
-            margin-bottom: 2.5rem;
-            padding-bottom: 2.5rem;
-            border-bottom: 1px solid var(--color-grey-light);
-        }
-
-        .form-section:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-
-        .form-section-title {
-            font-size: 0.8rem;
-            font-weight: 800;
-            color: var(--color-primary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .form-group {
             margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
         }
 
-        .form-section-title::before {
-            content: '';
-            width: 3px;
-            height: 16px;
-            background: linear-gradient(180deg, var(--color-primary), var(--color-primary-light));
-            margin-right: 10px;
-            border-radius: 2px;
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--primary);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 200ms ease;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(196,30,58,0.1);
         }
 
         .form-row {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr 1fr;
             gap: 1.5rem;
             margin-bottom: 1.5rem;
         }
@@ -462,250 +354,26 @@
             grid-template-columns: 1fr;
         }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        label {
-            font-weight: 700;
-            font-size: 0.85rem;
-            color: var(--color-black);
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        input[type="email"],
-        input[type="url"],
-        select,
-        textarea {
-            padding: 1rem 1.2rem;
-            border: 1.5px solid var(--color-grey-light);
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 0.95rem;
-            transition: all var(--transition-base);
-            background: var(--color-white);
-            color: var(--color-black);
-            min-height: 44px;
-        }
-
-        input[type="text"]:focus,
-        input[type="number"]:focus,
-        input[type="email"]:focus,
-        input[type="url"]:focus,
-        select:focus,
-        textarea:focus {
-            outline: none;
-            border-color: var(--color-primary);
-            box-shadow: 0 0 0 4px rgba(255, 90, 95, 0.15);
-            transform: translateY(-2px);
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .form-hint {
-            font-size: 0.8rem;
-            color: var(--color-grey-text);
-            margin-top: 0.4rem;
-            font-style: italic;
-        }
-
-        /* ============================================
-           BUTTONS
-           ============================================ */
-
-        .button-group {
+        .form-actions {
             display: flex;
             gap: 1rem;
             padding-top: 1.5rem;
-            border-top: 1.5px solid var(--color-grey-light);
+            border-top: 1px solid var(--border);
             margin-top: 2rem;
         }
 
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all var(--transition-slow);
-            font-family: inherit;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            min-height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .form-actions .btn {
+            flex: 1;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-            color: var(--color-white);
-            box-shadow: 0 8px 20px rgba(255, 90, 95, 0.25);
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 12px 32px rgba(255, 90, 95, 0.35);
-            transform: translateY(-3px);
-        }
-
-        .btn-primary:active {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(255, 90, 95, 0.25);
-        }
-
-        .btn-secondary {
-            background: var(--color-white);
-            color: var(--color-black);
-            border: 1.5px solid var(--color-grey-light);
-        }
-
-        .btn-secondary:hover {
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-            border-color: var(--color-primary);
-            color: var(--color-white);
-            box-shadow: 0 8px 20px rgba(255, 90, 95, 0.25);
-        }
-
-        /* ============================================
-           MODAL
-           ============================================ */
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 100%);
-            backdrop-filter: blur(4px);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.show {
-            display: flex;
-            animation: fadeIn var(--transition-base);
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        .modal-content {
-            background: linear-gradient(135deg, var(--color-white) 0%, #f9f9f9 100%);
-            border-radius: 16px;
-            padding: 2.5rem;
-            max-width: 480px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
-            border: 1px solid rgba(0, 0, 0, 0.04);
-            animation: slideUp var(--transition-slow);
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-header {
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
-            padding-bottom: 1.2rem;
-        }
-
-        .modal-header h3 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--color-primary);
-            letter-spacing: -0.2px;
-        }
-
-        .modal-body {
-            margin-bottom: 2rem;
-            color: var(--color-grey-text);
-            line-height: 1.7;
-            font-size: 0.95rem;
-        }
-
-        .modal-footer {
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
-        }
-
-        /* ============================================
-           FOOTER
-           ============================================ */
-
-        footer {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            border-top: 1px solid rgba(255, 90, 95, 0.1);
-            padding: 2.5rem;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #999;
-            margin-top: 6rem;
-            box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        footer a {
-            color: var(--color-primary);
-            text-decoration: none;
-            font-weight: 700;
-            transition: all var(--transition-fast);
-        }
-
-        footer a:hover {
-            color: var(--color-primary-light);
-            text-decoration: underline;
-        }
-
-        /* ============================================
-           MESSAGES
-           ============================================ */
-
+        /* MESSAGE */
         .message {
-            padding: 1.2rem 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 1.2rem;
-            font-size: 0.9rem;
+            padding: 1rem 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 2rem;
             display: none;
+            border-left: 4px solid;
             font-weight: 600;
-            border-left: 4px solid transparent;
-            box-shadow: var(--shadow-md);
-            animation: slideDown var(--transition-base);
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .message.show {
@@ -713,199 +381,84 @@
         }
 
         .message.success {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            background: #e8f5e9;
             color: #1b5e20;
             border-left-color: #4caf50;
-            box-shadow: 0 8px 20px rgba(56, 142, 60, 0.15);
         }
 
         .message.error {
-            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
-            color: #b71c1c;
+            background: #ffebee;
+            color: #c62828;
             border-left-color: #f44336;
-            box-shadow: 0 8px 20px rgba(244, 67, 54, 0.15);
         }
 
-        /* ============================================
-           LOADING & UI STATES
-           ============================================ */
+        /* EMPTY STATE */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--grey);
+        }
 
-        .loading-overlay {
+        .empty-state p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
-            display: none;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
             align-items: center;
             justify-content: center;
-            z-index: 2000;
-            backdrop-filter: blur(4px);
         }
 
-        .loading-overlay.show {
+        .modal.show {
             display: flex;
         }
 
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(255, 90, 95, 0.2);
-            border-top-color: var(--color-primary);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+        .modal-content {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* ============================================
-           FILTERS & CONTROLS
-           ============================================ */
-
-        .controls-bar {
-            display: flex;
-            gap: 1.2rem;
+        .modal-header {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 800;
             margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            align-items: center;
+            color: var(--primary);
         }
 
-        .filter-group {
+        .modal-buttons {
             display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .filter-btn {
-            padding: 0.7rem 1.2rem;
-            border: 1.5px solid var(--color-grey-light);
-            background: var(--color-white);
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: all var(--transition-base);
-            white-space: nowrap;
-        }
-
-        .filter-btn:hover {
-            border-color: var(--color-primary);
-            color: var(--color-primary);
-            background: rgba(255, 90, 95, 0.05);
-        }
-
-        .filter-btn.active {
-            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
-            color: var(--color-white);
-            border-color: var(--color-primary);
-            box-shadow: 0 4px 12px rgba(255, 90, 95, 0.2);
-        }
-
-        .sort-select {
-            padding: 0.7rem 1rem;
-            border: 1.5px solid var(--color-grey-light);
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-family: inherit;
-            cursor: pointer;
-            transition: all var(--transition-base);
-            background: var(--color-white);
-            color: var(--color-black);
-            min-width: 200px;
-        }
-
-        .sort-select:focus {
-            outline: none;
-            border-color: var(--color-primary);
-            box-shadow: 0 0 0 3px rgba(255, 90, 95, 0.15);
-        }
-
-        /* ============================================
-           PAGINATION
-           ============================================ */
-
-        .pagination {
-            display: flex;
-            gap: 0.5rem;
-            justify-content: center;
+            gap: 1rem;
             margin-top: 2rem;
-            flex-wrap: wrap;
+            justify-content: flex-end;
         }
 
-        .pagination-btn {
-            padding: 0.7rem 1rem;
-            border: 1.5px solid var(--color-grey-light);
-            background: var(--color-white);
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: all var(--transition-fast);
-            min-width: 40px;
-            text-align: center;
-        }
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header-wrapper {
+                flex-direction: column;
+                gap: 1rem;
+            }
 
-        .pagination-btn:hover:not(:disabled) {
-            border-color: var(--color-primary);
-            color: var(--color-primary);
-            background: rgba(255, 90, 95, 0.05);
-        }
+            .nav-tabs {
+                width: 100%;
+                justify-content: space-around;
+            }
 
-        .pagination-btn.active {
-            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
-            color: var(--color-white);
-            border-color: var(--color-primary);
-        }
-
-        .pagination-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .pagination-info {
-            text-align: center;
-            font-size: 0.85rem;
-            color: var(--color-grey-text);
-            margin-top: 1rem;
-        }
-
-        th.sortable {
-            cursor: pointer;
-            user-select: none;
-        }
-
-        th.sortable:hover {
-            background: rgba(255, 90, 95, 0.08);
-        }
-
-        th.sortable::after {
-            content: " ⇅";
-            font-size: 0.7em;
-            opacity: 0.5;
-        }
-
-        th.sortable.asc::after {
-            content: " ↑";
-            opacity: 1;
-            color: var(--color-primary);
-        }
-
-        th.sortable.desc::after {
-            content: " ↓";
-            opacity: 1;
-            color: var(--color-primary);
-        }
-
-        /* ============================================
-           RESPONSIVE DESIGN
-           ============================================ */
-
-        @media (max-width: 1024px) {
             .container {
                 padding: 1.5rem;
             }
@@ -914,1858 +467,576 @@
                 font-size: 1.8rem;
             }
 
-            .form-card {
-                padding: 2rem;
+            .grid {
+                grid-template-columns: 1fr;
             }
 
             .form-row {
                 grid-template-columns: 1fr;
             }
-        }
 
-        @media (max-width: 768px) {
-            header {
-                padding: 1rem 1.2rem;
+            .controls {
                 flex-direction: column;
-                gap: 0.8rem;
-                align-items: stretch;
-            }
-
-            .header-left {
-                width: 100%;
-                gap: 1rem;
-                display: flex;
-                align-items: center;
-            }
-
-            .logo img {
-                height: 32px;
-            }
-
-            .header-brand {
-                font-size: 1.1rem;
-            }
-
-            .tab-nav {
-                width: 100%;
-                order: initial;
-                flex: none;
-                overflow-x: auto;
-                overflow-y: hidden;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: thin;
-                border-bottom: 1px solid var(--color-grey-light);
-            }
-
-            .tab-nav button {
-                padding: 1rem 1.2rem;
-                min-height: 44px;
-                white-space: nowrap;
-                font-size: 0.8rem;
-                flex-shrink: 0;
-                display: flex;
-                align-items: center;
-            }
-
-            .header-right {
-                width: 100%;
-                justify-content: flex-end;
-            }
-
-            #logoutBtn {
-                padding: 0.7rem 1.2rem;
-                min-height: 44px;
-                font-size: 0.75rem;
-            }
-
-            .container {
-                padding: 1.2rem;
-            }
-
-            .section-header {
-                margin-bottom: 1.5rem;
-            }
-
-            .section-header h2 {
-                font-size: 1.5rem;
-                margin-bottom: 0.4rem;
-            }
-
-            .section-subtitle {
-                font-size: 0.85rem;
-            }
-
-            .properties-controls {
-                margin-bottom: 1.2rem;
             }
 
             .search-input {
-                width: 100%;
-                max-width: 100%;
-                padding: 0.9rem 1rem;
-                font-size: 0.9rem;
-            }
-
-            .table-wrapper {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                border-radius: 8px;
-            }
-
-            table {
-                font-size: 0.8rem;
-                min-width: 600px;
-            }
-
-            thead {
-                position: sticky;
-                top: 0;
-            }
-
-            th {
-                padding: 0.9rem 1rem;
-                font-size: 0.7rem;
-            }
-
-            td {
-                padding: 0.9rem 1rem;
-                font-size: 0.8rem;
-            }
-
-            .status-badge {
-                font-size: 0.65rem;
-                padding: 0.4rem 0.8rem;
-            }
-
-            .action-buttons {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .action-btn {
-                padding: 0.6rem 0.9rem;
-                font-size: 0.7rem;
-                width: 100%;
-                min-height: 36px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .form-card {
-                padding: 1.5rem;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-                gap: 1.2rem;
-                margin-bottom: 1.2rem;
-            }
-
-            .form-section {
-                margin-bottom: 1.5rem;
-                padding-bottom: 1.2rem;
-            }
-
-            .form-section-title {
-                font-size: 0.75rem;
-                margin-bottom: 1rem;
-                font-weight: 700;
-            }
-
-            .form-group {
-                gap: 0.4rem;
-            }
-
-            label {
-                font-size: 0.8rem;
-                font-weight: 600;
-            }
-
-            input[type="text"],
-            input[type="number"],
-            input[type="email"],
-            input[type="url"],
-            select,
-            textarea {
-                padding: 0.9rem 1rem;
-                font-size: 0.9rem;
-                min-height: 40px;
-            }
-
-            textarea {
-                min-height: 100px;
-                resize: vertical;
-            }
-
-            .button-group {
-                gap: 0.8rem;
-                flex-wrap: wrap;
-                margin-top: 1.2rem;
-            }
-
-            .btn {
-                flex: 1;
-                min-width: 100px;
-                padding: 1rem 1.2rem;
-                min-height: 44px;
-                font-size: 0.8rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .modal-content {
-                width: 90%;
-                max-width: 480px;
-                margin: 0 auto;
-                padding: 1.5rem;
-                border-radius: 12px;
-            }
-
-            .modal-header h3 {
-                font-size: 1.3rem;
-                margin-bottom: 0.8rem;
-            }
-
-            .modal-body {
-                font-size: 0.9rem;
-                margin-bottom: 1.5rem;
-                line-height: 1.6;
-            }
-
-            .modal-footer {
-                gap: 0.8rem;
-                margin-top: 1.5rem;
-            }
-
-            .modal-footer .btn {
-                flex: 1;
-                padding: 0.8rem 1rem;
-            }
-
-            footer {
-                padding: 1.5rem;
-                font-size: 0.75rem;
-                margin-top: 3rem;
-                text-align: center;
-            }
-
-            .empty-state {
-                padding: 2.5rem 1.2rem;
-                text-align: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header {
-                padding: 0.8rem 1rem;
-                flex-direction: column;
-                gap: 0.6rem;
-                position: sticky;
-                top: 0;
-                z-index: 100;
-            }
-
-            .header-left {
-                width: 100%;
-                gap: 0.6rem;
-                min-width: auto;
-            }
-
-            .logo img {
-                height: 28px;
-            }
-
-            .header-brand {
-                font-size: 1rem;
-                font-weight: 700;
-            }
-
-            .tab-nav {
-                width: 100%;
-                order: initial;
-                flex: none;
-                gap: 0;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .tab-nav button {
-                padding: 0.9rem 1.1rem;
-                min-height: 44px;
-                min-width: 90px;
-                font-size: 0.7rem;
-                flex-shrink: 0;
-            }
-
-            .tab-nav button.active {
-                border-bottom: 3px solid var(--color-primary);
-            }
-
-            .header-right {
-                width: 100%;
-                justify-content: flex-end;
-            }
-
-            #logoutBtn {
-                padding: 0.6rem 0.9rem;
-                min-height: 40px;
-                font-size: 0.65rem;
-            }
-
-            .container {
-                padding: 1rem;
-                max-width: 100%;
-            }
-
-            .section-header {
-                margin-bottom: 1.2rem;
-            }
-
-            .section-header h2 {
-                font-size: 1.3rem;
-                margin-bottom: 0.3rem;
-            }
-
-            .section-subtitle {
-                font-size: 0.8rem;
-            }
-
-            .properties-controls {
-                margin-bottom: 1rem;
-            }
-
-            .search-input {
-                width: 100%;
-                max-width: none;
-                padding: 0.8rem 0.9rem;
-                font-size: 0.9rem;
-                border-radius: 6px;
-            }
-
-            .table-wrapper {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                margin: 0 -1rem;
-                border-radius: 0;
-            }
-
-            table {
-                font-size: 0.75rem;
-                min-width: 500px;
-            }
-
-            thead {
-                position: sticky;
-                top: 0;
-                background: var(--color-grey-soft);
-                z-index: 10;
-            }
-
-            th, td {
-                padding: 0.7rem 0.9rem;
-                font-size: 0.75rem;
-            }
-
-            .action-btn {
-                padding: 0.5rem 0.7rem;
-                font-size: 0.65rem;
-                width: 100%;
-                min-height: 34px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .form-card {
-                padding: 1.2rem;
-                border-radius: 10px;
-                background: linear-gradient(135deg, var(--color-white) 0%, var(--color-grey-soft) 100%);
-                margin-bottom: 1.2rem;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-                margin-bottom: 1rem;
-            }
-
-            .form-section {
-                margin-bottom: 1.2rem;
-                padding-bottom: 1rem;
-            }
-
-            .form-section:last-of-type {
-                margin-bottom: 0;
-            }
-
-            .form-section-title {
-                font-size: 0.7rem;
-                margin-bottom: 0.9rem;
-                font-weight: 700;
-            }
-
-            .form-group {
-                gap: 0.3rem;
-            }
-
-            label {
-                font-size: 0.75rem;
-                font-weight: 600;
-                color: var(--color-black);
-            }
-
-            input[type="text"],
-            input[type="number"],
-            input[type="email"],
-            input[type="url"],
-            select,
-            textarea {
-                padding: 0.8rem 0.9rem;
-                font-size: 0.9rem;
-                border-radius: 6px;
-                min-height: 40px;
-                width: 100%;
-            }
-
-            textarea {
-                min-height: 80px;
-                resize: vertical;
-            }
-
-            .button-group {
-                gap: 0.6rem;
-                flex-direction: column;
-                margin-top: 1rem;
-            }
-
-            .btn {
-                flex: 1;
-                min-width: auto;
-                width: 100%;
-                padding: 1rem 0.9rem;
-                min-height: 44px;
-                font-size: 0.8rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .modal-content {
-                width: 100%;
-                max-width: 100%;
-                margin: 0;
-                padding: 1.2rem;
-                border-radius: 12px 12px 0 0;
-                max-height: 85vh;
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .modal-header h3 {
-                font-size: 1.2rem;
-                margin-bottom: 1rem;
-            }
-
-            .modal-body {
-                font-size: 0.9rem;
-                margin-bottom: 1.2rem;
-                line-height: 1.5;
-            }
-
-            .modal-footer {
-                gap: 0.6rem;
-                flex-direction: column;
-                margin-top: 1rem;
-            }
-
-            .modal-footer .btn {
-                padding: 0.9rem 0.8rem;
-                min-height: 40px;
-            }
-
-            footer {
-                padding: 1.2rem;
-                font-size: 0.7rem;
-                margin-top: 2rem;
-                text-align: center;
-                line-height: 1.5;
-            }
-
-            .empty-state {
-                padding: 2rem 1rem;
-                text-align: center;
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 380px) {
-            header {
-                padding: 0.7rem 0.8rem;
-                gap: 0.5rem;
-            }
-
-            .header-left {
-                gap: 0.5rem;
-            }
-
-            .logo img {
-                height: 24px;
-            }
-
-            .header-brand {
-                font-size: 0.95rem;
-                display: none;
-            }
-
-            .tab-nav button {
-                padding: 0.8rem 1rem;
-                min-width: 70px;
-                font-size: 0.65rem;
-            }
-
-            #logoutBtn {
-                padding: 0.6rem 0.8rem;
-                min-height: 36px;
-                font-size: 0.6rem;
-            }
-
-            .container {
-                padding: 0.8rem;
-            }
-
-            .section-header h2 {
-                font-size: 1.2rem;
-            }
-
-            .section-subtitle {
-                font-size: 0.75rem;
-            }
-
-            .search-input {
-                padding: 0.8rem 0.8rem;
-                font-size: 0.85rem;
-            }
-
-            table {
-                font-size: 0.7rem;
-                min-width: 400px;
-            }
-
-            th, td {
-                padding: 0.6rem 0.7rem;
-                font-size: 0.7rem;
-            }
-
-            .action-btn {
-                padding: 0.4rem 0.6rem;
-                font-size: 0.6rem;
-                min-height: 32px;
-            }
-
-            .form-card {
-                padding: 1rem;
-            }
-
-            input[type="text"],
-            input[type="number"],
-            input[type="email"],
-            input[type="url"],
-            select,
-            textarea {
-                padding: 0.8rem 0.7rem;
-                font-size: 0.9rem;
-                min-height: 36px;
-            }
-
-            .btn {
-                padding: 0.9rem 0.8rem;
-                min-height: 40px;
-                font-size: 0.75rem;
-            }
-
-            .modal-content {
-                padding: 1rem;
-                border-radius: 10px 10px 0 0;
-            }
-
-            footer {
-                padding: 0.8rem;
-                font-size: 0.65rem;
+                min-width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <!-- HEADER -->
-    <header>
-        <div class="header-left">
-            <div class="logo">
-                <a href="../public/index.html">
-                    <img src="../Images/logo.png" alt="Amon Heights Logo">
-                </a>
-            </div>
-            <div class="header-brand">Admin Dashboard</div>
-        </div>
-
-        <nav class="tab-nav">
-            <button class="tab-btn active" data-tab="properties-tab">
-                📋 Properties
-            </button>
-            <button class="tab-btn" data-tab="add-property-tab">
-                ➕ Add Property
-            </button>
-        </nav>
-
-        <div class="header-right">
-            <button id="logoutBtn">Logout</button>
-        </div>
-    </header>
-
-    <!-- MAIN CONTAINER -->
-    <div class="container">
-        <!-- TAB: PROPERTIES LIST -->
-        <section id="properties-tab" class="tab-content active">
-            <div class="section-header">
-                <h2>Properties</h2>
-                <p class="section-subtitle">Manage your luxury property listings</p>
-            </div>
-
-            <div class="properties-controls">
-                <input type="text" id="propertyFilter" placeholder="🔍 Search properties..." class="search-input">
-            </div>
-
-            <div class="controls-bar">
-                <div class="filter-group">
-                    <button class="filter-btn active" data-filter="all">All Properties</button>
-                    <button class="filter-btn" data-filter="Available">✓ Available</button>
-                    <button class="filter-btn" data-filter="Sold">Sold</button>
-                </div>
-                <select id="sortBy" class="sort-select">
-                    <option value="recent">Sort: Newest First</option>
-                    <option value="priceHigh">Sort: Price (High to Low)</option>
-                    <option value="priceLow">Sort: Price (Low to High)</option>
-                    <option value="nameAZ">Sort: Name (A-Z)</option>
-                    <option value="nameZA">Sort: Name (Z-A)</option>
-                </select>
-            </div>
-
-            <div id="propertiesMessage" class="message"></div>
-
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="sortable" data-sort="name">Name</th>
-                            <th class="sortable" data-sort="location">Location</th>
-                            <th class="sortable" data-sort="type">Type</th>
-                            <th class="sortable" data-sort="price">Price</th>
-                            <th class="sortable" data-sort="status">Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="propertiesTableBody">
-                        <tr>
-                            <td colspan="6" style="text-align: center; padding: 32px;">Loading properties...</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="pagination" id="paginationContainer" style="display: none;"></div>
-            <div class="pagination-info" id="paginationInfo"></div>
-
-            <div id="emptyState" class="empty-state" style="display: none;">
-                <p>📭 No properties yet.<br><a href="#" onclick="switchTab('add-property-tab'); return false;"><strong>Add your first property</strong></a></p>
-            </div>
-        </section>
-
-        <!-- TAB: ADD PROPERTY -->
-        <section id="add-property-tab" class="tab-content">
-            <div class="section-header">
-                <h2>Add New Property</h2>
-                <p class="section-subtitle">Create a new premium property listing</p>
-            </div>
-
-            <div id="formMessage" class="message"></div>
-
-            <div class="form-card">
-                <form id="propertyForm">
-                    <!-- Basic Information -->
-                    <div class="form-section">
-                        <div class="form-section-title">Basic Information</div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="propertyName">Property Name *</label>
-                                <input type="text" id="propertyName" name="name" placeholder="e.g., Sunset Villa Luxury Estate" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="propertyLocation">Location *</label>
-                                <input type="text" id="propertyLocation" name="location" placeholder="e.g., Victoria Island, Lagos" required>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="propertyType">Type *</label>
-                                <select id="propertyType" name="type" required>
-                                    <option value="">Select property type</option>
-                                    <option value="Apartment">Apartment</option>
-                                    <option value="Villa">Villa</option>
-                                    <option value="Duplex">Duplex</option>
-                                    <option value="Shortlet">Shortlet</option>
-                                    <option value="Penthouse">Penthouse</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="propertyStatus">Status *</label>
-                                <select id="propertyStatus" name="status" required>
-                                    <option value="">Select status</option>
-                                    <option value="Available">Available</option>
-                                    <option value="Sold">Sold</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pricing & Details -->
-                    <div class="form-section">
-                        <div class="form-section-title">Pricing & Details</div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="propertyPrice">Price (₦) *</label>
-                                <input type="number" id="propertyPrice" name="price" placeholder="e.g., 50000000" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="propertyRating">Rating (1-5)</label>
-                                <input type="number" id="propertyRating" name="rating" step="0.1" min="1" max="5" placeholder="4.8">
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="propertyBedrooms">Bedrooms</label>
-                                <input type="number" id="propertyBedrooms" name="bedrooms" placeholder="4">
-                            </div>
-                            <div class="form-group">
-                                <label for="propertyBathrooms">Bathrooms</label>
-                                <input type="number" id="propertyBathrooms" name="bathrooms" placeholder="3">
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="propertySize">Size (sqft)</label>
-                                <input type="number" id="propertySize" name="sqft" placeholder="5000">
-                            </div>
-                            <div class="form-group">
-                                <label for="propertyReviews">Number of Reviews</label>
-                                <input type="number" id="propertyReviews" name="reviews" placeholder="24">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Description & Image -->
-                    <div class="form-section">
-                        <div class="form-section-title">Content</div>
-
-                        <div class="form-row full">
-                            <div class="form-group">
-                                <label for="propertyDescription">Description</label>
-                                <textarea id="propertyDescription" name="description" placeholder="Describe the property, its features, and amenities..."></textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-row full">
-                            <div class="form-group">
-                                <label for="propertyImage">Image URL</label>
-                                <input type="url" id="propertyImage" name="image" placeholder="https://example.com/image.jpg">
-                                <p class="form-hint">Provide a direct link to the property image</p>
-                            </div>
-                        </div>
-
-                        <div class="form-row full">
-                            <div class="form-group">
-                                <label for="propertyAmenities">Amenities (comma-separated)</label>
-                                <input type="text" id="propertyAmenities" name="amenities" placeholder="Pool, Gym, Security, Garden">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Form Actions -->
-                    <div class="button-group">
-                        <button type="submit" class="btn btn-primary">Add Property</button>
-                        <button type="reset" class="btn btn-secondary">Clear</button>
-                    </div>
-                </form>
-            </div>
-        </section>
-    </div>
-
-    <!-- FOOTER -->
-    <footer>
-        <p>© 2026 <a href="./">Amon Heights</a>. All rights reserved. RC: 1434164 | Powered by <a href="#">Strigwall</a></p>
-    </footer>
-
-    <!-- EDIT PROPERTY MODAL -->
-    <div id="editModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Edit Property</h3>
-            </div>
-            <div class="modal-body">
-                <form id="editPropertyForm">
-                    <input type="hidden" id="editPropertyId">
-                    
-                    <div class="form-section">
-                        <div class="form-section-title">Basic Information</div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="editPropertyName">Property Name *</label>
-                                <input type="text" id="editPropertyName" name="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="editPropertyLocation">Location *</label>
-                                <input type="text" id="editPropertyLocation" name="location" required>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="editPropertyType">Type *</label>
-                                <select id="editPropertyType" name="type" required>
-                                    <option value="Apartment">Apartment</option>
-                                    <option value="Villa">Villa</option>
-                                    <option value="Duplex">Duplex</option>
-                                    <option value="Shortlet">Shortlet</option>
-                                    <option value="Penthouse">Penthouse</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="editPropertyStatus">Status *</label>
-                                <select id="editPropertyStatus" name="status" required>
-                                    <option value="Available">Available</option>
-                                    <option value="Sold">Sold</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-section">
-                        <div class="form-section-title">Pricing & Details</div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="editPropertyPrice">Price (₦) *</label>
-                                <input type="number" id="editPropertyPrice" name="price" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="editPropertyRating">Rating (1-5)</label>
-                                <input type="number" id="editPropertyRating" name="rating" step="0.1" min="1" max="5">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="editPropertyBedrooms">Bedrooms</label>
-                                <input type="number" id="editPropertyBedrooms" name="bedrooms">
-                            </div>
-                            <div class="form-group">
-                                <label for="editPropertyBathrooms">Bathrooms</label>
-                                <input type="number" id="editPropertyBathrooms" name="bathrooms">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="editPropertySize">Size (sqft)</label>
-                                <input type="number" id="editPropertySize" name="sqft">
-                            </div>
-                            <div class="form-group">
-                                <label for="editPropertyReviews">Number of Reviews</label>
-                                <input type="number" id="editPropertyReviews" name="reviews">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-section">
-                        <div class="form-section-title">Content</div>
-                        <div class="form-row full">
-                            <div class="form-group">
-                                <label for="editPropertyDescription">Description</label>
-                                <textarea id="editPropertyDescription" name="description"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-row full">
-                            <div class="form-group">
-                                <label for="editPropertyImage">Image URL</label>
-                                <input type="url" id="editPropertyImage" name="image">
-                            </div>
-                        </div>
-                        <div class="form-row full">
-                            <div class="form-group">
-                                <label for="editPropertyAmenities">Amenities (comma-separated)</label>
-                                <input type="text" id="editPropertyAmenities" name="amenities">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
-                <button type="button" class="btn btn-primary" onclick="savePropertyEdit()">Save Changes</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- LOADING OVERLAY -->
-    <div id="loadingOverlay" class="loading-overlay">
-        <div class="spinner"></div>
-    </div>
-
-    <!-- DELETE CONFIRMATION MODAL -->
-    <div id="deleteModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Confirm Delete</h3>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete this property? This action cannot be undone.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
-                <button type="button" class="btn btn-primary" onclick="confirmDelete()">Delete</button>
-            </div>
-        </div>
-    </div>
-
-</head>
-<body>
 
 <!-- HEADER -->
-<header style="position: sticky; top: 0; background: var(--color-white); z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-bottom: 1px solid #e0e0e0; padding: 1rem 2rem;">
-    <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 2rem;">
-        <div style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--color-black); font-size: 1.4rem; font-weight: 800;">
-            <img src="../Images/logo.png" alt="Amon Heights" style="height: 36px; width: auto;">
-            Blog Admin
-        </div>
-        <div style="display: flex; gap: 2rem; flex: 1; justify-content: center;">
-            <button onclick="switchTab('posts')" id="postsTab" class="tab-btn active" style="background: none; border: none; padding: 0.5rem 1rem; font-weight: 600; color: var(--color-black); cursor: pointer; border-bottom: 3px solid transparent; transition: all 200ms ease; font-size: 0.9rem;">📝 Posts</button>
-            <button onclick="switchTab('new')" id="newTab" class="tab-btn" style="background: none; border: none; padding: 0.5rem 1rem; font-weight: 600; color: #999; cursor: pointer; border-bottom: 3px solid transparent; transition: all 200ms ease; font-size: 0.9rem;">➕ New Post</button>
-        </div>
-        <button onclick="logout()" style="padding: 0.7rem 1.5rem; background: var(--color-primary); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 200ms ease;">Logout</button>
+<header>
+    <div class="header-wrapper">
+        <a href="../public/index.html" class="logo-section">
+            <img src="../Images/logo.png" alt="Amon Heights">
+            <span>Admin</span>
+        </a>
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="switchTab('posts')">📝 Blog Posts</button>
+            <button class="nav-tab" onclick="switchTab('properties')">🏠 Properties</button>
+        </nav>
+        <button class="logout-btn" onclick="confirmLogout()">Logout</button>
     </div>
 </header>
 
-<style>
-    .tab-btn.active {
-        color: var(--color-primary) !important;
-        border-bottom-color: var(--color-primary) !important;
-    }
-</style>
+<!-- CONTAINER -->
+<div class="container">
 
-<!-- MAIN CONTENT -->
-<div style="max-width: 1400px; margin: 0 auto; padding: 3rem 2rem;">
+    <!-- MESSAGE -->
+    <div id="message" class="message"></div>
 
-    <!-- TAB: POSTS LIST -->
-    <section id="postsSection" style="display: block;">
-        <div style="margin-bottom: 3rem;">
-            <h2 style="font-family: 'Playfair Display'; font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem;">Blog Posts</h2>
-            <p style="color: #666; font-size: 0.95rem;">Manage and edit your blog content</p>
+    <!-- BLOG POSTS SECTION -->
+    <section id="posts" class="section active">
+        <div class="section-header">
+            <h2>Blog Posts</h2>
+            <p>Manage your blog content</p>
         </div>
 
-        <div style="display: flex; gap: 2rem; margin-bottom: 2rem; align-items: center; flex-wrap: wrap;">
-            <input type="text" id="searchPosts" placeholder="Search posts..." onkeyup="filterPosts()" style="flex: 1; min-width: 200px; padding: 0.8rem 1rem; border: 1.5px solid #e0e0e0; border-radius: 6px; font-family: inherit; transition: all 200ms ease;" onfocus="this.style.borderColor='var(--color-primary)'; this.style.boxShadow='0 0 0 3px rgba(196,30,58,0.1)';" onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none';">
-            <select id="filterCategory" onchange="filterPosts()" style="padding: 0.8rem 1rem; border: 1.5px solid #e0e0e0; border-radius: 6px; font-family: inherit; cursor: pointer;">
-                <option value="">All Categories</option>
-                <option value="lifestyle">Lifestyle</option>
-                <option value="investment">Investment</option>
-                <option value="design">Design</option>
-            </select>
+        <div class="controls">
+            <input type="text" class="search-input" id="searchPosts" placeholder="Search posts..." onkeyup="filterPosts()">
+            <button class="btn btn-primary" onclick="openNewPostModal()">+ New Post</button>
         </div>
 
-        <div id="postsGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2rem;"></div>
-
-        <div id="emptyPosts" style="text-align: center; padding: 4rem 2rem; color: #999; display: none;">
-            <p style="font-size: 1.1rem; margin-bottom: 1rem;">No posts yet</p>
-            <button onclick="switchTab('new')" style="padding: 0.8rem 1.5rem; background: var(--color-primary); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">Create First Post</button>
+        <div id="postsGrid" class="grid"></div>
+        <div id="postsEmpty" class="empty-state" style="display: none;">
+            <p>📝 No blog posts yet</p>
+            <button class="btn btn-primary" onclick="openNewPostModal()">Create First Post</button>
         </div>
     </section>
 
-    <!-- TAB: NEW POST -->
-    <section id="newSection" style="display: none;">
-        <div style="margin-bottom: 3rem;">
-            <h2 style="font-family: 'Playfair Display'; font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem;">Create New Post</h2>
-            <p style="color: #666; font-size: 0.95rem;">Add a new blog post to your publication</p>
+    <!-- PROPERTIES SECTION -->
+    <section id="properties" class="section">
+        <div class="section-header">
+            <h2>Properties</h2>
+            <p>Manage property listings</p>
         </div>
 
-        <div id="formMessage" style="padding: 1rem; border-radius: 6px; margin-bottom: 2rem; display: none; border-left: 4px solid;"></div>
+        <div class="controls">
+            <input type="text" class="search-input" id="searchProperties" placeholder="Search properties..." onkeyup="filterProperties()">
+            <button class="btn btn-primary" onclick="openNewPropertyModal()">+ New Property</button>
+        </div>
 
-        <form id="postForm" onsubmit="savePost(event)" style="background: white; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e0e0e0;">
-            <div style="margin-bottom: 2rem;">
-                <label style="display: block; font-weight: 700; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; color: var(--color-primary);">Post Title *</label>
-                <input type="text" id="postTitle" required placeholder="E.g., Luxury Living in Abuja: A Guide to Premium Neighborhoods" style="width: 100%; padding: 1rem; border: 1.5px solid #e0e0e0; border-radius: 6px; font-family: inherit; font-size: 0.95rem; transition: all 200ms ease;" onfocus="this.style.borderColor='var(--color-primary)'; this.style.boxShadow='0 0 0 3px rgba(196,30,58,0.1)';" onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none';">
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
-                <div>
-                    <label style="display: block; font-weight: 700; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; color: var(--color-primary);">Author *</label>
-                    <input type="text" id="postAuthor" required placeholder="E.g., Sarah Johnson" style="width: 100%; padding: 1rem; border: 1.5px solid #e0e0e0; border-radius: 6px; font-family: inherit; font-size: 0.95rem; transition: all 200ms ease;" onfocus="this.style.borderColor='var(--color-primary)'; this.style.boxShadow='0 0 0 3px rgba(196,30,58,0.1)';" onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none';">
-                </div>
-                <div>
-                    <label style="display: block; font-weight: 700; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; color: var(--color-primary);">Category *</label>
-                    <select id="postCategory" required style="width: 100%; padding: 1rem; border: 1.5px solid #e0e0e0; border-radius: 6px; font-family: inherit; font-size: 0.95rem; cursor: pointer;">
-                        <option value="">Select Category</option>
-                        <option value="lifestyle">Lifestyle</option>
-                        <option value="investment">Investment</option>
-                        <option value="design">Design</option>
-                    </select>
-                </div>
-            </div>
-
-            <div style="margin-bottom: 2rem;">
-                <label style="display: block; font-weight: 700; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; color: var(--color-primary);">Excerpt *</label>
-                <textarea id="postExcerpt" required placeholder="Brief summary of the post..." style="width: 100%; padding: 1rem; border: 1.5px solid #e0e0e0; border-radius: 6px; font-family: inherit; font-size: 0.95rem; min-height: 80px; resize: vertical; transition: all 200ms ease;" onfocus="this.style.borderColor='var(--color-primary)'; this.style.boxShadow='0 0 0 3px rgba(196,30,58,0.1)';" onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none';"></textarea>
-            </div>
-
-            <div style="margin-bottom: 2rem;">
-                <label style="display: block; font-weight: 700; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; color: var(--color-primary);">Full Content *</label>
-                <textarea id="postContent" required placeholder="Write the full blog post content..." style="width: 100%; padding: 1rem; border: 1.5px solid #e0e0e0; border-radius: 6px; font-family: inherit; font-size: 0.95rem; min-height: 250px; resize: vertical; transition: all 200ms ease;" onfocus="this.style.borderColor='var(--color-primary)'; this.style.boxShadow='0 0 0 3px rgba(196,30,58,0.1)';" onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none';"></textarea>
-            </div>
-
-            <div style="margin-bottom: 2rem;">
-                <label style="display: block; font-weight: 700; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; color: var(--color-primary);">Image URL *</label>
-                <input type="url" id="postImage" required placeholder="https://example.com/image.jpg" style="width: 100%; padding: 1rem; border: 1.5px solid #e0e0e0; border-radius: 6px; font-family: inherit; font-size: 0.95rem; transition: all 200ms ease;" onfocus="this.style.borderColor='var(--color-primary)'; this.style.boxShadow='0 0 0 3px rgba(196,30,58,0.1)';" onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none';">
-            </div>
-
-            <div style="display: flex; gap: 1rem; padding-top: 1.5rem; border-top: 1px solid #e0e0e0;">
-                <button type="submit" style="padding: 1rem 2rem; background: var(--color-primary); color: white; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; transition: all 200ms ease; flex: 1;">Publish Post</button>
-                <button type="reset" style="padding: 1rem 2rem; background: white; color: var(--color-black); border: 1.5px solid #e0e0e0; border-radius: 6px; font-weight: 700; cursor: pointer; transition: all 200ms ease; flex: 1;">Reset</button>
-            </div>
-        </form>
+        <div id="propertiesGrid" class="grid"></div>
+        <div id="propertiesEmpty" class="empty-state" style="display: none;">
+            <p>🏠 No properties yet</p>
+            <button class="btn btn-primary" onclick="openNewPropertyModal()">Add First Property</button>
+        </div>
     </section>
 
 </div>
 
-<!-- FOOTER -->
-<footer style="background: var(--color-black); color: white; padding: 2rem; text-align: center; margin-top: 4rem; font-size: 0.85rem; border-top: 1px solid rgba(196,30,58,0.2);">
-    <p>© 2026 <a href="../public/index.html" style="color: var(--color-primary); text-decoration: none;">Amon Heights</a>. RC: 1434164. All rights reserved.</p>
-</footer>
+<!-- POST MODAL -->
+<div id="postModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header" id="postModalTitle">New Post</div>
+        <form onsubmit="savePost(event)">
+            <div class="form-group">
+                <label>Title *</label>
+                <input type="text" id="postTitle" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Author *</label>
+                    <input type="text" id="postAuthor" required>
+                </div>
+                <div class="form-group">
+                    <label>Date *</label>
+                    <input type="date" id="postDate" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Image URL *</label>
+                <input type="url" id="postImage" required>
+            </div>
+            <div class="form-group">
+                <label>Excerpt *</label>
+                <textarea id="postExcerpt" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Content *</label>
+                <textarea id="postContent" required style="min-height: 150px;"></textarea>
+            </div>
+            <div class="modal-buttons">
+                <button type="button" class="btn btn-secondary" onclick="closePostModal()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save Post</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- PROPERTY MODAL -->
+<div id="propertyModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header" id="propertyModalTitle">New Property</div>
+        <form onsubmit="saveProperty(event)">
+            <div class="form-group">
+                <label>Title *</label>
+                <input type="text" id="propertyTitle" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Type *</label>
+                    <select id="propertyType" required>
+                        <option value="">Select Type</option>
+                        <option value="apartment">Apartment</option>
+                        <option value="villa">Villa</option>
+                        <option value="duplex">Duplex</option>
+                        <option value="shortlet">Shortlet</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Location *</label>
+                    <input type="text" id="propertyLocation" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Price *</label>
+                    <input type="text" id="propertyPrice" required>
+                </div>
+                <div class="form-group">
+                    <label>Rating</label>
+                    <input type="number" id="propertyRating" step="0.1" min="0" max="5" value="4.9">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Bedrooms</label>
+                    <input type="number" id="propertyBeds" value="3">
+                </div>
+                <div class="form-group">
+                    <label>Bathrooms</label>
+                    <input type="number" id="propertyBaths" value="2">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Size (sqm) *</label>
+                <input type="text" id="propertySize" required>
+            </div>
+            <div class="form-group">
+                <label>Image URL *</label>
+                <input type="url" id="propertyImage" required>
+            </div>
+            <div class="form-group">
+                <label>Description *</label>
+                <textarea id="propertyDesc" required></textarea>
+            </div>
+            <div class="modal-buttons">
+                <button type="button" class="btn btn-secondary" onclick="closePropertyModal()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save Property</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- DELETE CONFIRMATION MODAL -->
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">Confirm Delete</div>
+        <p id="deleteMessage" style="margin-bottom: 1.5rem; color: var(--grey);">Are you sure you want to delete this item?</p>
+        <div class="modal-buttons">
+            <button class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
+            <button class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+        </div>
+    </div>
+</div>
 
 <script>
-    // Initialize admin dashboard for blog management
-    const BLOG_STORAGE_KEY = 'amonHeightsBlogPosts';
-    let allPosts = [];
-    let editingId = null;
+    // ========================
+    // ADMIN DASHBOARD SCRIPT
+    // ========================
 
+    let blogPosts = [];
+    let properties = [];
+    let editingPostId = null;
+    let editingPropertyId = null;
+    let deleteItem = null;
+
+    // Initialize
     document.addEventListener('DOMContentLoaded', () => {
-        // Check if user is logged in (basic check)
-        if (!sessionStorage.getItem('adminLoggedIn')) {
-            window.location.href = 'login.html';
-            return;
-        }
-
-        loadPosts();
-
-        // Setup form submission
-        document.getElementById('postForm').addEventListener('submit', savePost);
+        checkAuth();
+        loadData();
+        renderPosts();
+        renderProperties();
     });
 
-    function loadPosts() {
-        const stored = localStorage.getItem(BLOG_STORAGE_KEY);
-        allPosts = stored ? JSON.parse(stored) : [
-            {
-                id: 1,
-                title: "Luxury Living in Abuja: A Guide to Premium Neighborhoods",
-                author: "Sarah Johnson",
-                date: "2024-01-15",
-                image: "Images/abuja.jpg",
-                excerpt: "Discover the most exclusive neighborhoods offering world-class living experiences and investment opportunities.",
-                content: "Abuja's premium neighborhoods offer unparalleled luxury and convenience. From Maitama to Asokoro, each area provides unique advantages for investors and residents seeking high-end properties.",
-                category: "lifestyle"
-            },
-            {
-                id: 2,
-                title: "Investment Guide: Why Nigerian Real Estate is the Future",
-                author: "Michael Chen",
-                date: "2024-01-10",
-                image: "Images/living room 2.jpg",
-                excerpt: "Explore compelling reasons why intelligent investors are focusing on Nigerian property markets.",
-                content: "Nigerian real estate presents exceptional investment opportunities with strong growth potential. Economic development, increasing urbanization, and rising demand create perfect opportunities.",
-                category: "investment"
-            },
-            {
-                id: 3,
-                title: "Interior Design Trends: Creating the Perfect Luxury Home",
-                author: "Emma Williams",
-                date: "2024-01-05",
-                image: "Images/living room 1.jpg",
-                excerpt: "Master the art of luxury interior design with insights from top designers in Africa.",
-                content: "Contemporary luxury design blends comfort with sophistication. Discover how to incorporate minimalism, natural materials, and smart technology into your dream home.",
-                category: "design"
-            }
-        ];
-
-        renderPosts();
+    // Authentication
+    function checkAuth() {
+        if (!sessionStorage.getItem('adminLoggedIn')) {
+            window.location.href = 'login.html';
+        }
     }
 
-    function renderPosts() {
-        const grid = document.getElementById('postsGrid');
-        const empty = document.getElementById('emptyPosts');
+    function confirmLogout() {
+        if (confirm('Are you sure you want to logout?')) {
+            sessionStorage.removeItem('adminLoggedIn');
+            window.location.href = 'login.html';
+        }
+    }
 
-        if (allPosts.length === 0) {
-            grid.style.display = 'none';
+    // Load data from localStorage
+    function loadData() {
+        const stored = localStorage.getItem('amonHeightsBlogPosts');
+        const storedProps = localStorage.getItem('amonHeightsProperties');
+
+        if (stored) {
+            blogPosts = JSON.parse(stored);
+        } else {
+            blogPosts = [
+                {
+                    id: 1,
+                    title: "Luxury Living in Abuja: A Guide to Premium Neighborhoods",
+                    author: "Sarah Johnson",
+                    date: "2024-01-15",
+                    image: "Images/abuja.jpg",
+                    excerpt: "Discover the most exclusive neighborhoods offering world-class living experiences and investment opportunities.",
+                    content: "Abuja's premium neighborhoods offer unparalleled luxury and convenience. From Maitama to Asokoro, each area provides unique advantages for investors and residents seeking high-end properties. This comprehensive guide covers lifestyle, amenities, investment potential, and what makes each location special."
+                },
+                {
+                    id: 2,
+                    title: "Investment Guide: Why Nigerian Real Estate is the Future",
+                    author: "Michael Chen",
+                    date: "2024-01-10",
+                    image: "Images/living room 2.jpg",
+                    excerpt: "Explore compelling reasons why intelligent investors are focusing on Nigerian property markets.",
+                    content: "Nigerian real estate presents exceptional investment opportunities with strong growth potential. Economic development, increasing urbanization, rising demand for premium housing, and favorable demographics create a perfect storm of opportunity."
+                },
+                {
+                    id: 3,
+                    title: "Interior Design Trends: Creating the Perfect Luxury Home",
+                    author: "Emma Williams",
+                    date: "2024-01-05",
+                    image: "Images/living room 1.jpg",
+                    excerpt: "Master the art of luxury interior design with insights from top designers in Africa.",
+                    content: "Contemporary luxury design blends comfort with sophistication. Discover how to incorporate minimalism, natural materials, smart technology, and sustainable elements into your dream home."
+                }
+            ];
+            saveData();
+        }
+
+        if (storedProps) {
+            properties = JSON.parse(storedProps);
+        } else {
+            properties = [
+                { id: 1, title: "Luxury Penthouse", type: "apartment", location: "Maitama", price: "850M", rating: "4.95", image: "Images/living room 2.jpg", beds: 4, baths: 3, size: "450 sqm", desc: "Stunning luxury apartment with premium finishes and breathtaking views." },
+                { id: 2, title: "Executive Villa", type: "villa", location: "Asokoro", price: "1.2B", rating: "4.88", image: "Images/duplex and pool outdoor 1.jpg", beds: 5, baths: 4, size: "650 sqm", desc: "Contemporary villa with state-of-the-art features in exclusive neighborhood." },
+                { id: 3, title: "Premium Duplex", type: "duplex", location: "Wuse II", price: "750M", rating: "4.92", image: "Images/duplex.jpg", beds: 4, baths: 3, size: "520 sqm", desc: "Spacious duplex with modern architecture and premium finishes." }
+            ];
+            saveDataProperties();
+        }
+    }
+
+    function saveData() {
+        localStorage.setItem('amonHeightsBlogPosts', JSON.stringify(blogPosts));
+    }
+
+    function saveDataProperties() {
+        localStorage.setItem('amonHeightsProperties', JSON.stringify(properties));
+    }
+
+    // Tab switching
+    function switchTab(tab) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        document.getElementById(tab).classList.add('active');
+        event.target.classList.add('active');
+    }
+
+    // ========================
+    // BLOG POSTS
+    // ========================
+
+    function renderPosts(data = blogPosts) {
+        const grid = document.getElementById('postsGrid');
+        const empty = document.getElementById('postsEmpty');
+
+        if (data.length === 0) {
+            grid.innerHTML = '';
             empty.style.display = 'block';
             return;
         }
 
-        grid.style.display = 'grid';
         empty.style.display = 'none';
-
-        grid.innerHTML = allPosts.map(post => `
-            <div style="background: white; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: all 200ms ease; display: flex; flex-direction: column;">
-                <img src="${post.image}" alt="${post.title}" style="width: 100%; height: 200px; object-fit: cover;">
-                <div style="padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column;">
-                    <span style="display: inline-block; padding: 0.3rem 0.8rem; background: rgba(196,30,58,0.1); color: var(--color-primary); border-radius: 4px; font-size: 0.7rem; font-weight: 700; width: fit-content; margin-bottom: 0.8rem; text-transform: uppercase;">${post.category || 'Blog'}</span>
-                    <h3 style="font-family: 'Playfair Display'; font-size: 1.3rem; font-weight: 800; margin-bottom: 0.8rem; line-height: 1.3;">${post.title}</h3>
-                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;"><strong>${post.author}</strong> • ${new Date(post.date).toLocaleDateString()}</p>
-                    <p style="color: #666; font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1;">${post.excerpt}</p>
-                    <div style="display: flex; gap: 0.8rem;">
-                        <button onclick="editPost(${post.id})" style="flex: 1; padding: 0.7rem; background: var(--color-primary); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 200ms ease;">Edit</button>
-                        <button onclick="deletePost(${post.id})" style="flex: 1; padding: 0.7rem; background: white; color: var(--color-primary); border: 1.5px solid var(--color-primary); border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 200ms ease;">Delete</button>
+        grid.innerHTML = data.map(post => `
+            <div class="card">
+                <img src="${post.image}" alt="${post.title}" class="card-image" onerror="this.style.background='#f0f0f0'">
+                <div class="card-body">
+                    <div class="card-badge">Blog Post</div>
+                    <div class="card-title">${post.title}</div>
+                    <div class="card-meta"><strong>${post.author}</strong> • ${post.date}</div>
+                    <div class="card-excerpt">${post.excerpt}</div>
+                    <div class="card-actions">
+                        <button class="btn btn-secondary" onclick="editPost(${post.id})">Edit</button>
+                        <button class="btn btn-danger" onclick="openDeleteModal('post', ${post.id})">Delete</button>
                     </div>
                 </div>
             </div>
         `).join('');
     }
 
-    function savePost(event) {
-        event.preventDefault();
-
-        if (editingId) {
-            // Update existing post
-            const post = allPosts.find(p => p.id === editingId);
-            if (post) {
-                post.title = document.getElementById('postTitle').value;
-                post.author = document.getElementById('postAuthor').value;
-                post.category = document.getElementById('postCategory').value;
-                post.excerpt = document.getElementById('postExcerpt').value;
-                post.content = document.getElementById('postContent').value;
-                post.image = document.getElementById('postImage').value;
-                post.date = new Date().toISOString().split('T')[0];
-            }
-            editingId = null;
-        } else {
-            // Create new post
-            const newPost = {
-                id: Date.now(),
-                title: document.getElementById('postTitle').value,
-                author: document.getElementById('postAuthor').value,
-                category: document.getElementById('postCategory').value,
-                excerpt: document.getElementById('postExcerpt').value,
-                content: document.getElementById('postContent').value,
-                image: document.getElementById('postImage').value,
-                date: new Date().toISOString().split('T')[0]
-            };
-            allPosts.unshift(newPost);
-        }
-
-        localStorage.setItem(BLOG_STORAGE_KEY, JSON.stringify(allPosts));
-        document.getElementById('postForm').reset();
-        switchTab('posts');
-        renderPosts();
-        showMessage('Post published successfully!', 'success');
+    function openNewPostModal() {
+        editingPostId = null;
+        document.getElementById('postModalTitle').textContent = 'New Post';
+        document.getElementById('postTitle').value = '';
+        document.getElementById('postAuthor').value = '';
+        document.getElementById('postDate').value = new Date().toISOString().split('T')[0];
+        document.getElementById('postImage').value = '';
+        document.getElementById('postExcerpt').value = '';
+        document.getElementById('postContent').value = '';
+        document.getElementById('postModal').classList.add('show');
     }
 
     function editPost(id) {
-        const post = allPosts.find(p => p.id === id);
-        if (post) {
-            editingId = id;
-            document.getElementById('postTitle').value = post.title;
-            document.getElementById('postAuthor').value = post.author;
-            document.getElementById('postCategory').value = post.category;
-            document.getElementById('postExcerpt').value = post.excerpt;
-            document.getElementById('postContent').value = post.content;
-            document.getElementById('postImage').value = post.image;
-            switchTab('new');
-            window.scrollTo(0, 0);
-        }
+        const post = blogPosts.find(p => p.id === id);
+        if (!post) return;
+
+        editingPostId = id;
+        document.getElementById('postModalTitle').textContent = 'Edit Post';
+        document.getElementById('postTitle').value = post.title;
+        document.getElementById('postAuthor').value = post.author;
+        document.getElementById('postDate').value = post.date;
+        document.getElementById('postImage').value = post.image;
+        document.getElementById('postExcerpt').value = post.excerpt;
+        document.getElementById('postContent').value = post.content;
+        document.getElementById('postModal').classList.add('show');
     }
 
-    function deletePost(id) {
-        if (confirm('Are you sure you want to delete this post?')) {
-            allPosts = allPosts.filter(p => p.id !== id);
-            localStorage.setItem(BLOG_STORAGE_KEY, JSON.stringify(allPosts));
-            renderPosts();
-            showMessage('Post deleted successfully', 'success');
+    function savePost(e) {
+        e.preventDefault();
+
+        const postData = {
+            title: document.getElementById('postTitle').value,
+            author: document.getElementById('postAuthor').value,
+            date: document.getElementById('postDate').value,
+            image: document.getElementById('postImage').value,
+            excerpt: document.getElementById('postExcerpt').value,
+            content: document.getElementById('postContent').value
+        };
+
+        if (editingPostId) {
+            const post = blogPosts.find(p => p.id === editingPostId);
+            if (post) {
+                Object.assign(post, postData);
+                showMessage('Post updated successfully', 'success');
+            }
+        } else {
+            blogPosts.unshift({
+                id: Date.now(),
+                ...postData
+            });
+            showMessage('Post created successfully', 'success');
         }
+
+        saveData();
+        renderPosts();
+        closePostModal();
+    }
+
+    function closePostModal() {
+        document.getElementById('postModal').classList.remove('show');
     }
 
     function filterPosts() {
-        // Filtering logic can be added here
+        const query = document.getElementById('searchPosts').value.toLowerCase();
+        const filtered = blogPosts.filter(p =>
+            p.title.toLowerCase().includes(query) ||
+            p.author.toLowerCase().includes(query)
+        );
+        renderPosts(filtered);
     }
 
-    function switchTab(tab) {
-        document.getElementById('postsSection').style.display = tab === 'posts' ? 'block' : 'none';
-        document.getElementById('newSection').style.display = tab === 'new' ? 'block' : 'none';
-        
-        document.getElementById('postsTab').classList.toggle('active', tab === 'posts');
-        document.getElementById('newTab').classList.toggle('active', tab === 'new');
+    // ========================
+    // PROPERTIES
+    // ========================
 
-        if (tab === 'posts') {
-            document.getElementById('postsTab').style.color = 'var(--color-black)';
-            document.getElementById('newTab').style.color = '#999';
-        } else {
-            document.getElementById('postsTab').style.color = '#999';
-            document.getElementById('newTab').style.color = 'var(--color-black)';
+    function renderProperties(data = properties) {
+        const grid = document.getElementById('propertiesGrid');
+        const empty = document.getElementById('propertiesEmpty');
+
+        if (data.length === 0) {
+            grid.innerHTML = '';
+            empty.style.display = 'block';
+            return;
         }
+
+        empty.style.display = 'none';
+        grid.innerHTML = data.map(prop => `
+            <div class="card">
+                <img src="${prop.image}" alt="${prop.title}" class="card-image" onerror="this.style.background='#f0f0f0'">
+                <div class="card-body">
+                    <div class="card-badge">${prop.type}</div>
+                    <div class="card-title">${prop.title}</div>
+                    <div class="card-meta">${prop.location} • ₦${prop.price}</div>
+                    <div class="card-excerpt">${prop.desc}</div>
+                    <div class="card-actions">
+                        <button class="btn btn-secondary" onclick="editProperty(${prop.id})">Edit</button>
+                        <button class="btn btn-danger" onclick="openDeleteModal('property', ${prop.id})">Delete</button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
     }
+
+    function openNewPropertyModal() {
+        editingPropertyId = null;
+        document.getElementById('propertyModalTitle').textContent = 'New Property';
+        document.getElementById('propertyTitle').value = '';
+        document.getElementById('propertyType').value = '';
+        document.getElementById('propertyLocation').value = '';
+        document.getElementById('propertyPrice').value = '';
+        document.getElementById('propertyRating').value = '4.9';
+        document.getElementById('propertyBeds').value = '3';
+        document.getElementById('propertyBaths').value = '2';
+        document.getElementById('propertySize').value = '';
+        document.getElementById('propertyImage').value = '';
+        document.getElementById('propertyDesc').value = '';
+        document.getElementById('propertyModal').classList.add('show');
+    }
+
+    function editProperty(id) {
+        const prop = properties.find(p => p.id === id);
+        if (!prop) return;
+
+        editingPropertyId = id;
+        document.getElementById('propertyModalTitle').textContent = 'Edit Property';
+        document.getElementById('propertyTitle').value = prop.title;
+        document.getElementById('propertyType').value = prop.type;
+        document.getElementById('propertyLocation').value = prop.location;
+        document.getElementById('propertyPrice').value = prop.price;
+        document.getElementById('propertyRating').value = prop.rating;
+        document.getElementById('propertyBeds').value = prop.beds;
+        document.getElementById('propertyBaths').value = prop.baths;
+        document.getElementById('propertySize').value = prop.size;
+        document.getElementById('propertyImage').value = prop.image;
+        document.getElementById('propertyDesc').value = prop.desc;
+        document.getElementById('propertyModal').classList.add('show');
+    }
+
+    function saveProperty(e) {
+        e.preventDefault();
+
+        const propData = {
+            title: document.getElementById('propertyTitle').value,
+            type: document.getElementById('propertyType').value,
+            location: document.getElementById('propertyLocation').value,
+            price: document.getElementById('propertyPrice').value,
+            rating: document.getElementById('propertyRating').value,
+            beds: parseInt(document.getElementById('propertyBeds').value),
+            baths: parseInt(document.getElementById('propertyBaths').value),
+            size: document.getElementById('propertySize').value,
+            image: document.getElementById('propertyImage').value,
+            desc: document.getElementById('propertyDesc').value
+        };
+
+        if (editingPropertyId) {
+            const prop = properties.find(p => p.id === editingPropertyId);
+            if (prop) {
+                Object.assign(prop, propData);
+                showMessage('Property updated successfully', 'success');
+            }
+        } else {
+            properties.unshift({
+                id: Date.now(),
+                ...propData
+            });
+            showMessage('Property created successfully', 'success');
+        }
+
+        saveDataProperties();
+        renderProperties();
+        closePropertyModal();
+    }
+
+    function closePropertyModal() {
+        document.getElementById('propertyModal').classList.remove('show');
+    }
+
+    function filterProperties() {
+        const query = document.getElementById('searchProperties').value.toLowerCase();
+        const filtered = properties.filter(p =>
+            p.title.toLowerCase().includes(query) ||
+            p.location.toLowerCase().includes(query)
+        );
+        renderProperties(filtered);
+    }
+
+    // ========================
+    // DELETE
+    // ========================
+
+    function openDeleteModal(type, id) {
+        deleteItem = { type, id };
+        const item = type === 'post' ? blogPosts.find(p => p.id === id) : properties.find(p => p.id === id);
+        document.getElementById('deleteMessage').textContent = `Are you sure you want to delete "${item.title}"?`;
+        document.getElementById('deleteModal').classList.add('show');
+    }
+
+    function closeDeleteModal() {
+        deleteItem = null;
+        document.getElementById('deleteModal').classList.remove('show');
+    }
+
+    function confirmDelete() {
+        if (!deleteItem) return;
+
+        if (deleteItem.type === 'post') {
+            blogPosts = blogPosts.filter(p => p.id !== deleteItem.id);
+            saveData();
+            renderPosts();
+            showMessage('Post deleted successfully', 'success');
+        } else {
+            properties = properties.filter(p => p.id !== deleteItem.id);
+            saveDataProperties();
+            renderProperties();
+            showMessage('Property deleted successfully', 'success');
+        }
+
+        closeDeleteModal();
+    }
+
+    // ========================
+    // UTILITIES
+    // ========================
 
     function showMessage(text, type) {
-        const msgEl = document.getElementById('formMessage');
-        msgEl.textContent = text;
-        msgEl.style.borderColor = type === 'success' ? '#4caf50' : '#f44336';
-        msgEl.style.background = type === 'success' ? '#e8f5e9' : '#ffebee';
-        msgEl.style.color = type === 'success' ? '#1b5e20' : '#b71c1c';
-        msgEl.style.display = 'block';
-        setTimeout(() => msgEl.style.display = 'none', 4000);
+        const msg = document.getElementById('message');
+        msg.textContent = text;
+        msg.className = `message show ${type}`;
+        setTimeout(() => {
+            msg.classList.remove('show');
+        }, 3000);
     }
 
-    function logout() {
-        if (confirm('Are you sure you want to logout?')) {
-            sessionStorage.removeItem('adminLoggedIn');
-            window.location.href = 'login.html';
-        }
-    }
+    // Close modals on background click
+    document.addEventListener('click', (e) => {
+        if (e.target.id === 'postModal') document.getElementById('postModal').classList.remove('show');
+        if (e.target.id === 'propertyModal') document.getElementById('propertyModal').classList.remove('show');
+        if (e.target.id === 'deleteModal') document.getElementById('deleteModal').classList.remove('show');
+    });
 </script>
 
-</body>
-</html>
-        
-        let properties = [];
-        let filteredProperties = [];
-        let currentPage = 1;
-        let currentFilter = 'all';
-        let currentSort = 'recent';
-        let sortColumn = null;
-        let sortDirection = 'asc';
-        let propertyToDelete = null;
-        let editingPropertyId = null;
-
-        /* ============================================
-           INITIALIZATION
-           ============================================ */
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // CHECK AUTHENTICATION
-            const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
-            const adminUser = sessionStorage.getItem('adminUsername');
-            
-            if (!isLoggedIn || !adminUser) {
-                // Redirect to login if not authenticated
-                window.location.href = './login.html';
-                return;
-            }
-            
-            // User is authenticated - load dashboard
-            loadProperties();
-            setupEventListeners();
-        });
-
-        function setupEventListeners() {
-            // Tab navigation
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    switchTab(this.dataset.tab);
-                });
-            });
-
-            // Property form submission
-            document.getElementById('propertyForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                addProperty();
-            });
-
-            // Property search/filter
-            document.getElementById('propertyFilter').addEventListener('input', function() {
-                currentPage = 1;
-                applyFilters();
-            });
-
-            // Filter buttons
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    currentFilter = this.dataset.filter;
-                    currentPage = 1;
-                    applyFilters();
-                });
-            });
-
-            // Sort dropdown
-            document.getElementById('sortBy').addEventListener('change', function() {
-                currentSort = this.value;
-                currentPage = 1;
-                applyFilters();
-            });
-
-            // Sortable table headers
-            document.querySelectorAll('th.sortable').forEach(th => {
-                th.addEventListener('click', function() {
-                    const column = this.dataset.sort;
-                    if (sortColumn === column) {
-                        sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
-                    } else {
-                        sortColumn = column;
-                        sortDirection = 'asc';
-                    }
-                    
-                    document.querySelectorAll('th.sortable').forEach(h => {
-                        h.classList.remove('asc', 'desc');
-                    });
-                    this.classList.add(sortDirection);
-                    
-                    currentPage = 1;
-                    applyFilters();
-                });
-            });
-
-            // Edit modal close
-            document.getElementById('editModal').addEventListener('click', function(e) {
-                if (e.target === this) closeEditModal();
-            });
-
-            // Delete modal close
-            document.getElementById('deleteModal').addEventListener('click', function(e) {
-                if (e.target === this) closeDeleteModal();
-            });
-
-            // Logout
-            document.getElementById('logoutBtn').addEventListener('click', function() {
-                if (confirm('Are you sure you want to logout?')) {
-                    window.location.href = './login.html';
-                }
-            });
-        }
-
-        /* ============================================
-           UTILITIES
-           ============================================ */
-
-        function sanitizeInput(input) {
-            const div = document.createElement('div');
-            div.textContent = input;
-            return div.innerHTML;
-        }
-
-        function showLoading(show = true) {
-            document.getElementById('loadingOverlay').classList.toggle('show', show);
-        }
-
-        function showMessage(elementId, message, type) {
-            const messageEl = document.getElementById(elementId);
-            messageEl.textContent = message;
-            messageEl.className = `message show ${type}`;
-            setTimeout(() => {
-                messageEl.classList.remove('show');
-            }, 4000);
-        }
-
-        /* ============================================
-           STORAGE OPERATIONS
-           ============================================ */
-
-        function loadProperties() {
-            showLoading(true);
-            setTimeout(() => {
-                try {
-                    const stored = localStorage.getItem(STORAGE_KEY);
-                    properties = stored ? JSON.parse(stored) : [];
-                } catch (error) {
-                    console.error('Error loading from storage:', error);
-                    properties = [];
-                }
-                applyFilters();
-                showLoading(false);
-            }, 500);
-        }
-
-        function saveProperties() {
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(properties));
-            } catch (error) {
-                console.error('Error saving to storage:', error);
-                showMessage('formMessage', 'Error saving property', 'error');
-            }
-        }
-
-        function getNextPropertyId() {
-            return properties.length === 0 ? 1 : Math.max(...properties.map(p => p.id)) + 1;
-        }
-
-        /* ============================================
-           TAB SWITCHING
-           ============================================ */
-
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.getElementById(tabId).classList.add('active');
-            document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
-        }
-
-        /* ============================================
-           FILTERING & SORTING
-           ============================================ */
-
-        function applyFilters() {
-            let filtered = [...properties];
-
-            // Apply status filter
-            if (currentFilter !== 'all') {
-                filtered = filtered.filter(p => p.status === currentFilter);
-            }
-
-            // Apply search filter
-            const searchTerm = document.getElementById('propertyFilter').value.toLowerCase();
-            if (searchTerm) {
-                filtered = filtered.filter(p => 
-                    (p.name && p.name.toLowerCase().includes(searchTerm)) ||
-                    (p.location && p.location.toLowerCase().includes(searchTerm)) ||
-                    (p.price && p.price.toString().includes(searchTerm))
-                );
-            }
-
-            // Apply sorting
-            filtered = applySorting(filtered);
-            
-            filteredProperties = filtered;
-            currentPage = 1;
-            displayPaginatedProperties();
-        }
-
-        function applySorting(arr) {
-            const sorted = [...arr];
-
-            if (sortColumn) {
-                sorted.sort((a, b) => {
-                    let aVal = a[sortColumn];
-                    let bVal = b[sortColumn];
-
-                    if (typeof aVal === 'string') {
-                        aVal = aVal.toLowerCase();
-                        bVal = bVal.toLowerCase();
-                    }
-
-                    const comparison = aVal < bVal ? -1 : aVal > bVal ? 1 : 0;
-                    return sortDirection === 'asc' ? comparison : -comparison;
-                });
-            } else {
-                // Apply dropdown sort
-                sorted.sort((a, b) => {
-                    switch(currentSort) {
-                        case 'priceHigh':
-                            return b.price - a.price;
-                        case 'priceLow':
-                            return a.price - b.price;
-                        case 'nameAZ':
-                            return a.name.localeCompare(b.name);
-                        case 'nameZA':
-                            return b.name.localeCompare(a.name);
-                        default: // recent
-                            return b.id - a.id;
-                    }
-                });
-            }
-
-            return sorted;
-        }
-
-        /* ============================================
-           PAGINATION
-           ============================================ */
-
-        function displayPaginatedProperties() {
-            const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
-            const endIdx = startIdx + ITEMS_PER_PAGE;
-            const pageData = filteredProperties.slice(startIdx, endIdx);
-
-            displayProperties(pageData);
-            displayPagination();
-        }
-
-        function displayPagination() {
-            const totalPages = Math.ceil(filteredProperties.length / ITEMS_PER_PAGE);
-            const paginationContainer = document.getElementById('paginationContainer');
-            const paginationInfo = document.getElementById('paginationInfo');
-
-            if (totalPages <= 1) {
-                paginationContainer.style.display = 'none';
-                paginationInfo.textContent = filteredProperties.length === 0 
-                    ? 'No properties found' 
-                    : `Showing ${filteredProperties.length} properties`;
-                return;
-            }
-
-            paginationContainer.style.display = 'flex';
-            paginationContainer.innerHTML = '';
-
-            // Previous button
-            const prevBtn = document.createElement('button');
-            prevBtn.className = 'pagination-btn';
-            prevBtn.textContent = '← Previous';
-            prevBtn.disabled = currentPage === 1;
-            prevBtn.onclick = () => {
-                if (currentPage > 1) {
-                    currentPage--;
-                    displayPaginatedProperties();
-                    window.scrollTo({top: 0, behavior: 'smooth'});
-                }
-            };
-            paginationContainer.appendChild(prevBtn);
-
-            // Page numbers
-            for (let i = 1; i <= totalPages; i++) {
-                const pageBtn = document.createElement('button');
-                pageBtn.className = 'pagination-btn';
-                if (i === currentPage) pageBtn.classList.add('active');
-                pageBtn.textContent = i;
-                pageBtn.onclick = () => {
-                    currentPage = i;
-                    displayPaginatedProperties();
-                    window.scrollTo({top: 0, behavior: 'smooth'});
-                };
-                paginationContainer.appendChild(pageBtn);
-            }
-
-            // Next button
-            const nextBtn = document.createElement('button');
-            nextBtn.className = 'pagination-btn';
-            nextBtn.textContent = 'Next →';
-            nextBtn.disabled = currentPage === totalPages;
-            nextBtn.onclick = () => {
-                if (currentPage < totalPages) {
-                    currentPage++;
-                    displayPaginatedProperties();
-                    window.scrollTo({top: 0, behavior: 'smooth'});
-                }
-            };
-            paginationContainer.appendChild(nextBtn);
-
-            const startIdx = (currentPage - 1) * ITEMS_PER_PAGE + 1;
-            const endIdx = Math.min(currentPage * ITEMS_PER_PAGE, filteredProperties.length);
-            paginationInfo.textContent = `Showing ${startIdx}-${endIdx} of ${filteredProperties.length} properties`;
-        }
-
-        function displayProperties(propertiesArray) {
-            const tbody = document.getElementById('propertiesTableBody');
-            const emptyState = document.getElementById('emptyState');
-
-            if (propertiesArray.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 32px;">No properties found</td></tr>';
-                if (filteredProperties.length === 0) {
-                    emptyState.style.display = 'block';
-                }
-                return;
-            }
-
-            emptyState.style.display = 'none';
-            tbody.innerHTML = propertiesArray.map(property => `
-                <tr>
-                    <td>${sanitizeInput(property.name || 'N/A')}</td>
-                    <td>${sanitizeInput(property.location || 'N/A')}</td>
-                    <td>${sanitizeInput(property.type || 'N/A')}</td>
-                    <td>₦${parseInt(property.price || 0).toLocaleString()}</td>
-                    <td>
-                        <span class="status-badge status-${property.status === 'Available' ? 'available' : 'sold'}">
-                            ${sanitizeInput(property.status || 'N/A')}
-                        </span>
-                    </td>
-                    <td>
-                        <div class="action-buttons">
-                            <button type="button" class="action-btn action-btn-edit" onclick="openEditModal(${property.id})">Edit</button>
-                            <button type="button" class="action-btn action-btn-delete" onclick="openDeleteModal(${property.id})">Delete</button>
-                        </div>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        /* ============================================
-           CRUD OPERATIONS
-           ============================================ */
-
-        function addProperty() {
-            const form = document.getElementById('propertyForm');
-            const formData = new FormData(form);
-            const propertyData = Object.fromEntries(formData);
-
-            // Validation
-            if (!propertyData.name || !propertyData.location || !propertyData.type || !propertyData.price || !propertyData.status) {
-                showMessage('formMessage', '⚠️ Please fill all required fields', 'error');
-                return;
-            }
-
-            // Sanitize inputs
-            Object.keys(propertyData).forEach(key => {
-                if (typeof propertyData[key] === 'string') {
-                    propertyData[key] = sanitizeInput(propertyData[key]);
-                }
-            });
-
-            const newProperty = {
-                id: getNextPropertyId(),
-                ...propertyData,
-                price: parseInt(propertyData.price),
-                bedrooms: parseInt(propertyData.bedrooms) || 0,
-                bathrooms: parseInt(propertyData.bathrooms) || 0,
-                sqft: parseInt(propertyData.sqft) || 0,
-                rating: parseFloat(propertyData.rating) || 0,
-                reviews: parseInt(propertyData.reviews) || 0,
-                amenities: propertyData.amenities ? propertyData.amenities.split(',').map(a => a.trim()) : []
-            };
-
-            properties.push(newProperty);
-            saveProperties();
-            form.reset();
-            showMessage('formMessage', '✅ Property added successfully!', 'success');
-            setTimeout(() => {
-                switchTab('properties-tab');
-                applyFilters();
-            }, 1000);
-        }
-
-        function openEditModal(propertyId) {
-            const property = properties.find(p => p.id === propertyId);
-            if (!property) return;
-
-            editingPropertyId = propertyId;
-            document.getElementById('editPropertyId').value = propertyId;
-            document.getElementById('editPropertyName').value = property.name;
-            document.getElementById('editPropertyLocation').value = property.location;
-            document.getElementById('editPropertyType').value = property.type;
-            document.getElementById('editPropertyStatus').value = property.status;
-            document.getElementById('editPropertyPrice').value = property.price;
-            document.getElementById('editPropertyRating').value = property.rating || '';
-            document.getElementById('editPropertyBedrooms').value = property.bedrooms || '';
-            document.getElementById('editPropertyBathrooms').value = property.bathrooms || '';
-            document.getElementById('editPropertySize').value = property.sqft || '';
-            document.getElementById('editPropertyReviews').value = property.reviews || '';
-            document.getElementById('editPropertyDescription').value = property.description || '';
-            document.getElementById('editPropertyImage').value = property.image || '';
-            document.getElementById('editPropertyAmenities').value = property.amenities ? property.amenities.join(', ') : '';
-
-            document.getElementById('editModal').classList.add('show');
-        }
-
-        function closeEditModal() {
-            document.getElementById('editModal').classList.remove('show');
-            editingPropertyId = null;
-        }
-
-        function savePropertyEdit() {
-            if (editingPropertyId === null) return;
-
-            const form = document.getElementById('editPropertyForm');
-            const formData = new FormData(form);
-            const updated = Object.fromEntries(formData);
-
-            // Validation
-            if (!updated.name || !updated.location || !updated.type || !updated.price || !updated.status) {
-                showMessage('propertiesMessage', '⚠️ Please fill all required fields', 'error');
-                return;
-            }
-
-            // Sanitize
-            Object.keys(updated).forEach(key => {
-                if (typeof updated[key] === 'string') {
-                    updated[key] = sanitizeInput(updated[key]);
-                }
-            });
-
-            const propertyIdx = properties.findIndex(p => p.id === editingPropertyId);
-            if (propertyIdx !== -1) {
-                properties[propertyIdx] = {
-                    ...properties[propertyIdx],
-                    ...updated,
-                    price: parseInt(updated.price),
-                    bedrooms: parseInt(updated.bedrooms) || 0,
-                    bathrooms: parseInt(updated.bathrooms) || 0,
-                    sqft: parseInt(updated.sqft) || 0,
-                    rating: parseFloat(updated.rating) || 0,
-                    reviews: parseInt(updated.reviews) || 0,
-                    amenities: updated.amenities ? updated.amenities.split(',').map(a => a.trim()) : []
-                };
-                saveProperties();
-                closeEditModal();
-                showMessage('propertiesMessage', '✅ Property updated successfully!', 'success');
-                applyFilters();
-            }
-        }
-
-        function openDeleteModal(propertyId) {
-            propertyToDelete = propertyId;
-            document.getElementById('deleteModal').classList.add('show');
-        }
-
-        function closeDeleteModal() {
-            document.getElementById('deleteModal').classList.remove('show');
-            propertyToDelete = null;
-        }
-
-        function confirmDelete() {
-            if (propertyToDelete !== null) {
-                properties = properties.filter(p => p.id !== propertyToDelete);
-                saveProperties();
-                closeDeleteModal();
-                showMessage('propertiesMessage', '✅ Property deleted successfully!', 'success');
-                applyFilters();
-            }
-        }
-
-        // Close modals on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeEditModal();
-                closeDeleteModal();
-            }
-        });
-    </script>
-</body>
-</html>
-                                <label for="propertyName">Property Name *</label>
-                                <input type="text" id="propertyName" required placeholder="e.g., Luxury Penthouse - Maitama">
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="propertyLocation">Location *</label>
-                                    <input type="text" id="propertyLocation" required placeholder="e.g., Maitama, Abuja">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="propertyCategory">Type *</label>
-                                    <select id="propertyCategory" required>
-                                        <option value="">Select Type</option>
-                                        <option value="sale">For Sale</option>
-                                        <option value="rent">For Rent</option>
-                                        <option value="shortlet">Short-Let</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="propertyPrice">Price *</label>
-                                <input type="text" id="propertyPrice" required placeholder="e.g., 250000000">
-                            </div>
-                        </fieldset>
-
-                        <!-- Descriptions -->
-                        <fieldset>
-                            <legend>Descriptions</legend>
-
-                            <div class="form-group">
-                                <label for="propertyDescription">Short Description *</label>
-                                <textarea id="propertyDescription" required placeholder="Brief description for property cards (100-200 characters)"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="propertyFullDescription">Full Description</label>
-                                <textarea id="propertyFullDescription" placeholder="Detailed description for property detail page"></textarea>
-                            </div>
-                        </fieldset>
-
-                        <!-- Features -->
-                        <fieldset>
-                            <legend>Property Features</legend>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="propertyBedrooms">Bedrooms</label>
-                                    <input type="text" id="propertyBedrooms" placeholder="e.g., 4">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="propertyBathrooms">Bathrooms</label>
-                                    <input type="text" id="propertyBathrooms" placeholder="e.g., 3">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="propertySize">Size (sqm)</label>
-                                    <input type="text" id="propertySize" placeholder="e.g., 500">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="propertyAmenities">Amenities (comma-separated)</label>
-                                <textarea id="propertyAmenities" placeholder="Swimming Pool, Gym, Smart Home, Wine Cellar, etc."></textarea>
-                            </div>
-                        </fieldset>
-
-                        <!-- Media -->
-                        <fieldset>
-                            <legend>Media</legend>
-
-                            <div class="form-group">
-                                <label for="propertyImage">Property Image *</label>
-                                <div class="image-upload" onclick="document.getElementById('propertyImage').click()">
-                                    <input type="file" id="propertyImage" accept="image/*" required>
-                                    <p style="font-size: 14px; color: var(--color-grey-600);">Click to upload or drag and drop<br><span class="upload-hint">PNG, JPEG, WebP (Max 10MB)</span></p>
-                                </div>
-                                <div id="imagePreview" class="image-preview" style="display: none;">
-                                    <img id="previewImg" src="" alt="Preview">
-                                    <button type="button" class="remove-image-btn">Remove</button>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="propertyVideo">YouTube Video Link (Embed URL)</label>
-                                <input type="url" id="propertyVideo" placeholder="https://www.youtube.com/embed/...">
-                                <p class="form-hint">Paste the embed URL from YouTube</p>
-                            </div>
-                        </fieldset>
-
-                        <!-- Visibility -->
-                        <fieldset>
-                            <legend>Settings</legend>
-
-                            <div class="form-group checkbox">
-                                <input type="checkbox" id="propertyVisible" checked>
-                                <label for="propertyVisible">Visible on Public Website</label>
-                            </div>
-                        </fieldset>
-
-                        <!-- Actions -->
-                        <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">Save Property</button>
-                            <button type="button" class="btn btn-secondary" onclick="resetForm()">Reset</button>
-                            <button type="button" class="btn btn-danger" id="deleteBtn" style="display: none;">Delete Property</button>
-                        </div>
-                    </form>
-
-                    <div id="formMessage" class="form-message"></div>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <!-- DELETE MODAL -->
-    <div id="deleteModal" class="modal">
-        <div class="modal-overlay"></div>
-        <div class="modal-content">
-            <h2>Delete Property?</h2>
-            <p>This action cannot be undone. The property will be permanently deleted.</p>
-            <div class="modal-actions">
-                <button class="btn btn-danger" id="confirmDelete">Delete</button>
-                <button class="btn btn-secondary" id="cancelDelete">Cancel</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
