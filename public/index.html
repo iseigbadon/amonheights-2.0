@@ -3,1127 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Luxury properties in Abuja. Premium homes for sale and rent.">
-    <title>Amon Heights - Luxury Properties in Abuja</title>
-    <link rel="stylesheet" href="./styles.css">
+    <meta name="description" content="Luxury properties in Abuja. Book your dream property today.">
+    <meta name="keywords" content="luxury properties, real estate Abuja, apartments, villas">
+    <title>Amon Heights | Luxury Properties in Abuja</title>
+    <link rel="icon" type="image/png" href="Images/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- ====== HEADER / NAVIGATION ====== -->
-<header class="header">
-    <div class="header-wrapper">
-        <a href="./" class="logo-link">
-            <img src="Images/logo.png" alt="Amon Heights" class="logo-img">
-            <span class="logo-text">Amon Heights</span>
-        </a>
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search properties..." autocomplete="off">
-            <button class="search-btn" title="Search">🔍</button>
+<!-- HEADER -->
+<header>
+    <div class="header-content">
+        <div class="logo">
+            <img src="Images/logo.png" alt="Amon Heights">
+            <span>Amon Heights</span>
         </div>
-        <div class="header-icons">
-            <a href="./about.html" class="header-link">About</a>
-            <a href="https://wa.me/2349040837557" class="header-link btn btn-header">Contact</a>
-        </div>
+        <nav>
+            <a href="#properties">Properties</a>
+            <a href="about.html">About</a>
+            <a href="blog.html">Blog</a>
+            <a href="#contact">Contact</a>
+        </nav>
     </div>
 </header>
 
-<!-- ====== FILTER PILLS ====== -->
-<div class="filters-bar">
-    <div class="filters-wrapper">
-        <div class="filter-pill active" data-filter="all">All Homes</div>
-        <div class="filter-pill" data-filter="apartment">Apartments</div>
-        <div class="filter-pill" data-filter="villa">Villas</div>
-        <div class="filter-pill" data-filter="duplex">Duplexes</div>
-        <div class="filter-pill" data-filter="shortlet">Shortlets</div>
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Find Your Luxury Home in Abuja</h1>
+        <p>Discover premium properties and exclusive investment opportunities</p>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search by location or type...">
+            <button onclick="filterBySearch()">Search</button>
+        </div>
+        <div class="filters">
+            <button class="filter-btn active" onclick="filter('all')">All</button>
+            <button class="filter-btn" onclick="filter('apartment')">Apartments</button>
+            <button class="filter-btn" onclick="filter('villa')">Villas</button>
+            <button class="filter-btn" onclick="filter('duplex')">Duplexes</button>
+            <button class="filter-btn" onclick="filter('shortlet')">Shortlets</button>
+        </div>
     </div>
-</div>
+</section>
 
-<!-- ====== PROPERTIES SECTION ====== -->
-<main class="main-content">
-    
-    <section class="section">
-        <div class="section-header">
-            <h1 class="section-title">Stays in Abuja</h1>
-            <p class="section-subtitle">Discover premium properties across Nigeria's capital</p>
-        </div>
-        <div class="properties-grid" id="propertiesGrid">
-            <div class="loading-message">Loading properties...</div>
-        </div>
-    </section>
+<!-- PROPERTIES -->
+<section class="properties" id="properties">
+    <div class="section-header">
+        <h2>Featured Properties</h2>
+        <p>Handpicked luxury residences</p>
+    </div>
+    <div class="grid" id="propertyGrid">
+        <!-- Properties loaded via JavaScript -->
+    </div>
+</section>
 
-    <!-- ====== ABOUT SECTION ====== -->
-    <section class="section about-section" id="about">
-        <div class="about-wrapper">
-            <div class="about-content">
-                <h2>About Amon Heights</h2>
-                <p>Amon Heights is Nigeria's premier luxury real estate platform. We connect discerning clients with exclusive properties across Abuja's most prestigious locations.</p>
-                <div class="about-stats">
-                    <div class="stat">
-                        <div class="stat-number">1434164</div>
-                        <div class="stat-label">RC Number</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">500+</div>
-                        <div class="stat-label">Properties Listed</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">2020</div>
-                        <div class="stat-label">Founded</div>
-                    </div>
-                </div>
+<!-- ABOUT -->
+<section class="about" id="about">
+    <div class="about-content">
+        <div class="about-text">
+            <h2>About Amon Heights</h2>
+            <h3>Your Premium Real Estate Partner</h3>
+            <p>We specialize in luxury properties and premium real estate investments in Abuja's most exclusive neighborhoods.</p>
+            <p>With over 500+ properties managed and 10,000+ satisfied clients, we're committed to excellence in every transaction.</p>
+            <p>Our expert team ensures a seamless experience from property discovery to investment closure.</p>
+        </div>
+        <div style="background: var(--grey-border); border-radius: 12px; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+            <img src="Images/abuja.jpg" alt="Abuja Skyline" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+    </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+    <h2>Why Choose Amon Heights</h2>
+    <div class="stats-grid">
+        <div>
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Properties Managed</div>
+        </div>
+        <div>
+            <div class="stat-number">10K+</div>
+            <div class="stat-label">Satisfied Clients</div>
+        </div>
+        <div>
+            <div class="stat-number">8-12%</div>
+            <div class="stat-label">Annual Growth</div>
+        </div>
+        <div>
+            <div class="stat-number">2020</div>
+            <div class="stat-label">Year Founded</div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="invest">
+    <h2>Ready to Invest?</h2>
+    <p>Schedule a consultation with our investment specialists today</p>
+    <div class="cta-buttons">
+        <button class="btn-primary" onclick="contactWhatsApp('investment')">Chat on WhatsApp</button>
+        <button class="btn-secondary" onclick="contactPhone()">Schedule Call</button>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+    <div style="max-width: 1400px; margin: 0 auto;">
+        <h2>Get in Touch</h2>
+        <p style="text-align: center; color: var(--grey-text); margin-bottom: 2rem;">Have questions? We're here to help you find your perfect property.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+            <div style="text-align: center; cursor: pointer;" onclick="contactEmail()">
+                <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: 700;">📧 Email</h3>
+                <p style="color: var(--grey-text);">info@amonheights.com</p>
+            </div>
+            <div style="text-align: center; cursor: pointer;" onclick="contactPhone()">
+                <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: 700;">📞 Call Us</h3>
+                <p style="color: var(--grey-text);">+234 (0) 900 000 0000</p>
+            </div>
+            <div style="text-align: center; cursor: pointer;" onclick="contactWhatsApp()">
+                <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: 700;">💬 WhatsApp</h3>
+                <p style="color: var(--grey-text);">+234 (0) 900 000 0000</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-</main>
-
-<!-- ====== FOOTER ====== -->
-<footer class="footer">
-    <div class="footer-wrapper">
-        <div class="footer-column">
+<!-- FOOTER -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-col">
             <h4>Company</h4>
-            <a href="#about">About Us</a>
-            <a href="https://www.instagram.com/amonheights_limited/">Instagram</a>
-            <a href="https://www.youtube.com/@amonheights">YouTube</a>
-            <a href="https://x.com/AmonHeights">X / Twitter</a>
+            <a href="about.html">About</a>
+            <a href="careers.html">Careers</a>
+            <a href="blog.html">Blog</a>
+            <a href="press.html">Press</a>
         </div>
-        <div class="footer-column">
-            <h4>Contact</h4>
-            <a href="https://wa.me/2349040837557">Sales: +234 904 083 7557</a>
-            <a href="https://wa.me/2347072901406">Rentals: +234 707 290 1406</a>
-            <a href="mailto:amonheightslimited@gmail.com">Email</a>
+        <div class="footer-col">
+            <h4>Support</h4>
+            <a href="help.html">Help Center</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
         </div>
-        <div class="footer-column">
-            <h4>Legal</h4>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Security</a>
+        <div class="footer-col">
+            <h4>Properties</h4>
+            <a href="all-properties.html">All Properties</a>
+            <a href="apartments.html">Apartments</a>
+            <a href="villas.html">Villas</a>
+            <a href="duplexes.html">Duplexes</a>
+        </div>
+        <div class="footer-col">
+            <h4>Connect</h4>
+            <a href="javascript:openInstagram()">Instagram</a>
+            <a href="javascript:openYouTube()">YouTube</a>
+            <a href="javascript:openTwitter()">Twitter</a>
+            <a href="javascript:openLinkedIn()">LinkedIn</a>
         </div>
     </div>
     <div class="footer-bottom">
-        <p>© 2026 Amon Heights. All rights reserved. RC: 1434164 | Powered by Strigwall</p>
+        <p>© 2026 Amon Heights. All rights reserved. RC: 1434164</p>
     </div>
 </footer>
 
-<!-- ====== MODAL / PROPERTY DETAILS ====== -->
-<div class="modal" id="propertyModal">
-    <div class="modal-backdrop" id="modalBackdrop"></div>
+<!-- MODAL -->
+<div class="modal" id="modal">
     <div class="modal-content">
-        <button class="modal-close" id="modalClose">&times;</button>
-        <div class="modal-body" id="modalBody">
-            <!-- Property details populated by JS -->
-        </div>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <div class="modal-body" id="modalBody"></div>
     </div>
 </div>
 
-<!-- ====== STYLES ====== -->
-<style>
-/* ========== RESET & VARIABLES ========== */
-* {  
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
-    --color-bg: #ffffff;
-    --color-text: #222222;
-    --color-text-light: #717171;
-    --color-border: #ebebeb;
-    --color-red: #ff5a5f;
-    --color-red-hover: #ff7a81;
-    --color-grey-light: #f5f5f5;
-    --color-grey-lighter: #fafafa;
-    
-    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-    --max-width: 1400px;
-}
-
-html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-}
-
-body {
-    font-family: var(--font-family);
-    background-color: var(--color-bg);
-    color: var(--color-text);
-    line-height: 1.5;
-}
-
-/* ========== HEADER ========== */
-.header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background-color: var(--color-bg);
-    border-bottom: 1px solid var(--color-border);
-    padding: 12px 0;
-}
-
-.header-wrapper {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 32px;
-}
-
-.logo {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--color-red);
-    white-space: nowrap;
-}
-
-        .logo-link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            white-space: nowrap;
-            transition: opacity 150ms ease;
-        }
-
-        .logo-link:hover {
-            opacity: 0.8;
-        }
-
-        .logo-img {
-            height: 32px;
-            width: auto;
-            display: block;
-        }
-
-        .logo-text {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--color-red);
-        }
-
-.search-bar {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    max-width: 500px;
-    gap: 0;
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    padding: 0;
-    background-color: var(--color-white);
-    transition: all 150ms ease;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-}
-
-.search-bar:hover {
-    border-color: #d0d0d0;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-
-.search-bar:focus-within {
-    border-color: var(--color-red);
-    box-shadow: 0 4px 12px rgba(255,90,95,0.15);
-}
-
-.search-bar input {
-    flex: 1;
-    border: none;
-    background: transparent;
-    font-size: 14px;
-    outline: none;
-    font-family: var(--font-family);
-    padding: 10px 16px;
-    color: var(--color-text);
-    width: 100%;
-}
-
-.search-bar input::placeholder {
-    color: var(--color-text-light);
-}
-
-.search-bar input:focus {
-    color: var(--color-text);
-}
-
-.search-btn {
-    background: none;
-    border: none;
-    color: var(--color-text-light);
-    cursor: pointer;
-    font-size: 16px;
-    padding: 0 12px;
-    transition: color 150ms ease;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.search-btn:hover {
-    color: var(--color-red);
-}
-
-.header-icons {
-    display: flex;
-    gap: 24px;
-    align-items: center;
-}
-
-.header-link {
-    color: var(--color-text);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition: color 200ms;
-}
-
-.header-link:hover {
-    color: var(--color-red);
-}
-
-        .btn-header {
-            padding: 8px 20px;
-            border: none;
-            background-color: var(--color-red);
-            color: white;
-            border-radius: 24px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 200ms;
-        }
-
-        .btn-header:hover {
-            background-color: var(--color-red-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 90, 95, 0.2);
-        }
-.filters-bar {
-    position: sticky;
-    top: 60px;
-    z-index: 99;
-    background-color: var(--color-bg);
-    border-bottom: 1px solid var(--color-border);
-    padding: 12px 0;
-}
-
-.filters-wrapper {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 40px;
-    display: flex;
-    gap: 12px;
-    overflow-x: auto;
-    scrollbar-width: none;
-}
-
-.filters-wrapper::-webkit-scrollbar {
-    display: none;
-}
-
-.filter-pill {
-    padding: 8px 16px;
-    border: 1px solid var(--color-border);
-    border-radius: 24px;
-    background-color: var(--color-bg);
-    cursor: pointer;
-    white-space: nowrap;
-    font-size: 14px;
-    transition: all 200ms;
-}
-
-.filter-pill:hover {
-    border-color: var(--color-text);
-    background-color: var(--color-grey-light);
-}
-
-.filter-pill.active {
-    border-color: var(--color-red);
-    background-color: #fff5f5;
-    font-weight: 600;
-    color: var(--color-red);
-}
-
-@media (max-width: 768px) {
-    .filters-wrapper {
-        padding: 0 20px;
-    }
-}
-
-/* ========== MAIN CONTENT ========== */
-.main-content {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 40px;
-}
-
-.section {
-    margin-bottom: 60px;
-}
-
-.section-header {
-    margin-bottom: 32px;
-}
-
-.section-title {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 8px;
-}
-
-.section-subtitle {
-    font-size: 16px;
-    color: var(--color-text-light);
-}
-
-/* ========== PROPERTY GRID ========== */
-.properties-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 24px;
-}
-
-.property-card {
-    cursor: pointer;
-    transition: transform 100ms;
-}
-
-.property-card:hover {
-    transform: translateY(-4px);
-}
-
-.property-image-wrapper {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1;
-    border-radius: 12px;
-    overflow: hidden;
-    background-color: var(--color-grey-light);
-    margin-bottom: 12px;
-}
-
-.property-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 200ms;
-    loading: lazy;
-}
-
-.property-card:hover .property-image {
-    transform: scale(1.05);
-}
-
-.property-badge {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background-color: rgba(255,255,255,0.95);
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--color-text);
-}
-
-.property-badge.sold {
-    background-color: rgba(255,90,95,0.2);
-    color: var(--color-red);
-}
-
-.property-info {
-    padding: 0 4px;
-}
-
-.property-header {
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-    margin-bottom: 4px;
-}
-
-.property-title {
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1.4;
-    flex: 1;
-}
-
-.property-rating {
-    font-size: 14px;
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-
-.property-type {
-    font-size: 14px;
-    color: var(--color-text-light);
-    margin-bottom: 8px;
-}
-
-.property-location {
-    font-size: 14px;
-    color: var(--color-text-light);
-    margin-bottom: 8px;
-}
-
-.property-price {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--color-text);
-}
-
-.property-price-label {
-    font-size: 14px;
-    color: var(--color-text-light);
-    font-weight: 400;
-}
-
-.loading-message {
-    grid-column: 1/-1;
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--color-text-light);
-}
-
-@media (max-width: 768px) {
-    .main-content {
-        padding: 20px;
-    }
-    .properties-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: 16px;
-    }
-    .property-image-wrapper {
-        aspect-ratio: 4/5;
-    }
-}
-
-/* ========== ABOUT SECTION ========== */
-.about-section {
-    background-color: var(--color-grey-lighter);
-    padding: 60px 40px;
-    border-radius: 12px;
-    margin: 0;
-}
-
-.about-wrapper {
-    max-width: 600px;
-}
-
-.about-content h2 {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 16px;
-}
-
-.about-content p {
-    font-size: 16px;
-    color: var(--color-text-light);
-    margin-bottom: 32px;
-    line-height: 1.6;
-}
-
-.about-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-}
-
-.stat {
-    text-align: center;
-}
-
-.stat-number {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--color-red);
-    margin-bottom: 4px;
-}
-
-.stat-label {
-    font-size: 14px;
-    color: var(--color-text-light);
-}
-
-@media (max-width: 768px) {
-    .about-section {
-        padding: 40px 20px;
-    }
-    .about-stats {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-}
-
-/* ========== FOOTER ========== */
-.footer {
-    background-color: var(--color-grey-lighter);
-    padding: 40px 0 20px;
-    margin-top: 60px;
-    border-top: 1px solid var(--color-border);
-}
-
-.footer-wrapper {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 40px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 40px;
-    margin-bottom: 32px;
-}
-
-.footer-column h4 {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 16px;
-    text-transform: uppercase;
-    color: var(--color-text);
-}
-
-.footer-column a {
-    display: block;
-    font-size: 14px;
-    color: var(--color-text-light);
-    text-decoration: none;
-    margin-bottom: 8px;
-    transition: color 200ms;
-}
-
-.footer-column a:hover {
-    color: var(--color-red);
-}
-
-.footer-bottom {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 40px;
-    border-top: 1px solid var(--color-border);
-    padding-top: 20px;
-    text-align: center;
-    font-size: 12px;
-    color: var(--color-text-light);
-}
-
-@media (max-width: 768px) {
-    .footer-wrapper {
-        padding: 0 20px;
-        grid-template-columns: 1fr;
-        gap: 24px;
-    }
-    .footer-bottom {
-        padding: 0 20px;
-    }
-}
-
-/* ========== MODAL ========== */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1000;
-}
-
-.modal.open {
-    display: flex;
-}
-
-.modal-backdrop {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.5);
-}
-
-.modal-content {
-    position: relative;
-    margin: auto;
-    background-color: var(--color-bg);
-    border-radius: 12px;
-    max-width: 900px;
-    width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-    z-index: 1001;
-}
-
-.modal-close {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 40px;
-    height: 40px;
-    border: none;
-    background-color: var(--color-bg);
-    border-radius: 50%;
-    font-size: 28px;
-    color: var(--color-text);
-    cursor: pointer;
-    z-index: 1002;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 200ms;
-}
-
-.modal-close:hover {
-    background-color: var(--color-grey-light);
-}
-
-.modal-body {
-    padding: 40px;
-}
-
-.modal-header {
-    margin-bottom: 24px;
-}
-
-.modal-title {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 8px;
-}
-
-.modal-meta {
-    display: flex;
-    gap: 16px;
-    font-size: 14px;
-    color: var(--color-text-light);
-    margin-bottom: 16px;
-}
-
-.modal-price {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--color-text);
-    margin-bottom: 24px;
-}
-
-.modal-images {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-    margin-bottom: 24px;
-}
-
-.modal-image {
-    width: 100%;
-    border-radius: 12px;
-    object-fit: cover;
-    max-height: 400px;
-}
-
-.modal-divider {
-    height: 1px;
-    background-color: var(--color-border);
-    margin: 24px 0;
-}
-
-.modal-section h3 {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 12px;
-}
-
-.modal-section p {
-    color: var(--color-text-light);
-    margin-bottom: 16px;
-    line-height: 1.6;
-}
-
-.modal-amenities {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-}
-
-.amenity-item {
-    padding: 12px;
-    background-color: var(--color-grey-light);
-    border-radius: 8px;
-    font-size: 14px;
-}
-
-.modal-actions {
-    display: flex;
-    gap: 12px;
-    margin-top: 32px;
-}
-
-.modal-button {
-    flex: 1;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 200ms;
-    font-family: var(--font-family);
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
-}
-
-.modal-button.primary {
-    background-color: var(--color-red);
-    color: white;
-}
-
-.modal-button.primary:hover {
-    background-color: var(--color-red-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 90, 95, 0.3);
-}
-
-.modal-button.secondary {
-    background-color: var(--color-grey-light);
-    color: var(--color-text);
-    border: 1px solid var(--color-border);
-}
-
-.modal-button.secondary:hover {
-    background-color: var(--color-border);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-@media (max-width: 768px) {
-    .modal-body {
-        padding: 24px;
-    }
-    .modal-amenities {
-        grid-template-columns: 1fr;
-    }
-}
-
-</style>
-
-<!-- ====== JAVASCRIPT ====== -->
-<script>
-// ========== STATE & CONFIG ==========
-let allProperties = [];
-let filteredProperties = [];
-let currentFilter = 'all';
-
-// ========== FETCH PROPERTIES FROM BACKEND ==========
-async function loadProperties() {
-    try {
-        const response = await fetch('/api/properties');
-        if (!response.ok) throw new Error('API error');
-        const data = await response.json();
-        allProperties = Array.isArray(data) ? data : data.properties || [];
-        displayProperties(allProperties);
-    } catch (error) {
-        console.log('Backend unavailable, using demo data');
-        loadDemoProperties();
-    }
-}
-
-// ========== DEMO DATA (FALLBACK) ==========
-function loadDemoProperties() {
-    allProperties = [
-        {
-            id: 1,
-            name: "Luxury 4-Bedroom Apartment",
-            location: "Maitama, Abuja",
-            price: 450000000,
-            type: "apartment",
-            image: "Images/living%20room%201.jpg",
-            rating: 4.95,
-            reviews: 128,
-            description: "Stunning luxury apartment with modern amenities, premium finishes & breathtaking views.",
-            bedrooms: 4,
-            bathrooms: 3,
-            sqft: 3200,
-            amenities: ["WiFi", "Air Conditioning", "Parking", "Gym", "Pool", "Security", "Garden", "Balcony"],
-            status: "available"
-        },
-        {
-            id: 2,
-            name: "Modern 5-Bedroom Villa",
-            location: "Asokoro, Abuja",
-            price: 650000000,
-            type: "villa",
-            image: "Images/abuja%203.jpg",
-            rating: 4.88,
-            reviews: 95,
-            description: "Contemporary villa with state-of-the-art features, spacious grounds & premium location.",
-            bedrooms: 5,
-            bathrooms: 4,
-            sqft: 4500,
-            amenities: ["WiFi", "Pool", "Gym", "Cinema", "Sauna", "Parking", "Garden", "Security"],
-            status: "available"
-        },
-        {
-            id: 3,
-            name: "Premium 3-Bedroom Penthouse",
-            location: "Ikoyi, Abuja",
-            price: 300000000,
-            type: "apartment",
-            image: "Images/abuja%20scene.jpg",
-            rating: 5.0,
-            reviews: 156,
-            description: "Exclusive penthouse with panoramic city views, luxury finishes & premium amenities.",
-            bedrooms: 3,
-            bathrooms: 2,
-            sqft: 2800,
-            amenities: ["WiFi", "Balcony", "City View", "Parking", "Security", "Elevator", "Concierge"],
-            status: "sold"
-        },
-        {
-            id: 4,
-            name: "Elegant 2-Bedroom Apartment",
-            location: "Wuse II, Abuja",
-            price: 180000000,
-            type: "apartment",
-            image: "Images/shortlet.jpg",
-            rating: 4.92,
-            reviews: 82,
-            description: "Cozy yet elegant apartment perfect for couples or small families.",
-            bedrooms: 2,
-            bathrooms: 1,
-            sqft: 1500,
-            amenities: ["WiFi", "Parking", "Kitchen", "Balcony", "Security"],
-            status: "available"
-        },
-        {
-            id: 5,
-            name: "Executive 4-Bedroom Duplex",
-            location: "Garki, Abuja",
-            price: 380000000,
-            type: "duplex",
-            image: "Images/duplex%20outdoor.jpg",
-            rating: 4.85,
-            reviews: 67,
-            description: "Spacious duplex with separate living areas, modern kitchen & beautiful garden.",
-            bedrooms: 4,
-            bathrooms: 2,
-            sqft: 3000,
-            amenities: ["WiFi", "Parking", "Garden", "Playground", "Security", "Kitchen"],
-            status: "available"
-        },
-        {
-            id: 6,
-            name: "Luxury Beachfront Villa",
-            location: "Maitama, Abuja",
-            price: 720000000,
-            type: "villa",
-            image: "Images/living%20room%202.jpg",
-            rating: 5.0,
-            reviews: 203,
-            description: "Spectacular waterfront villa with private beach access & world-class amenities.",
-            bedrooms: 5,
-            bathrooms: 4,
-            sqft: 5000,
-            amenities: ["WiFi", "Beach Access", "Pool", "Spa", "Gym", "Cinema", "Parking"],
-            status: "available"
-        },
-        {
-            id: 7,
-            name: "Charming 3-Bedroom Townhouse",
-            location: "Abuja, Abuja",
-            price: 220000000,
-            type: "apartment",
-            image: "Images/cbn%20abuja.jpg",
-            rating: 4.90,
-            reviews: 74,
-            description: "Charming townhouse in prime location with modern design & great views.",
-            bedrooms: 3,
-            bathrooms: 2,
-            sqft: 2000,
-            amenities: ["WiFi", "Parking", "Garden", "Balcony", "Security"],
-            status: "available"
-        },
-        {
-            id: 8,
-            name: "Sophisticated 5-Bedroom Estate",
-            location: "Maitama, Abuja",
-            price: 850000000,
-            type: "villa",
-            image: "Images/duplex%20and%20pool%20outdoor%201.jpg",
-            rating: 4.98,
-            reviews: 189,
-            description: "Magnificent estate with multiple buildings, resort-style amenities & sprawling grounds.",
-            bedrooms: 5,
-            bathrooms: 4,
-            sqft: 6000,
-            amenities: ["WiFi", "Pool", "Spa", "Gym", "Tennis Court", "Garden", "Parking"],
-            status: "available"
-        }
-    ];
-    displayProperties(allProperties);
-}
-
-// ========== DISPLAY PROPERTIES ==========
-function displayProperties(properties) {
-    const grid = document.getElementById('propertiesGrid');
-    
-    if (!properties || properties.length === 0) {
-        grid.innerHTML = '<div class="loading-message">No properties found</div>';
-        return;
-    }
-    
-    grid.innerHTML = properties.map(prop => `
-        <div class="property-card" data-id="${prop.id}">
-            <div class="property-image-wrapper">
-                <img src="${prop.image || 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22%3E%3Crect fill=%23f5f5f5%22/%3E%3C/svg%3E'}" 
-                     alt="${prop.name}" 
-                     class="property-image"
-                     loading="lazy"
-                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22%3E%3Crect fill=%22%23f5f5f5%22/%3E%3C/svg%3E'">
-                ${prop.status === 'sold' ? '<div class="property-badge sold">SOLD</div>' : ''}
-            </div>
-            <div class="property-info">
-                <div class="property-header">
-                    <div class="property-title">${prop.name}</div>
-                    <div class="property-rating">★ ${prop.rating || 4.9}</div>
-                </div>
-                <div class="property-location">${prop.location}</div>
-                <div class="property-type">${prop.type} · ${prop.reviews || 100} reviews</div>
-                <div class="property-price">₦${(prop.price || 0).toLocaleString()}</div>
-                <div class="property-price-label">${prop.status === 'sold' ? 'SOLD' : 'For Sale'}</div>
-            </div>
-        </div>
-    `).join('');
-    
-    // Attach click handlers
-    document.querySelectorAll('.property-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const id = parseInt(card.dataset.id);
-            openPropertyModal(id);
-        });
-    });
-}
-
-// ========== OPEN PROPERTY MODAL ==========
-function openPropertyModal(propertyId) {
-    const property = allProperties.find(p => p.id === propertyId);
-    if (!property) return;
-    
-    const modal = document.getElementById('propertyModal');
-    const modalBody = document.getElementById('modalBody');
-    
-    const amenitiesHtml = property.amenities 
-        ? property.amenities.map(a => `<div class="amenity-item">✓ ${a}</div>`).join('')
-        : '';
-    
-    modalBody.innerHTML = `
-        <div class="modal-header">
-            <div class="modal-badge" style="margin-bottom: 12px;">
-                ${property.status === 'sold' ? '<span style="color: #ff5a5f; font-weight: 600;">SOLD</span>' : '<span style="color: #05a025; font-weight: 600;">Available</span>'}
-            </div>
-            <h2 class="modal-title">${property.name}</h2>
-            <div class="modal-meta">
-                <span>★ ${property.rating || 4.9}</span>
-                <span>${property.reviews || 100} inquiries</span>
-                <span>${property.type}</span>
-            </div>
-            <div class="modal-price">₦${(property.price || 0).toLocaleString()}</div>
-        </div>
-        
-        <div class="modal-images">
-            <img src="${property.image}" alt="${property.name}" class="modal-image" loading="lazy">
-        </div>
-        
-        <div class="modal-divider"></div>
-        
-        <div class="modal-section">
-            <h3>About this property</h3>
-            <p>${property.description || 'Premium luxury property in prime location.'}</p>
-        </div>
-        
-        <div class="modal-divider"></div>
-        
-        <div class="modal-section">
-            <h3>What this place offers</h3>
-            <div class="modal-amenities">
-                ${amenitiesHtml || '<div class="amenity-item">✓ Premium Finishes</div><div class="amenity-item">✓ Modern Design</div>'}
-            </div>
-        </div>
-        
-        <div class="modal-divider"></div>
-        
-        <div class="modal-section">
-            <h3>Details</h3>
-            <p>
-                <strong>Bedrooms:</strong> ${property.bedrooms || 4}<br>
-                <strong>Bathrooms:</strong> ${property.bathrooms || 3}<br>
-                <strong>Size:</strong> ${property.sqft || 3000} sqft<br>
-                <strong>Location:</strong> ${property.location}<br>
-                <strong>Status:</strong> ${property.status === 'sold' ? 'Sold' : 'Available'}
-            </p>
-        </div>
-        
-        <div class="modal-actions">
-            <a href="https://wa.me/2349040837557?text=I'm interested in ${encodeURIComponent(property.name)} at ₦${(property.price || 0).toLocaleString()}" 
-               class="modal-button primary">
-               Inquire Now
-            </a>
-            <a href="https://www.instagram.com/amonheights_limited/" 
-               class="modal-button secondary">
-               Follow Us
-            </a>
-        </div>
-    `;
-    
-    modal.classList.add('open');
-}
-
-// ========== CLOSE MODAL ==========
-function closeModal() {
-    document.getElementById('propertyModal').classList.remove('open');
-}
-
-// ========== FILTER FUNCTIONALITY ==========
-document.querySelectorAll('.filter-pill').forEach(pill => {
-    pill.addEventListener('click', () => {
-        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-        
-        currentFilter = pill.dataset.filter;
-        
-        if (currentFilter === 'all') {
-            displayProperties(allProperties);
-        } else {
-            const filtered = allProperties.filter(p => p.type === currentFilter);
-            displayProperties(filtered);
-        }
-    });
-});
-
-// ========== SEARCH FUNCTIONALITY ==========
-document.getElementById('searchInput').addEventListener('input', (e) => {
-    const query = e.target.value.toLowerCase();
-    
-    if (!query) {
-        displayProperties(allProperties);
-        return;
-    }
-    
-    const results = allProperties.filter(p =>
-        p.name.toLowerCase().includes(query) ||
-        p.location.toLowerCase().includes(query) ||
-        p.type.toLowerCase().includes(query)
-    );
-    
-    displayProperties(results);
-});
-
-// ========== MODAL CLOSE HANDLERS ==========
-document.getElementById('modalClose').addEventListener('click', closeModal);
-document.getElementById('modalBackdrop').addEventListener('click', closeModal);
-
-// ========== INITIALIZE ==========
-window.addEventListener('load', loadProperties);
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>

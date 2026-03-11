@@ -1857,6 +1857,17 @@
            ============================================ */
 
         document.addEventListener('DOMContentLoaded', function() {
+            // CHECK AUTHENTICATION
+            const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
+            const adminUser = sessionStorage.getItem('adminUsername');
+            
+            if (!isLoggedIn || !adminUser) {
+                // Redirect to login if not authenticated
+                window.location.href = './login.html';
+                return;
+            }
+            
+            // User is authenticated - load dashboard
             loadProperties();
             setupEventListeners();
         });

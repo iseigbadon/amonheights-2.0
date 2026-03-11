@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartments - Amon Heights</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">Amon Heights</div>
+        <nav class="nav">
+            <a href="index.html">Properties</a>
+            <a href="about.html">About</a>
+            <a href="blog.html">Blog</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Luxury Apartments</h1>
+            <p>Discover our premium apartment collection in the most sought-after Abuja neighborhoods.</p>
+            <div class="hero-search">
+                <input type="text" id="searchInput" placeholder="Search by property name or location..." onkeyup="filterBySearch()">
+            </div>
+        </div>
+    </section>
+
+    <!-- Properties Section -->
+    <section class="properties" id="properties">
+        <div class="properties-header">
+            <h2>Available Apartments</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filter('apartment')">Apartments</button>
+                <button class="filter-btn" onclick="navigateTo('all-properties.html')">View All</button>
+            </div>
+        </div>
+        <div id="propertyGrid"></div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>Company</h4>
+                <a href="about.html">About</a>
+                <a href="careers.html">Careers</a>
+                <a href="blog.html">Blog</a>
+                <a href="press.html">Press</a>
+            </div>
+            <div class="footer-column">
+                <h4>Support</h4>
+                <a href="help.html">Help Center</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="terms.html">Terms</a>
+                <a href="privacy.html">Privacy</a>
+            </div>
+            <div class="footer-column">
+                <h4>Properties</h4>
+                <a href="all-properties.html">All Properties</a>
+                <a href="apartments.html">Apartments</a>
+                <a href="villas.html">Villas</a>
+                <a href="duplexes.html">Duplexes</a>
+            </div>
+            <div class="footer-column">
+                <h4>Connect</h4>
+                <a href="#" onclick="openInstagram()">Instagram</a>
+                <a href="#" onclick="openYouTube()">YouTube</a>
+                <a href="#" onclick="openTwitter()">Twitter</a>
+                <a href="#" onclick="openLinkedIn()">LinkedIn</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Amon Heights. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            filter('apartment');
+        });
+    </script>
+</body>
+</html>

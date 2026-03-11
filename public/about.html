@@ -10,9 +10,563 @@
     <meta property="og:description" content="Premium properties and investment opportunities in Abuja. RC: 1434164">
     <meta property="og:type" content="website">
     <meta property="og:image" content="Images/logo.png">
-    <title>About Amon Heights - Luxury Real Estate Platform | Abuja, Nigeria</title>
+    <title>About Amon Heights - Luxury Real Estate | Abuja, Nigeria</title>
     <link rel="icon" type="image/png" href="Images/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-black: #1a1a1a;
+            --color-white: #ffffff;
+            --color-grey-soft: #fafafa;
+            --color-grey-text: #666666;
+            --color-grey-light: #ebebeb;
+            --color-grey-border: #d8d8d8;
+            --color-primary: #FF5A5F;
+            --color-primary-light: #FF8B91;
+            --color-primary-dark: #E63946;
+            --color-gold: #D4AF37;
+            --color-green: #1B4D3E;
+            --color-charcoal: #2C2C2C;
+            
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            
+            --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-white);
+            color: var(--color-black);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif);
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            color: var(--color-black);
+        }
+
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.8rem; margin-bottom: 2rem; }
+        h3 { font-size: 1.6rem; margin-bottom: 1rem; }
+
+        p { color: var(--color-grey-text); line-height: 1.75; }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* HEADER */
+        .header {
+            position: sticky;
+            top: 0;
+            background: var(--color-white);
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+            border-bottom: 1px solid var(--color-grey-light);
+        }
+
+        .header-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: opacity 280ms;
+        }
+
+        .logo-link:hover { opacity: 0.8; }
+        .logo-img { height: 36px; width: auto; }
+        .logo-text { font-size: 1.4rem; font-weight: 800; color: var(--color-black); }
+
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .nav-link {
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            transition: color 280ms;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-primary);
+            transition: width 150ms;
+        }
+
+        .nav-link:hover { color: var(--color-primary); }
+        .nav-link:hover::after { width: 100%; }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            color: var(--color-white);
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            box-shadow: var(--shadow-md);
+            transition: all 280ms;
+        }
+
+        .cta-button:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        /* HERO ABOUT */
+        .hero {
+            background: linear-gradient(135deg, var(--color-charcoal) 0%, var(--color-black) 100%);
+            color: var(--color-white);
+            padding: 8rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 { color: var(--color-white); margin-bottom: 1rem; }
+        .hero p { color: rgba(255, 255, 255, 0.9); font-size: 1.2rem; }
+
+        /* SECTIONS */
+        .section {
+            padding: 6rem 2rem;
+        }
+
+        .section-alt {
+            background: linear-gradient(135deg, var(--color-grey-soft) 0%, var(--color-white) 100%);
+        }
+
+        .section h2 { text-align: center; margin-bottom: 3rem; }
+
+        /* MISSION VISION */
+        .mission-vision {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .mission-card {
+            background: var(--color-white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-grey-light);
+            transition: all 280ms;
+        }
+
+        .mission-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-6px);
+        }
+
+        .mission-card h3 { color: var(--color-primary); margin-bottom: 1.5rem; }
+        .mission-card p { line-height: 1.8; }
+
+        /* VALUES GRID */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .value-item {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--color-grey-light);
+            transition: all 280ms;
+        }
+
+        .value-item:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-md);
+            background: rgba(255, 90, 95, 0.03);
+        }
+
+        .value-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .value-item h4 { margin-bottom: 0.8rem; }
+        .value-item p { font-size: 0.95rem; }
+
+        /* TEAM */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .team-member {
+            background: var(--color-white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-grey-light);
+            transition: var(--shadow-lg);
+        }
+
+        .member-photo {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .member-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .member-info h4 { margin-bottom: 0.25rem; }
+        .member-info span { color: var(--color-primary); font-weight: 600; }
+
+        /* STATS */
+        .stats-section {
+            background: linear-gradient(135deg, var(--color-charcoal) 0%, var(--color-black) 100%);
+            color: var(--color-white);
+            padding: 4rem 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-box {
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            transition: all 280ms;
+        }
+
+        .stat-box:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--color-gold);
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--color-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            color: var(--color-white);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .cta-section h2 { color: var(--color-white); margin-bottom: 1.5rem; }
+        .cta-section p { color: rgba(255, 255, 255, 0.95); font-size: 1.1rem; margin-bottom: 2rem; }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+            transition: all 280ms;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--color-white);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-white);
+            color: var(--color-primary);
+            border-color: var(--color-white);
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--color-black);
+            color: var(--color-white);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1280px;
+            margin: 0 auto;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h4 {
+            color: var(--color-white);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        .footer-column a {
+            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.8rem;
+            transition: color 280ms;
+            font-size: 0.95rem;
+        }
+
+        .footer-column a:hover { color: var(--color-primary); }
+
+        .footer-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            .header-wrapper { padding: 1rem 20px; gap: 1rem; }
+            .nav-menu { display: none; }
+            .cta-buttons { flex-direction: column; }
+            .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-wrapper">
+        <a href="/index.html" class="logo-link">
+            <img src="Images/logo.png" alt="Amon Heights" class="logo-img">
+            <span class="logo-text">Amon Heights</span>
+        </a>
+        <nav class="nav-menu">
+            <a href="/index.html#home" class="nav-link">Home</a>
+            <a href="/index.html#properties" class="nav-link">Properties</a>
+            <a href="/index.html#investment" class="nav-link">Investment</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+        <a href="/index.html#properties" class="cta-button">Explore Now</a>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <h1>About Amon Heights</h1>
+        <p>Nigeria's premier luxury real estate platform, dedicated to transforming how premium properties are experienced, valued, and invested in across Abuja.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2>Our Story</h2>
+        <div class="mission-vision">
+            <div class="mission-card">
+                <h3>🎯 Our Mission</h3>
+                <p>To be the trusted platform connecting discerning investors and homebuyers with the finest luxury properties in Abuja, delivering exceptional value through professional expertise and architectural excellence.</p>
+            </div>
+            <div class="mission-card">
+                <h3>🌟 Our Vision</h3>
+                <p>To establish Amon Heights as a global benchmark for luxury real estate in West Africa, recognized for transforming investment opportunities and redefining premium living standards across Nigeria.</p>
+            </div>
+            <div class="mission-card">
+                <h3>💼 Our Promise</h3>
+                <p>Every property represents meticulous curation, architectural integrity, and investment potential. We commit to transparency, expertise, and exceptional service in every transaction.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-alt">
+    <div class="container">
+        <h2>Core Values</h2>
+        <div class="values-grid">
+            <div class="value-item">
+                <div class="value-icon">🏛️</div>
+                <h4>Architectural Excellence</h4>
+                <p>Every property meets uncompromising standards of design and construction quality.</p>
+            </div>
+            <div class="value-item">
+                <div class="value-icon">🔍</div>
+                <h4>Transparency</h4>
+                <p>Complete disclosure and honesty in all property details and transaction terms.</p>
+            </div>
+            <div class="value-item">
+                <div class="value-icon">⭐</div>
+                <h4>Excellence</h4>
+                <p>Premium service standards and attention to every detail throughout your journey.</p>
+            </div>
+            <div class="value-item">
+                <div class="value-icon">🤝</div>
+                <h4>Partnership</h4>
+                <p>Long-term relationships built on trust, expertise, and mutual success.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="stats-section">
+    <div class="container">
+        <h2 style="color: white; text-align: center; margin-bottom: 3rem;">By The Numbers</h2>
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-number">1434164</div>
+                <div class="stat-label">RC Registration</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Properties Managed</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">10K+</div>
+                <div class="stat-label">Satisfied Clients</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Client Satisfaction</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2>Leadership Team</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-photo">👔</div>
+                <div class="member-info">
+                    <h4>Amonaeze Efemini</h4>
+                    <span>Founder & CEO</span>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-photo">🏗️</div>
+                <div class="member-info">
+                    <h4>Real Estate Expert</h4>
+                    <span>Property Director</span>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-photo">💼</div>
+                <div class="member-info">
+                    <h4>Investment Advisor</h4>
+                    <span>Client Services</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container" id="contact">
+        <h2>Ready to Experience Luxury?</h2>
+        <p>Discover your perfect property or schedule a consultation with our specialists today.</p>
+        <div class="cta-buttons">
+            <a href="https://wa.me/2349040837557" class="btn" style="background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.15) 100%); color: white; border: 2px solid white;">Schedule Consultation</a>
+            <a href="mailto:amonheightslimited@gmail.com" class="btn btn-secondary">Get in Touch</a>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-wrapper">
+        <div class="footer-column">
+            <h4>Navigation</h4>
+            <a href="/index.html">Home</a>
+            <a href="/index.html#properties">Properties</a>
+            <a href="/index.html#investment">Investment</a>
+        </div>
+        <div class="footer-column">
+            <h4>Contact</h4>
+            <a href="https://wa.me/2349040837557">Sales: +234 904 083 7557</a>
+            <a href="https://wa.me/2347072901406">Rentals: +234 707 290 1406</a>
+            <a href="mailto:amonheightslimited@gmail.com">Email</a>
+        </div>
+        <div class="footer-column">
+            <h4>Follow Us</h4>
+            <a href="https://www.instagram.com/amonheights_limited/">Instagram</a>
+            <a href="https://www.youtube.com/@amonheights">YouTube</a>
+            <a href="https://x.com/AmonHeights">X / Twitter</a>
+        </div>
+        <div class="footer-column">
+            <h4>Legal</h4>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Security</a>
+        </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+        <p>© 2026 Amon Heights Limited. All rights reserved. RC: 1434164</p>
+    </div>
+</footer>
+
+</body>
+</html>
         * {
             margin: 0;
             padding: 0;
