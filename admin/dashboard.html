@@ -693,6 +693,7 @@
     function confirmLogout() {
         if (confirm('Are you sure you want to logout?')) {
             sessionStorage.removeItem('adminLoggedIn');
+            sessionStorage.removeItem('adminEmail');
             window.location.href = 'login.html';
         }
     }

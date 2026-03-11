@@ -3,582 +3,271 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Amon Heights Admin Panel - Secure Login">
-    <title>Amon Heights Admin - Secure Login</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Admin Login | Amon Heights</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --color-primary: #FF5A5F;
-            --color-primary-light: #FF8B91;
-            --color-primary-dark: #E63946;
-            --color-black: #1a1a1a;
-            --color-white: #ffffff;
-            --color-grey-soft: #fafafa;
-            --color-grey-text: #666666;
-            --color-grey-light: #ebebeb;
-            --color-charcoal: #2C2C2C;
-            --font-serif: 'Playfair Display', Georgia, serif;
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html, body {
-            width: 100%;
-            height: 100%;
+        :root {
+            --primary: #c41e3a;
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --grey: #666666;
+            --light-grey: #f5f5f5;
+            --border: #e0e0e0;
+        }
+
+        html {
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
         }
 
         body {
-            font-family: var(--font-sans);
-            background: linear-gradient(135deg, var(--color-charcoal) 0%, var(--color-black) 100%);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            color: var(--black);
+            line-height: 1.6;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
             min-height: 100vh;
-        }
-
-        .login-wrapper {
-            width: 100%;
-            max-width: 480px;
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
+            padding: 20px;
         }
 
         .login-container {
-            background: var(--color-white);
-            border-radius: 16px;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
-            overflow: hidden;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             width: 100%;
-            border: 1px solid var(--color-grey-light);
-            animation: slideUp 600ms cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            max-width: 420px;
+            overflow: hidden;
         }
 
         .login-header {
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-            color: var(--color-white);
-            padding: 56px 32px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 3rem 2rem;
             text-align: center;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            position: relative;
         }
 
         .login-logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .logo-img {
-            width: 48px;
-            height: 48px;
-            display: block;
-            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
-            transition: filter 300ms ease;
-        }
-
-        .login-logo:hover .logo-img {
-            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+            height: 50px;
+            width: auto;
+            margin-bottom: 1.5rem;
         }
 
         .login-header h1 {
-            font-family: var(--font-serif);
-            font-size: 32px;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
             font-weight: 800;
-            margin: 0;
-            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
         }
 
         .login-header p {
-            color: rgba(255, 255, 255, 0.92);
-            margin-top: 10px;
-            font-size: 15px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+            opacity: 0.95;
         }
 
         .login-body {
-            padding: 40px 32px;
-        }
-
-        .login-form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            padding: 2.5rem 2rem;
         }
 
         .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+            margin-bottom: 1.5rem;
         }
 
         .form-group label {
+            display: block;
             font-weight: 700;
-            font-size: 14px;
-            color: var(--color-black);
+            margin-bottom: 0.6rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
+            color: var(--primary);
             letter-spacing: 0.3px;
         }
 
         .form-group input {
-            padding: 14px 16px;
-            border: 2px solid var(--color-grey-light);
-            border-radius: 8px;
-            font-size: 14px;
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
             font-family: inherit;
-            transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
-            min-height: 44px;
-            background-color: var(--color-white);
+            font-size: 0.95rem;
+            transition: all 200ms ease;
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: var(--color-primary);
-            box-shadow: 0 0 0 4px rgba(255, 90, 95, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .form-group input::placeholder {
-            color: var(--color-grey-text);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(196,30,58,0.1);
         }
 
         .login-button {
-            padding: 14px 20px;
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-            color: var(--color-white);
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: var(--white);
             border: none;
-            border-radius: 8px;
-            font-size: 15px;
+            border-radius: 6px;
             font-weight: 700;
-            cursor: pointer;
-            transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
-            font-family: inherit;
-            margin-top: 12px;
-            min-height: 44px;
+            font-size: 0.95rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 12px rgba(255, 90, 95, 0.25);
+            letter-spacing: 0.3px;
+            cursor: pointer;
+            transition: all 200ms ease;
+            margin-top: 0.5rem;
         }
 
-        .login-button:hover:not(:disabled) {
-            box-shadow: 0 8px 24px rgba(255, 90, 95, 0.35);
-            transform: translateY(-3px);
+        .login-button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(196,30,58,0.3);
         }
 
-        .login-button:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
+        .login-button:active {
+            transform: translateY(0);
         }
 
-        .error-message {
-            background: rgba(230, 57, 70, 0.1);
-            color: var(--color-primary-dark);
-            padding: 12px 16px;
-            border-radius: 8px;
-            font-size: 14px;
-            border-left: 4px solid var(--color-primary-dark);
+        .message {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-radius: 6px;
+            font-weight: 600;
             display: none;
+            border-left: 4px solid;
         }
 
-        .error-message.show {
+        .message.show {
             display: block;
-            animation: slideIn 300ms ease;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-10px); }
-            to { opacity: 1; transform: translateX(0); }
+        .message.error {
+            background: #ffebee;
+            color: #c62828;
+            border-left-color: #f44336;
         }
 
-        .success-message {
-            background: rgba(76, 175, 80, 0.1);
-            color: #4CAF50;
-            padding: 12px 16px;
-            border-radius: 8px;
-            font-size: 14px;
-            border-left: 4px solid #4CAF50;
-            display: none;
+        .message.success {
+            background: #e8f5e9;
+            color: #1b5e20;
+            border-left-color: #4caf50;
         }
 
-        .success-message.show {
-            display: block;
-            animation: slideIn 300ms ease;
+        .login-info {
+            background: var(--light-grey);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: var(--grey);
+            text-align: center;
         }
 
-        .loading-spinner {
-            display: none;
-            width: 16px;
-            height: 16px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-top-color: var(--color-white);
-            border-radius: 50%;
-            animation: spin 600ms linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .login-info strong {
+            color: var(--black);
         }
 
         @media (max-width: 480px) {
-            .login-container { border-radius: 12px; }
-            .login-header { padding: 40px 24px; }
-            .login-header h1 { font-size: 24px; }
-            .login-body { padding: 30px 24px; }
+            .login-container {
+                border-radius: 8px;
+            }
+
+            .login-header {
+                padding: 2rem 1.5rem;
+            }
+
+            .login-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .login-body {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="login-wrapper">
-    <div class="login-container">
-        <div class="login-header">
-            <div class="login-logo">
-                <img src="Images/logo.png" alt="Amon Heights" class="logo-img">
+<div class="login-container">
+    <div class="login-header">
+        <img src="../Images/logo.png" alt="Amon Heights" class="login-logo">
+        <h1>Admin Portal</h1>
+        <p>Amon Heights Management System</p>
+    </div>
+
+    <div class="login-body">
+        <div id="message" class="message"></div>
+
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="username">Email Address</label>
+                <input 
+                    type="email" 
+                    id="username" 
+                    placeholder="admin@amonheights.com" 
+                    required 
+                    autofocus
+                >
             </div>
-            <h1>Admin Panel</h1>
-            <p>Secure Property Management System</p>
-        </div>
-        <div class="login-body">
-            <div id="errorMessage" class="error-message"></div>
-            <div id="successMessage" class="success-message"></div>
-            
-            <form id="loginForm" class="login-form" onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label for="email">Admin Email</label>
-                    <input type="email" id="email" placeholder="your@email.com" required autocomplete="email">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password">
-                </div>
-                <button type="submit" class="login-button">
-                    <span id="buttonText">Sign In</span>
-                    <span id="spinner" class="loading-spinner"></span>
-                </button>
-            </form>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    placeholder="••••••••" 
+                    required
+                >
+            </div>
+
+            <button type="submit" class="login-button">Sign In</button>
+        </form>
+
+        <div class="login-info">
+            <strong>Demo Credentials:</strong><br>
+            Email: admin@amonheights.com<br>
+            Password: amonheights2024
         </div>
     </div>
 </div>
 
 <script>
-    const ADMIN_EMAIL = 'admin@amonheights.com';
-    const ADMIN_PASSWORD = 'amonheights2024';
-
     function handleLogin(event) {
         event.preventDefault();
-        
-        const email = document.getElementById('email').value.trim();
+
+        const email = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value;
-        const errorMsg = document.getElementById('errorMessage');
-        const successMsg = document.getElementById('successMessage');
-        const button = document.querySelector('.login-button');
-        const spinner = document.getElementById('spinner');
-        const buttonText = document.getElementById('buttonText');
+        const message = document.getElementById('message');
 
-        errorMsg.classList.remove('show');
-        successMsg.classList.remove('show');
+        // Simple credentials (for demo - in production use proper auth)
+        const VALID_EMAIL = 'admin@amonheights.com';
+        const VALID_PASSWORD = 'amonheights2024';
 
-        if (!email || !password) {
-            showError('Please enter email and password');
-            return;
+        message.classList.remove('show', 'error', 'success');
+
+        if (email === VALID_EMAIL && password === VALID_PASSWORD) {
+            message.textContent = 'Login successful! Redirecting...';
+            message.className = 'message show success';
+            
+            // Set session
+            sessionStorage.setItem('adminLoggedIn', 'true');
+            sessionStorage.setItem('adminEmail', email);
+
+            // Redirect after 500ms
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 500);
+        } else {
+            message.textContent = 'Invalid email or password';
+            message.className = 'message show error';
         }
-
-        button.disabled = true;
-        spinner.style.display = 'inline-block';
-        buttonText.textContent = 'Verifying...';
-
-        setTimeout(() => {
-            if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-                sessionStorage.setItem('adminLoggedIn', 'true');
-                sessionStorage.setItem('adminUsername', email);
-                successMsg.textContent = 'Login successful! Redirecting...';
-                successMsg.classList.add('show');
-                
-                setTimeout(() => {
-                    window.location.href = './dashboard.html';
-                }, 1000);
-            } else {
-                showError('Invalid email or password');
-                button.disabled = false;
-                spinner.style.display = 'none';
-                buttonText.textContent = 'Sign In';
-            }
-        }, 800);
     }
-
-    function showError(message) {
-        const errorMsg = document.getElementById('errorMessage');
-        errorMsg.textContent = message;
-        errorMsg.classList.add('show');
-    }
-
-    document.getElementById('password').addEventListener('contextmenu', (e) => e.preventDefault());
 </script>
 
-</body>
-</html>
-    <div class="login-wrapper">
-        <div class="login-container">
-            <div class="login-header">
-                <div class="login-logo">
-                    <img src="../Images/logo.png" alt="Amon Heights" class="logo-img">
-                </div>
-                <h1>Amon Heights</h1>
-                <p>Admin Portal</p>
-            </div>
-
-            <div class="login-body">
-                <form class="login-form" id="loginForm">
-                    <div id="errorMessage" class="error-message"></div>
-
-                    <div class="form-group">
-                        <label for="username">Admin Username</label>
-                        <input 
-                            type="text" 
-                            id="username" 
-                            placeholder="Enter your username" 
-                            required 
-                            autofocus
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input 
-                            type="password" 
-                            id="password" 
-                            placeholder="Enter your password" 
-                            required
-                        >
-                    </div>
-
-                    <button type="submit" class="login-button" id="loginBtn">
-                        Sign In to Dashboard
-                    </button>
-                </form>
-
-                <div class="security-note">
-                    🔒 Secure connection. Demo: admin / password123
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <p>© 2026 <a href="../public/">Amon Heights</a>. All rights reserved. RC: 1434164 | Powered by <a href="#">Strigwall</a></p>
-    </footer>
-
-    <script>
-        const loginForm = document.getElementById('loginForm');
-        const errorMessage = document.getElementById('errorMessage');
-        const loginBtn = document.getElementById('loginBtn');
-        const usernameInput = document.getElementById('username');
-        const passwordInput = document.getElementById('password');
-
-        const DEMO_USERNAME = 'admin';
-        const DEMO_PASSWORD = 'password123';
-
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            loginBtn.disabled = true;
-            loginBtn.textContent = 'Signing in...';
-            errorMessage.classList.remove('show');
-
-            const username = usernameInput.value.trim();
-            const password = passwordInput.value;
-
-            await new Promise(resolve => setTimeout(resolve, 600));
-
-            if (username === DEMO_USERNAME && password === DEMO_PASSWORD) {
-                sessionStorage.setItem('adminLoggedIn', 'true');
-                sessionStorage.setItem('adminUsername', username);
-                window.location.href = './dashboard.html';
-            } else {
-                showError('Invalid credentials. Try admin / password123');
-                loginBtn.disabled = false;
-                loginBtn.textContent = 'Sign In to Dashboard';
-                passwordInput.value = '';
-            }
-        });
-
-        function showError(message) {
-            errorMessage.textContent = message;
-            errorMessage.classList.add('show');
-        }
-
-        usernameInput.addEventListener('input', () => {
-            errorMessage.classList.remove('show');
-        });
-
-        passwordInput.addEventListener('input', () => {
-            errorMessage.classList.remove('show');
-        });
-    </script>
-</body>
-</html>
-            transform: none;
-        }
-
-        .error-message {
-            background-color: #fee;
-            color: #c33;
-            padding: 0.8rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            display: none;
-            border-left: 4px solid #c33;
-        }
-
-        .error-message.show {
-            display: block;
-        }
-
-        .success-message {
-            background-color: #efe;
-            color: #3c3;
-            padding: 0.8rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            display: none;
-            border-left: 4px solid #3c3;
-        }
-
-        .success-message.show {
-            display: block;
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            margin-top: 1rem;
-        }
-
-        .loader {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid var(--color-gold-primary);
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @media (max-width: 480px) {
-            .login-container {
-                padding: 2rem;
-                margin: 1rem;
-            }
-
-            .login-logo h1 {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="login-container">
-        <div class="login-logo">
-            <h1>Amon Heights</h1>
-            <p>Admin Dashboard</p>
-        </div>
-
-        <form class="login-form" id="loginForm">
-            <div class="error-message" id="errorMessage"></div>
-            <div class="success-message" id="successMessage"></div>
-
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required autocomplete="username">
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required autocomplete="current-password">
-            </div>
-
-            <button type="submit" class="login-button" id="loginBtn">Sign In</button>
-
-            <div class="loading" id="loading">
-                <div class="loader"></div>
-            </div>
-        </form>
-    </div>
-
-    <script>
-        const loginForm = document.getElementById('loginForm');
-        const errorMessage = document.getElementById('errorMessage');
-        const successMessage = document.getElementById('successMessage');
-        const loginBtn = document.getElementById('loginBtn');
-        const loading = document.getElementById('loading');
-
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            errorMessage.classList.remove('show');
-            successMessage.classList.remove('show');
-            loginBtn.disabled = true;
-            loading.style.display = 'block';
-
-            try {
-                const response = await fetch('/api/admin/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ username, password })
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    successMessage.textContent = 'Login successful! Redirecting...';
-                    successMessage.classList.add('show');
-                    setTimeout(() => {
-                        window.location.href = '/admin/dashboard';
-                    }, 1000);
-                } else {
-                    errorMessage.textContent = data.error || 'Login failed. Please try again.';
-                    errorMessage.classList.add('show');
-                    loginBtn.disabled = false;
-                    loading.style.display = 'none';
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                errorMessage.textContent = 'Network error. Please try again.';
-                errorMessage.classList.add('show');
-                loginBtn.disabled = false;
-                loading.style.display = 'none';
-            }
-        });
-
-        // Focus first input on load
-        document.getElementById('username').focus();
-    </script>
 </body>
 </html>

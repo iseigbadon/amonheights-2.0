@@ -3,46 +3,58 @@
    Complete System: Properties, Blog, Contact
    ============================================ */
 
+// ========== LOAD DATA FROM STORAGE ==========
+// Check if admin has saved updated data, otherwise use defaults
+function loadBlogPosts() {
+    const stored = localStorage.getItem('amonHeightsBlogPosts');
+    return stored ? JSON.parse(stored) : [
+        {
+            id: 1,
+            title: "Luxury Living in Abuja: A Guide to Premium Neighborhoods",
+            author: "Sarah Johnson",
+            date: "2024-01-15",
+            image: "Images/abuja.jpg",
+            excerpt: "Discover the most exclusive neighborhoods offering world-class living experiences and investment opportunities.",
+            content: "Abuja's premium neighborhoods offer unparalleled luxury and convenience. From Maitama to Asokoro, each area provides unique advantages for investors and residents seeking high-end properties. This comprehensive guide covers lifestyle, amenities, investment potential, and what makes each location special. Learn about security features, community standards, and long-term value appreciation in these elite neighborhoods."
+        },
+        {
+            id: 2,
+            title: "Investment Guide: Why Nigerian Real Estate is the Future",
+            author: "Michael Chen",
+            date: "2024-01-10",
+            image: "Images/living room 2.jpg",
+            excerpt: "Explore compelling reasons why intelligent investors are focusing on Nigerian property markets.",
+            content: "Nigerian real estate presents exceptional investment opportunities with strong growth potential. Economic development, increasing urbanization, rising demand for premium housing, and favorable demographics create a perfect storm of opportunity. This guide explores capital appreciation potential, rental yield possibilities, market trends, and portfolio diversification benefits. Learn from successful investors and understand why now is the ideal time to invest."
+        },
+        {
+            id: 3,
+            title: "Interior Design Trends: Creating the Perfect Luxury Home",
+            author: "Emma Williams",
+            date: "2024-01-05",
+            image: "Images/living room 1.jpg",
+            excerpt: "Master the art of luxury interior design with insights from top designers in Africa.",
+            content: "Contemporary luxury design blends comfort with sophistication. Discover how to incorporate minimalism, natural materials, smart technology, and sustainable elements into your dream home. This article covers color palettes, furniture selection, lighting design, and how to work with interior designers to create personalized spaces that reflect your lifestyle and values. Includes case studies of award-winning luxury homes in Abuja."
+        }
+    ];
+}
+
+function loadProperties() {
+    const stored = localStorage.getItem('amonHeightsProperties');
+    return stored ? JSON.parse(stored) : [
+        { id: 1, title: "Luxury Penthouse", type: "apartment", location: "Maitama", price: "850M", rating: "4.95", image: "Images/living room 2.jpg", beds: 4, baths: 3, size: "450 sqm", desc: "Stunning luxury apartment with premium finishes and breathtaking views." },
+        { id: 2, title: "Executive Villa", type: "villa", location: "Asokoro", price: "1.2B", rating: "4.88", image: "Images/duplex and pool outdoor 1.jpg", beds: 5, baths: 4, size: "650 sqm", desc: "Contemporary villa with state-of-the-art features in exclusive neighborhood." },
+        { id: 3, title: "Premium Duplex", type: "duplex", location: "Wuse II", price: "750M", rating: "4.92", image: "Images/duplex.jpg", beds: 4, baths: 3, size: "520 sqm", desc: "Spacious duplex with modern architecture and premium finishes." },
+        { id: 4, title: "Luxury Shortlet", type: "shortlet", location: "Maitama", price: "2.5M/mo", rating: "4.90", image: "Images/shortlet1.jpg", beds: 3, baths: 2, size: "380 sqm", desc: "Fully furnished luxury apartment perfect for short-term stays." },
+        { id: 5, title: "High-End Apartment", type: "apartment", location: "CBD", price: "680M", rating: "4.85", image: "Images/living room 1.jpg", beds: 3, baths: 2, size: "420 sqm", desc: "Modern apartment in prime business district location." },
+        { id: 6, title: "Exclusive Estate", type: "villa", location: "Jahi", price: "1.4B", rating: "4.98", image: "Images/duplex and pool out door.jpg", beds: 6, baths: 5, size: "780 sqm", desc: "Magnificent estate with world-class amenities and sprawling grounds." },
+    ];
+}
+
 // ========== BLOG DATA ==========
-const blogPosts = [
-    {
-        id: 1,
-        title: "Luxury Living in Abuja: A Guide to Premium Neighborhoods",
-        author: "Sarah Johnson",
-        date: "2024-01-15",
-        image: "Images/abuja.jpg",
-        excerpt: "Discover the most exclusive neighborhoods offering world-class living experiences and investment opportunities.",
-        content: "Abuja's premium neighborhoods offer unparalleled luxury and convenience. From Maitama to Asokoro, each area provides unique advantages for investors and residents seeking high-end properties. This comprehensive guide covers lifestyle, amenities, investment potential, and what makes each location special. Learn about security features, community standards, and long-term value appreciation in these elite neighborhoods."
-    },
-    {
-        id: 2,
-        title: "Investment Guide: Why Nigerian Real Estate is the Future",
-        author: "Michael Chen",
-        date: "2024-01-10",
-        image: "Images/living room 2.jpg",
-        excerpt: "Explore compelling reasons why intelligent investors are focusing on Nigerian property markets.",
-        content: "Nigerian real estate presents exceptional investment opportunities with strong growth potential. Economic development, increasing urbanization, rising demand for premium housing, and favorable demographics create a perfect storm of opportunity. This guide explores capital appreciation potential, rental yield possibilities, market trends, and portfolio diversification benefits. Learn from successful investors and understand why now is the ideal time to invest."
-    },
-    {
-        id: 3,
-        title: "Interior Design Trends: Creating the Perfect Luxury Home",
-        author: "Emma Williams",
-        date: "2024-01-05",
-        image: "Images/living room 1.jpg",
-        excerpt: "Master the art of luxury interior design with insights from top designers in Africa.",
-        content: "Contemporary luxury design blends comfort with sophistication. Discover how to incorporate minimalism, natural materials, smart technology, and sustainable elements into your dream home. This article covers color palettes, furniture selection, lighting design, and how to work with interior designers to create personalized spaces that reflect your lifestyle and values. Includes case studies of award-winning luxury homes in Abuja."
-    }
-];
+const blogPosts = loadBlogPosts();
 
 // ========== PROPERTY DATA ==========
-const properties = [
-    { id: 1, title: "Luxury Penthouse", type: "apartment", location: "Maitama", price: "850M", rating: "4.95", image: "Images/living room 2.jpg", beds: 4, baths: 3, size: "450 sqm", desc: "Stunning luxury apartment with premium finishes and breathtaking views." },
-    { id: 2, title: "Executive Villa", type: "villa", location: "Asokoro", price: "1.2B", rating: "4.88", image: "Images/duplex and pool outdoor 1.jpg", beds: 5, baths: 4, size: "650 sqm", desc: "Contemporary villa with state-of-the-art features in exclusive neighborhood." },
-    { id: 3, title: "Premium Duplex", type: "duplex", location: "Wuse II", price: "750M", rating: "4.92", image: "Images/duplex.jpg", beds: 4, baths: 3, size: "520 sqm", desc: "Spacious duplex with modern architecture and premium finishes." },
-    { id: 4, title: "Luxury Shortlet", type: "shortlet", location: "Maitama", price: "2.5M/mo", rating: "4.90", image: "Images/shortlet1.jpg", beds: 3, baths: 2, size: "380 sqm", desc: "Fully furnished luxury apartment perfect for short-term stays." },
-    { id: 5, title: "High-End Apartment", type: "apartment", location: "CBD", price: "680M", rating: "4.85", image: "Images/living room 1.jpg", beds: 3, baths: 2, size: "420 sqm", desc: "Modern apartment in prime business district location." },
-    { id: 6, title: "Exclusive Estate", type: "villa", location: "Jahi", price: "1.4B", rating: "4.98", image: "Images/duplex and pool out door.jpg", beds: 6, baths: 5, size: "780 sqm", desc: "Magnificent estate with world-class amenities and sprawling grounds." },
-];
+const properties = loadProperties();
 
 let currentFilter = 'all';
 
