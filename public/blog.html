@@ -3,84 +3,568 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Amon Heights</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Blog - Amon Heights. Insights, trends, and guides for luxury living and smart property investment in Nigeria.">
+    <title>Blog - Amon Heights | Luxury Real Estate Insights</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        .blog-section { padding: 6rem 2rem; }
-        .blog-header { text-align: center; margin-bottom: 4rem; }
-        .blog-header h1 { font-size: 2.5rem; margin-bottom: 1rem; color: var(--black); }
-        .blog-header p { font-size: 1.1rem; color: var(--grey-text); max-width: 600px; margin: 0 auto; }
-        #blogContainer { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem; }
-        .blog-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 200ms ease, box-shadow 200ms ease; cursor: pointer; }
-        .blog-card:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,0.15); }
-        .blog-image { width: 100%; height: 220px; object-fit: cover; }
-        .blog-content { padding: 1.5rem; }
-        .blog-title { font-size: 1.3rem; font-weight: 600; color: var(--black); margin: 0 0 0.5rem; line-height: 1.4; }
-        .blog-meta { font-size: 0.9rem; color: var(--grey-text); margin-bottom: 1rem; }
-        .blog-excerpt { font-size: 0.95rem; color: var(--grey-text); line-height: 1.6; margin-bottom: 1rem; }
-        .read-more { color: var(--primary); text-decoration: none; font-weight: 500; }
-        .read-more:hover { color: var(--primary-hover); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #c41e3a;
+            --color-primary-hover: #a01729;
+            --color-black: #0a0a0a;
+            --color-white: #ffffff;
+            --color-text-secondary: #666666;
+            --color-border: #e0e0e0;
+            --color-bg-light: #f5f5f5;
+            --color-gold: #D4AF37;
+            
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.16);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-white);
+            color: var(--color-black);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 200ms ease;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-serif);
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.8rem; }
+        h3 { font-size: 1.6rem; }
+
+        /* HEADER */
+        .header {
+            position: sticky;
+            top: 0;
+            background: var(--color-white);
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .header-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: opacity 200ms ease;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--color-black);
+        }
+
+        .logo-link:hover {
+            opacity: 0.8;
+        }
+
+        .logo-img {
+            height: 36px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .nav-link {
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            transition: color 200ms ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-primary);
+            transition: width 150ms ease;
+        }
+
+        .nav-link:hover {
+            color: var(--color-primary);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.98) 100%);
+            color: var(--color-white);
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: var(--color-white);
+            margin-bottom: 1.5rem;
+            font-size: 3.5rem;
+        }
+
+        .hero p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* BLOG SECTION */
+        .blog-section {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section-controls {
+            display: flex;
+            gap: 2rem;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1.5px solid var(--color-border);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 200ms ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.1);
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            border: 1.5px solid var(--color-border);
+            background: var(--color-white);
+            color: var(--color-black);
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 200ms ease;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .filter-btn.active {
+            background: var(--color-primary);
+            color: var(--color-white);
+            border-color: var(--color-primary);
+        }
+
+        /* BLOG GRID */
+        #blogContainer {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .blog-card {
+            background: var(--color-white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--color-border);
+            transition: all 200ms ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--color-primary);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            transition: transform 200ms ease;
+        }
+
+        .blog-card:hover .blog-image {
+            transform: scale(1.05);
+        }
+
+        .blog-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-badge {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            background: rgba(196, 30, 58, 0.1);
+            color: var(--color-primary);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 1rem;
+            width: fit-content;
+        }
+
+        .blog-title {
+            font-size: 1.4rem;
+            color: var(--color-black);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .blog-meta {
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 1.2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .blog-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .blog-excerpt {
+            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .read-more {
+            color: var(--color-primary);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 200ms ease;
+        }
+
+        .read-more:hover {
+            color: var(--color-primary-hover);
+            gap: 0.8rem;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--color-black);
+            color: var(--color-white);
+            padding: 4rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-wrapper {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h4 {
+            color: var(--color-white);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+        }
+
+        .footer-column a {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.8rem;
+            transition: color 200ms ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-column a:hover {
+            color: var(--color-primary);
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+
+            .header-wrapper {
+                padding: 0.8rem 20px;
+                gap: 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hero {
+                padding: 4rem 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .blog-section {
+                padding: 3rem 20px;
+            }
+
+            .section-controls {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .search-box {
+                min-width: 100%;
+            }
+
+            .filters {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            #blogContainer {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-wrapper {
+                padding: 0.6rem 15px;
+                gap: 0.5rem;
+            }
+
+            .blog-section {
+                padding: 2rem 15px;
+            }
+
+            .blog-content {
+                padding: 1.5rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .filters {
+                flex-direction: column;
+            }
+
+            .filter-btn {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="logo">Amon Heights</div>
-        <nav class="nav">
-            <a href="index.html">Properties</a>
-            <a href="about.html">About</a>
-            <a href="blog.html">Blog</a>
-            <a href="#contact">Contact</a>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="header-wrapper">
+        <a href="index.html" class="logo-link">
+            <img src="Images/logo.png" alt="Amon Heights" class="logo-img">
+            Amon Heights
+        </a>
+        <nav class="nav-menu">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="all-properties.html" class="nav-link">Properties</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
         </nav>
-    </header>
+    </div>
+</header>
 
-    <!-- Blog Section -->
-    <section class="blog-section">
-        <div class="blog-header">
-            <h1>Our Blog</h1>
-            <p>Insights, trends, and guides for luxury living and smart property investment in Nigeria.</p>
+<!-- HERO SECTION -->
+<section class="hero">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 0 2rem;">
+        <h1>Insights & Trends</h1>
+        <p>Expert guides, market analysis, and luxury living inspiration for discerning investors and homeowners.</p>
+    </div>
+</section>
+
+<!-- BLOG SECTION -->
+<section class="blog-section">
+    <div class="section-controls">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search articles..." onkeyup="filterByBlogSearch()">
         </div>
-        <div id="blogContainer"></div>
-    </section>
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterBlogCategory('all')">All</button>
+            <button class="filter-btn" onclick="filterBlogCategory('lifestyle')">Lifestyle</button>
+            <button class="filter-btn" onclick="filterBlogCategory('investment')">Investment</button>
+            <button class="filter-btn" onclick="filterBlogCategory('design')">Design</button>
+        </div>
+    </div>
+    <div id="blogContainer"></div>
+</section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-wrapper">
+        <div class="footer-grid">
             <div class="footer-column">
                 <h4>Company</h4>
-                <a href="about.html">About</a>
-                <a href="careers.html">Careers</a>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
                 <a href="blog.html">Blog</a>
                 <a href="press.html">Press</a>
             </div>
             <div class="footer-column">
-                <h4>Support</h4>
-                <a href="help.html">Help Center</a>
-                <a href="contact.html">Contact Us</a>
+                <h4>Resources</h4>
+                <a href="all-properties.html">Properties</a>
+                <a href="careers.html">Careers</a>
+                <a href="help.html">Help</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-column">
+                <h4>Legal</h4>
                 <a href="terms.html">Terms</a>
                 <a href="privacy.html">Privacy</a>
+                <a href="mailto:amonheightslimited@gmail.com">Support</a>
             </div>
             <div class="footer-column">
-                <h4>Properties</h4>
-                <a href="all-properties.html">All Properties</a>
-                <a href="apartments.html">Apartments</a>
-                <a href="villas.html">Villas</a>
-                <a href="duplexes.html">Duplexes</a>
-            </div>
-            <div class="footer-column">
-                <h4>Connect</h4>
-                <a href="#" onclick="openInstagram()">Instagram</a>
-                <a href="#" onclick="openYouTube()">YouTube</a>
-                <a href="#" onclick="openTwitter()">Twitter</a>
-                <a href="#" onclick="openLinkedIn()">LinkedIn</a>
+                <h4>Follow</h4>
+                <a href="https://www.instagram.com/amonheights_limited/">Instagram</a>
+                <a href="https://www.youtube.com/@amonheights">YouTube</a>
+                <a href="https://x.com/AmonHeights">X / Twitter</a>
             </div>
         </div>
+        <div class="footer-divider"></div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Amon Heights. All rights reserved.</p>
+            <p>© 2026 Amon Heights Limited. RC: 1434164. All rights reserved.</p>
         </div>
-    </footer>
+    </div>
+</footer>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
+<script>
+    function filterByBlogSearch() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const cards = document.querySelectorAll('.blog-card');
+        cards.forEach(card => {
+            const title = card.querySelector('.blog-title').textContent.toLowerCase();
+            const excerpt = card.querySelector('.blog-excerpt').textContent.toLowerCase();
+            if (title.includes(query) || excerpt.includes(query)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    function filterBlogCategory(category) {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        // Add category data to blog posts in script.js to enable filtering
+        if (category === 'all') {
+            renderBlogPosts();
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderBlogPosts();
+    });
+</script>
+
 </body>
 </html>

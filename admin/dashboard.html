@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amon Heights - Admin Dashboard</title>
+    <meta name="description" content="Amon Heights Admin Dashboard - Manage blog posts and content">
+    <title>Admin Dashboard - Blog Management | Amon Heights</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --color-black: #1a1a1a;
+            --color-primary: #c41e3a;
+            --color-primary-hover: #a01729;
+            --color-black: #0a0a0a;
             --color-white: #ffffff;
             --color-grey-soft: #fafafa;
             --color-grey-text: #666666;
@@ -1834,13 +1838,308 @@
         </div>
     </div>
 
-    <script>
-        /* ============================================
-           STATE & CONFIG
-           ============================================ */
+</head>
+<body>
+
+<!-- HEADER -->
+<header style="position: sticky; top: 0; background: var(--color-white); z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-bottom: 1px solid #e0e0e0; padding: 1rem 2rem;">
+    <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 2rem;">
+        <div style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--color-black); font-size: 1.4rem; font-weight: 800;">
+            <img src="../Images/logo.png" alt="Amon Heights" style="height: 36px; width: auto;">
+            Blog Admin
+        </div>
+        <div style="display: flex; gap: 2rem; flex: 1; justify-content: center;">
+            <button onclick="switchTab('posts')" id="postsTab" class="tab-btn active" style="background: none; border: none; padding: 0.5rem 1rem; font-weight: 600; color: var(--color-black); cursor: pointer; border-bottom: 3px solid transparent; transition: all 200ms ease; font-size: 0.9rem;">📝 Posts</button>
+            <button onclick="switchTab('new')" id="newTab" class="tab-btn" style="background: none; border: none; padding: 0.5rem 1rem; font-weight: 600; color: #999; cursor: pointer; border-bottom: 3px solid transparent; transition: all 200ms ease; font-size: 0.9rem;">➕ New Post</button>
+        </div>
+        <button onclick="logout()" style="padding: 0.7rem 1.5rem; background: var(--color-primary); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 200ms ease;">Logout</button>
+    </div>
+</header>
+
+<style>
+    .tab-btn.active {
+        color: var(--color-primary) !important;
+        border-bottom-color: var(--color-primary) !important;
+    }
+</style>
+
+<!-- MAIN CONTENT -->
+<div style="max-width: 1400px; margin: 0 auto; padding: 3rem 2rem;">
+
+    <!-- TAB: POSTS LIST -->
+    <section id="postsSection" style="display: block;">
+        <div style="margin-bottom: 3rem;">
+            <h2 style="font-family: 'Playfair Display'; font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem;">Blog Posts</h2>
+            <p style="color: #666; font-size: 0.95rem;">Manage and edit your blog content</p>
+        </div>
+
+        <div style="display: flex; gap: 2rem; margin-bottom: 2rem; align-items: center; flex-wrap: wrap;">
+            <input type="text" id="searchPosts" placeholder="Search posts..." onkeyup="filterPosts()" style="flex: 1; min-width: 200px; padding: 0.8rem 1rem; border: 1.5px solid #e0e0e0; border-radius: 6px; font-family: inherit; transition: all 200ms ease;" onfocus="this.style.borderColor='var(--color-primary)'; this.style.boxShadow='0 0 0 3px rgba(196,30,58,0.1)';" onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none';">
+            <select id="filterCategory" onchange="filterPosts()" style="padding: 0.8rem 1rem; border: 1.5px solid #e0e0e0; border-radius: 6px; font-family: inherit; cursor: pointer;">
+                <option value="">All Categories</option>
+                <option value="lifestyle">Lifestyle</option>
+                <option value="investment">Investment</option>
+                <option value="design">Design</option>
+            </select>
+        </div>
+
+        <div id="postsGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2rem;"></div>
+
+        <div id="emptyPosts" style="text-align: center; padding: 4rem 2rem; color: #999; display: none;">
+            <p style="font-size: 1.1rem; margin-bottom: 1rem;">No posts yet</p>
+            <button onclick="switchTab('new')" style="padding: 0.8rem 1.5rem; background: var(--color-primary); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">Create First Post</button>
+        </div>
+    </section>
+
+    <!-- TAB: NEW POST -->
+    <section id="newSection" style="display: none;">
+        <div style="margin-bottom: 3rem;">
+            <h2 style="font-family: 'Playfair Display'; font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem;">Create New Post</h2>
+            <p style="color: #666; font-size: 0.95rem;">Add a new blog post to your publication</p>
+        </div>
+
+        <div id="formMessage" style="padding: 1rem; border-radius: 6px; margin-bottom: 2rem; display: none; border-left: 4px solid;"></div>
+
+        <form id="postForm" onsubmit="savePost(event)" style="background: white; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e0e0e0;">
+            <div style="margin-bottom: 2rem;">
+                <label style="display: block; font-weight: 700; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; color: var(--color-primary);">Post Title *</label>
+                <input type="text" id="postTitle" required placeholder="E.g., Luxury Living in Abuja: A Guide to Premium Neighborhoods" style="width: 100%; padding: 1rem; border: 1.5px solid #e0e0e0; border-radius: 6px; font-family: inherit; font-size: 0.95rem; transition: all 200ms ease;" onfocus="this.style.borderColor='var(--color-primary)'; this.style.boxShadow='0 0 0 3px rgba(196,30,58,0.1)';" onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none';">
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                <div>
+                    <label style="display: block; font-weight: 700; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; color: var(--color-primary);">Author *</label>
+                    <input type="text" id="postAuthor" required placeholder="E.g., Sarah Johnson" style="width: 100%; padding: 1rem; border: 1.5px solid #e0e0e0; border-radius: 6px; font-family: inherit; font-size: 0.95rem; transition: all 200ms ease;" onfocus="this.style.borderColor='var(--color-primary)'; this.style.boxShadow='0 0 0 3px rgba(196,30,58,0.1)';" onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none';">
+                </div>
+                <div>
+                    <label style="display: block; font-weight: 700; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; color: var(--color-primary);">Category *</label>
+                    <select id="postCategory" required style="width: 100%; padding: 1rem; border: 1.5px solid #e0e0e0; border-radius: 6px; font-family: inherit; font-size: 0.95rem; cursor: pointer;">
+                        <option value="">Select Category</option>
+                        <option value="lifestyle">Lifestyle</option>
+                        <option value="investment">Investment</option>
+                        <option value="design">Design</option>
+                    </select>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <label style="display: block; font-weight: 700; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; color: var(--color-primary);">Excerpt *</label>
+                <textarea id="postExcerpt" required placeholder="Brief summary of the post..." style="width: 100%; padding: 1rem; border: 1.5px solid #e0e0e0; border-radius: 6px; font-family: inherit; font-size: 0.95rem; min-height: 80px; resize: vertical; transition: all 200ms ease;" onfocus="this.style.borderColor='var(--color-primary)'; this.style.boxShadow='0 0 0 3px rgba(196,30,58,0.1)';" onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none';"></textarea>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <label style="display: block; font-weight: 700; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; color: var(--color-primary);">Full Content *</label>
+                <textarea id="postContent" required placeholder="Write the full blog post content..." style="width: 100%; padding: 1rem; border: 1.5px solid #e0e0e0; border-radius: 6px; font-family: inherit; font-size: 0.95rem; min-height: 250px; resize: vertical; transition: all 200ms ease;" onfocus="this.style.borderColor='var(--color-primary)'; this.style.boxShadow='0 0 0 3px rgba(196,30,58,0.1)';" onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none';"></textarea>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <label style="display: block; font-weight: 700; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase; color: var(--color-primary);">Image URL *</label>
+                <input type="url" id="postImage" required placeholder="https://example.com/image.jpg" style="width: 100%; padding: 1rem; border: 1.5px solid #e0e0e0; border-radius: 6px; font-family: inherit; font-size: 0.95rem; transition: all 200ms ease;" onfocus="this.style.borderColor='var(--color-primary)'; this.style.boxShadow='0 0 0 3px rgba(196,30,58,0.1)';" onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none';">
+            </div>
+
+            <div style="display: flex; gap: 1rem; padding-top: 1.5rem; border-top: 1px solid #e0e0e0;">
+                <button type="submit" style="padding: 1rem 2rem; background: var(--color-primary); color: white; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; transition: all 200ms ease; flex: 1;">Publish Post</button>
+                <button type="reset" style="padding: 1rem 2rem; background: white; color: var(--color-black); border: 1.5px solid #e0e0e0; border-radius: 6px; font-weight: 700; cursor: pointer; transition: all 200ms ease; flex: 1;">Reset</button>
+            </div>
+        </form>
+    </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer style="background: var(--color-black); color: white; padding: 2rem; text-align: center; margin-top: 4rem; font-size: 0.85rem; border-top: 1px solid rgba(196,30,58,0.2);">
+    <p>© 2026 <a href="../public/index.html" style="color: var(--color-primary); text-decoration: none;">Amon Heights</a>. RC: 1434164. All rights reserved.</p>
+</footer>
+
+<script>
+    // Initialize admin dashboard for blog management
+    const BLOG_STORAGE_KEY = 'amonHeightsBlogPosts';
+    let allPosts = [];
+    let editingId = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Check if user is logged in (basic check)
+        if (!sessionStorage.getItem('adminLoggedIn')) {
+            window.location.href = 'login.html';
+            return;
+        }
+
+        loadPosts();
+
+        // Setup form submission
+        document.getElementById('postForm').addEventListener('submit', savePost);
+    });
+
+    function loadPosts() {
+        const stored = localStorage.getItem(BLOG_STORAGE_KEY);
+        allPosts = stored ? JSON.parse(stored) : [
+            {
+                id: 1,
+                title: "Luxury Living in Abuja: A Guide to Premium Neighborhoods",
+                author: "Sarah Johnson",
+                date: "2024-01-15",
+                image: "Images/abuja.jpg",
+                excerpt: "Discover the most exclusive neighborhoods offering world-class living experiences and investment opportunities.",
+                content: "Abuja's premium neighborhoods offer unparalleled luxury and convenience. From Maitama to Asokoro, each area provides unique advantages for investors and residents seeking high-end properties.",
+                category: "lifestyle"
+            },
+            {
+                id: 2,
+                title: "Investment Guide: Why Nigerian Real Estate is the Future",
+                author: "Michael Chen",
+                date: "2024-01-10",
+                image: "Images/living room 2.jpg",
+                excerpt: "Explore compelling reasons why intelligent investors are focusing on Nigerian property markets.",
+                content: "Nigerian real estate presents exceptional investment opportunities with strong growth potential. Economic development, increasing urbanization, and rising demand create perfect opportunities.",
+                category: "investment"
+            },
+            {
+                id: 3,
+                title: "Interior Design Trends: Creating the Perfect Luxury Home",
+                author: "Emma Williams",
+                date: "2024-01-05",
+                image: "Images/living room 1.jpg",
+                excerpt: "Master the art of luxury interior design with insights from top designers in Africa.",
+                content: "Contemporary luxury design blends comfort with sophistication. Discover how to incorporate minimalism, natural materials, and smart technology into your dream home.",
+                category: "design"
+            }
+        ];
+
+        renderPosts();
+    }
+
+    function renderPosts() {
+        const grid = document.getElementById('postsGrid');
+        const empty = document.getElementById('emptyPosts');
+
+        if (allPosts.length === 0) {
+            grid.style.display = 'none';
+            empty.style.display = 'block';
+            return;
+        }
+
+        grid.style.display = 'grid';
+        empty.style.display = 'none';
+
+        grid.innerHTML = allPosts.map(post => `
+            <div style="background: white; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: all 200ms ease; display: flex; flex-direction: column;">
+                <img src="${post.image}" alt="${post.title}" style="width: 100%; height: 200px; object-fit: cover;">
+                <div style="padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column;">
+                    <span style="display: inline-block; padding: 0.3rem 0.8rem; background: rgba(196,30,58,0.1); color: var(--color-primary); border-radius: 4px; font-size: 0.7rem; font-weight: 700; width: fit-content; margin-bottom: 0.8rem; text-transform: uppercase;">${post.category || 'Blog'}</span>
+                    <h3 style="font-family: 'Playfair Display'; font-size: 1.3rem; font-weight: 800; margin-bottom: 0.8rem; line-height: 1.3;">${post.title}</h3>
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;"><strong>${post.author}</strong> • ${new Date(post.date).toLocaleDateString()}</p>
+                    <p style="color: #666; font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1;">${post.excerpt}</p>
+                    <div style="display: flex; gap: 0.8rem;">
+                        <button onclick="editPost(${post.id})" style="flex: 1; padding: 0.7rem; background: var(--color-primary); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 200ms ease;">Edit</button>
+                        <button onclick="deletePost(${post.id})" style="flex: 1; padding: 0.7rem; background: white; color: var(--color-primary); border: 1.5px solid var(--color-primary); border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 200ms ease;">Delete</button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function savePost(event) {
+        event.preventDefault();
+
+        if (editingId) {
+            // Update existing post
+            const post = allPosts.find(p => p.id === editingId);
+            if (post) {
+                post.title = document.getElementById('postTitle').value;
+                post.author = document.getElementById('postAuthor').value;
+                post.category = document.getElementById('postCategory').value;
+                post.excerpt = document.getElementById('postExcerpt').value;
+                post.content = document.getElementById('postContent').value;
+                post.image = document.getElementById('postImage').value;
+                post.date = new Date().toISOString().split('T')[0];
+            }
+            editingId = null;
+        } else {
+            // Create new post
+            const newPost = {
+                id: Date.now(),
+                title: document.getElementById('postTitle').value,
+                author: document.getElementById('postAuthor').value,
+                category: document.getElementById('postCategory').value,
+                excerpt: document.getElementById('postExcerpt').value,
+                content: document.getElementById('postContent').value,
+                image: document.getElementById('postImage').value,
+                date: new Date().toISOString().split('T')[0]
+            };
+            allPosts.unshift(newPost);
+        }
+
+        localStorage.setItem(BLOG_STORAGE_KEY, JSON.stringify(allPosts));
+        document.getElementById('postForm').reset();
+        switchTab('posts');
+        renderPosts();
+        showMessage('Post published successfully!', 'success');
+    }
+
+    function editPost(id) {
+        const post = allPosts.find(p => p.id === id);
+        if (post) {
+            editingId = id;
+            document.getElementById('postTitle').value = post.title;
+            document.getElementById('postAuthor').value = post.author;
+            document.getElementById('postCategory').value = post.category;
+            document.getElementById('postExcerpt').value = post.excerpt;
+            document.getElementById('postContent').value = post.content;
+            document.getElementById('postImage').value = post.image;
+            switchTab('new');
+            window.scrollTo(0, 0);
+        }
+    }
+
+    function deletePost(id) {
+        if (confirm('Are you sure you want to delete this post?')) {
+            allPosts = allPosts.filter(p => p.id !== id);
+            localStorage.setItem(BLOG_STORAGE_KEY, JSON.stringify(allPosts));
+            renderPosts();
+            showMessage('Post deleted successfully', 'success');
+        }
+    }
+
+    function filterPosts() {
+        // Filtering logic can be added here
+    }
+
+    function switchTab(tab) {
+        document.getElementById('postsSection').style.display = tab === 'posts' ? 'block' : 'none';
+        document.getElementById('newSection').style.display = tab === 'new' ? 'block' : 'none';
         
-        const ITEMS_PER_PAGE = 5;
-        const STORAGE_KEY = 'amonHeightsProperties';
+        document.getElementById('postsTab').classList.toggle('active', tab === 'posts');
+        document.getElementById('newTab').classList.toggle('active', tab === 'new');
+
+        if (tab === 'posts') {
+            document.getElementById('postsTab').style.color = 'var(--color-black)';
+            document.getElementById('newTab').style.color = '#999';
+        } else {
+            document.getElementById('postsTab').style.color = '#999';
+            document.getElementById('newTab').style.color = 'var(--color-black)';
+        }
+    }
+
+    function showMessage(text, type) {
+        const msgEl = document.getElementById('formMessage');
+        msgEl.textContent = text;
+        msgEl.style.borderColor = type === 'success' ? '#4caf50' : '#f44336';
+        msgEl.style.background = type === 'success' ? '#e8f5e9' : '#ffebee';
+        msgEl.style.color = type === 'success' ? '#1b5e20' : '#b71c1c';
+        msgEl.style.display = 'block';
+        setTimeout(() => msgEl.style.display = 'none', 4000);
+    }
+
+    function logout() {
+        if (confirm('Are you sure you want to logout?')) {
+            sessionStorage.removeItem('adminLoggedIn');
+            window.location.href = 'login.html';
+        }
+    }
+</script>
+
+</body>
+</html>
         
         let properties = [];
         let filteredProperties = [];
